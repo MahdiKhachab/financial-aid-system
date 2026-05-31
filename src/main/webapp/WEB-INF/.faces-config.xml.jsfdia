@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::0" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="home::views#template#template.xhtml"
+    NAME="output" PATH="views/template/template.xhtml"
+    TARGET="rules:views#template#template.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::1" SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::1" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="company-cfg-list::#views#cfg#companyCfg-list.xhtml"
+    NAME="output" PATH="/views/cfg/companyCfg-list.xhtml"
+    TARGET="rules:#views#cfg#companyCfg-list.xhtml"
+    TITLE="company-cfg-list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::2" SHAPE="32,241,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::2" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="healthy-status-cfg::#views#cfg#healthyStatusCfg-list.xhtml"
+    NAME="output" PATH="/views/cfg/healthyStatusCfg-list.xhtml"
+    TARGET="rules:#views#cfg#healthyStatusCfg-list.xhtml"
+    TITLE="healthy-status-cfg" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::3" SHAPE="32,353,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::3" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="inssurance-cfg-list::#views#cfg#inssuranceCfg-list.xhtml"
+    NAME="output" PATH="/views/cfg/inssuranceCfg-list.xhtml"
+    TARGET="rules:#views#cfg#inssuranceCfg-list.xhtml"
+    TITLE="inssurance-cfg-list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::4" SHAPE="32,465,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::4" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="poorPercentageCfg-list::#views#cfg#poorPercentageCfg-list.xhtml"
+    NAME="output" PATH="/views/cfg/poorPercentageCfg-list.xhtml"
+    TARGET="rules:#views#cfg#poorPercentageCfg-list.xhtml"
+    TITLE="poorPercentageCfg-list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#cfg#companyCfg-list.xhtml"
+  PATH="/views/cfg/companyCfg-list.xhtml" SHAPE="256,145,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#cfg#inssuranceCfg-list.xhtml"
+  PATH="/views/cfg/inssuranceCfg-list.xhtml" SHAPE="240,481,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#cfg#healthyStatusCfg-list.xhtml"
+  PATH="/views/cfg/healthyStatusCfg-list.xhtml" SHAPE="240,369,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::5" SHAPE="32,577,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::5" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="submissionCfg-list::#views#cfg#submissions#submissionCfg-list.xhtml"
+    NAME="output" PATH="/views/cfg/submissions/submissionCfg-list.xhtml"
+    TARGET="rules:#views#cfg#submissions#submissionCfg-list.xhtml"
+    TITLE="submissionCfg-list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::6" SHAPE="32,689,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::6" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="religion-reference-cfg-list::#views#cfg#religionReferenceCfg-list.xhtml"
+    NAME="output" PATH="/views/cfg/religionReferenceCfg-list.xhtml"
+    TARGET="rules:#views#cfg#religionReferenceCfg-list.xhtml"
+    TITLE="religion-reference-cfg-list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::7" SHAPE="32,801,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::7" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="deserved-list::#views#deserved#deserved-list.xhtml"
+    NAME="output" PATH="/views/deserved/deserved-list.xhtml"
+    TARGET="rules:#views#deserved#deserved-list.xhtml"
+    TITLE="deserved-list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#cfg#religionReferenceCfg-list.xhtml"
+  PATH="/views/cfg/religionReferenceCfg-list.xhtml" SHAPE="240,817,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#cfg#submissions#submissionCfg-list.xhtml"
+  PATH="/views/cfg/submissions/submissionCfg-list.xhtml"
+  SHAPE="240,705,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#cfg#poorPercentageCfg-list.xhtml"
+  PATH="/views/cfg/poorPercentageCfg-list.xhtml" SHAPE="240,593,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:views#template#template.xhtml"
+  PATH="views/template/template.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::8" SHAPE="32,913,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::8" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="submission-cfg-card::#views#cfg#submissions#submissionCfg-card.xhtml"
+    NAME="output" PATH="/views/cfg/submissions/submissionCfg-card.xhtml"
+    TARGET="rules:#views#cfg#submissions#submissionCfg-card.xhtml"
+    TITLE="submission-cfg-card" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#deserved#deserved-list.xhtml"
+  PATH="/views/deserved/deserved-list.xhtml" SHAPE="240,929,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::9" SHAPE="32,1025,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::9" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="deserved-card::#views#deserved#deserved-card.xhtml"
+    NAME="output" PATH="/views/deserved/deserved-card.xhtml"
+    TARGET="rules:#views#deserved#deserved-card.xhtml"
+    TITLE="deserved-card" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:#views#cfg#submissions#submissionCfg-card.xhtml"
+  PATH="/views/cfg/submissions/submissionCfg-card.xhtml"
+  SHAPE="240,1041,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::10" SHAPE="32,1137,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::10" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="sponsor-list::#views#sponsor#sponsor-list.xhtml" NAME="output"
+    PATH="/views/sponsor/sponsor-list.xhtml"
+    TARGET="rules:#views#sponsor#sponsor-list.xhtml"
+    TITLE="sponsor-list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#sponsor#sponsor-card.xhtml"
+  PATH="/views/sponsor/sponsor-card.xhtml" SHAPE="240,1153,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::11" SHAPE="32,1249,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::11" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="sponsor-card::#views#sponsor#sponsor-card.xhtml" NAME="output"
+    PATH="/views/sponsor/sponsor-card.xhtml"
+    TARGET="rules:#views#sponsor#sponsor-card.xhtml"
+    TITLE="sponsor-card" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#sponsor#sponsor-list.xhtml"
+  PATH="/views/sponsor/sponsor-list.xhtml" SHAPE="240,1265,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::12" SHAPE="32,1361,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::12" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="receive_money::#views#receive_money#receive_money.xhtml"
+    NAME="output" PATH="/views/receive_money/receive_money.xhtml"
+    TARGET="rules:#views#receive_money#receive_money.xhtml"
+    TITLE="receive_money" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::13" SHAPE="32,1585,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::13" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="receive_money_take::#views#receive_money#receive_money_take.xhtml"
+    NAME="output" PATH="/views/receive_money/receive_money_take.xhtml"
+    TARGET="rules:#views#receive_money#receive_money_take.xhtml"
+    TITLE="receive_money_take" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::14" SHAPE="32,1697,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::14" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="sponsor_repport_take::#views#SponsorRepport#SponsorRepportGiven.xhtml"
+    NAME="output" PATH="/views/SponsorRepport/SponsorRepportGiven.xhtml"
+    TARGET="rules:#views#SponsorRepport#SponsorRepportGiven.xhtml"
+    TITLE="sponsor_repport_take" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::15" SHAPE="32,1809,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::15" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="sponsor_repport::#views#SponsorRepport#SponsorRepport.xhtml"
+    NAME="output" PATH="/views/SponsorRepport/SponsorRepport.xhtml"
+    TARGET="rules:#views#SponsorRepport#SponsorRepport.xhtml"
+    TITLE="sponsor_repport" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::16" SHAPE="32,1921,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::16" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="mediator-list::#views#mediator#mediator-list.xhtml"
+    NAME="output" PATH="/views/mediator/mediator-list.xhtml"
+    TARGET="rules:#views#mediator#mediator-list.xhtml"
+    TITLE="mediator-list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::17" SHAPE="32,2033,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::17" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="mediator-card::#views#mediator#mediator-card.xhtml"
+    NAME="output" PATH="/views/mediator/mediator-card.xhtml"
+    TARGET="rules:#views#mediator#mediator-card.xhtml"
+    TITLE="mediator-card" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::18" SHAPE="32,2145,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::18" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="mediator-card::#views#mediator#mediator-card.xhtml"
+    NAME="output" PATH="/views/mediator/mediator-card.xhtml"
+    TARGET="rules:#views#mediator#mediator-card.xhtml"
+    TITLE="mediator-card" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::19" SHAPE="32,2257,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::19" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="provide-aid-basic::#views#provide_aid#provide_aid_basic.xhtml"
+    NAME="output" PATH="/views/provide_aid/provide_aid_basic.xhtml"
+    TARGET="rules:#views#provide_aid#provide_aid_basic.xhtml"
+    TITLE="provide-aid-basic" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::20" SHAPE="32,2369,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::20" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="submit-with-conditions-aid::#views#provide_aid#submit_with_conditions_aid.xhtml"
+    NAME="output"
+    PATH="/views/provide_aid/submit_with_conditions_aid.xhtml"
+    TARGET="rules:#views#provide_aid#submit_with_conditions_aid.xhtml"
+    TITLE="submit-with-conditions-aid" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::21" SHAPE="32,2481,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::21" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="direct-submission-aid::#views#provide_aid#direct_submission_aid.xhtml"
+    NAME="output" PATH="/views/provide_aid/direct_submission_aid.xhtml"
+    TARGET="rules:#views#provide_aid#direct_submission_aid.xhtml"
+    TITLE="direct-submission-aid" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::22" SHAPE="32,2593,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::22" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="direct-submission-aid-give::#views#provide_aid#direct_submission_aid_give.xhtml"
+    NAME="output"
+    PATH="/views/provide_aid/direct_submission_aid_give.xhtml"
+    TARGET="rules:#views#provide_aid#direct_submission_aid_give.xhtml"
+    TITLE="direct-submission-aid-give" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::23" SHAPE="32,2705,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::23" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="submit-a-voucher-aid::#views#provide_aid#submit_a_voucher_aid.xhtml"
+    NAME="output" PATH="/views/provide_aid/submit_a_voucher_aid.xhtml"
+    TARGET="rules:#views#provide_aid#submit_a_voucher_aid.xhtml"
+    TITLE="submit-a-voucher-aid" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::24" SHAPE="32,2817,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::24" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="submit-with-repport-aid::#views#provide_aid#submit_with_repport_aid.xhtml"
+    NAME="output"
+    PATH="/views/provide_aid/submit_with_repport_aid.xhtml"
+    TARGET="rules:#views#provide_aid#submit_with_repport_aid.xhtml"
+    TITLE="submit-with-repport-aid" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::25" SHAPE="32,2929,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::25" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="mediator-report::#views#reports#mediator-reports#mediator-report.xhtml"
+    NAME="output"
+    PATH="/views/reports/mediator-reports/mediator-report.xhtml"
+    TARGET="rules:#views#reports#mediator-reports#mediator-report.xhtml"
+    TITLE="mediator-report" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::26" SHAPE="32,3041,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::26" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="submit-rabit::#views#provide_aid#submit_to_rabit.xhtml"
+    NAME="output" PATH="/views/provide_aid/submit_to_rabit.xhtml"
+    TARGET="rules:#views#provide_aid#submit_to_rabit.xhtml"
+    TITLE="submit-rabit" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::27" SHAPE="32,3153,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::27" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="submit-company::#views#provide_aid#submit_to_company.xhtml"
+    NAME="output" PATH="/views/provide_aid/submit_to_company.xhtml"
+    TARGET="rules:#views#provide_aid#submit_to_company.xhtml"
+    TITLE="submit-company" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::28" SHAPE="32,3265,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::28" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="person_desrved_repport::#views#provide_aid#person_desrved_repport_give.xhtml"
+    NAME="output"
+    PATH="/views/provide_aid/person_desrved_repport_give.xhtml"
+    TARGET="rules:#views#provide_aid#person_desrved_repport_give.xhtml"
+    TITLE="person_desrved_repport" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::29" SHAPE="32,3377,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::29" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="rabit_list::#views#repport_rabit#list_rabit.xhtml" NAME="output"
+    PATH="/views/repport_rabit/list_rabit.xhtml"
+    TARGET="rules:#views#repport_rabit#list_rabit.xhtml"
+    TITLE="rabit_list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::30" SHAPE="32,3489,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::30" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="rabit_list_repport::#views#repport_rabit#rabit_repport.xhtml"
+    NAME="output" PATH="/views/repport_rabit/rabit_repport.xhtml"
+    TARGET="rules:#views#repport_rabit#rabit_repport.xhtml"
+    TITLE="rabit_list_repport" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::31" SHAPE="32,3601,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::31" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="company_list::#views#company_repoort#company_list.xhtml"
+    NAME="output" PATH="/views/company_repoort/company_list.xhtml"
+    TARGET="rules:#views#company_repoort#company_list.xhtml"
+    TITLE="company_list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::32" SHAPE="32,3713,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::32" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="company_list_repport::#views#company_repoort#repport_company.xhtml"
+    NAME="output" PATH="/views/company_repoort/repport_company.xhtml"
+    TARGET="rules:#views#company_repoort#repport_company.xhtml"
+    TITLE="company_list_repport" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::33" SHAPE="32,3825,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::33" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="service-list::#views#cfg#service-list.xhtml"
+    NAME="output" PATH="/views/cfg/service-list.xhtml"
+    TARGET="rules:#views#cfg#service-list.xhtml" TITLE="service-list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::34" SHAPE="32,3937,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::34" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="currency-exchange-select-submission::#views#currency_exchange#currency_exchange_select_submission.xhtml"
+    NAME="output"
+    PATH="/views/currency_exchange/currency_exchange_select_submission.xhtml"
+    TARGET="rules:#views#currency_exchange#currency_exchange_select_submission.xhtml"
+    TITLE="currency-exchange-select-submission" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::35" SHAPE="32,4049,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::35" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="worker-list::#views#worker#worker-list.xhtml" NAME="output"
+    PATH="/views/worker/worker-list.xhtml"
+    TARGET="rules:#views#worker#worker-list.xhtml" TITLE="worker-list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::36" SHAPE="32,4161,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::36" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="currency-exchange-action::#views#currency_exchange#currency_exchange_action.xhtml"
+    NAME="output"
+    PATH="/views/currency_exchange/currency_exchange_action.xhtml"
+    TARGET="rules:#views#currency_exchange#currency_exchange_action.xhtml"
+    TITLE="currency-exchange-action" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::37" SHAPE="32,4273,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::37" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="worker-card::#views#worker#worker-card.xhtml" NAME="output"
+    PATH="/views/worker/worker-card.xhtml"
+    TARGET="rules:#views#worker#worker-card.xhtml" TITLE="worker-card" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#company_repoort#company_list.xhtml"
+  PATH="/views/company_repoort/company_list.xhtml" SHAPE="240,3617,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#deserved#deserved-card.xhtml"
+  PATH="/views/deserved/deserved-card.xhtml" SHAPE="240,1377,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#worker#worker-list.xhtml"
+  PATH="/views/worker/worker-list.xhtml" SHAPE="240,4065,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#provide_aid#submit_to_rabit.xhtml"
+  PATH="/views/provide_aid/submit_to_rabit.xhtml" SHAPE="240,3057,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#provide_aid#submit_to_company.xhtml"
+  PATH="/views/provide_aid/submit_to_company.xhtml" SHAPE="240,3169,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#provide_aid#direct_submission_aid.xhtml"
+  PATH="/views/provide_aid/direct_submission_aid.xhtml"
+  SHAPE="240,2497,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#cfg#service-list.xhtml"
+  PATH="/views/cfg/service-list.xhtml" SHAPE="240,3841,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#receive_money#receive_money.xhtml"
+  PATH="/views/receive_money/receive_money.xhtml" SHAPE="240,1489,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#provide_aid#submit_a_voucher_aid.xhtml"
+  PATH="/views/provide_aid/submit_a_voucher_aid.xhtml"
+  SHAPE="240,2721,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#repport_rabit#rabit_repport.xhtml"
+  PATH="/views/repport_rabit/rabit_repport.xhtml" SHAPE="240,3505,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#currency_exchange#currency_exchange_action.xhtml"
+  PATH="/views/currency_exchange/currency_exchange_action.xhtml"
+  SHAPE="240,4177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#worker#worker-card.xhtml"
+  PATH="/views/worker/worker-card.xhtml" SHAPE="240,4289,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#provide_aid#person_desrved_repport_give.xhtml"
+  PATH="/views/provide_aid/person_desrved_repport_give.xhtml"
+  SHAPE="240,3281,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#currency_exchange#currency_exchange_select_submission.xhtml"
+  PATH="/views/currency_exchange/currency_exchange_select_submission.xhtml"
+  SHAPE="240,3953,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#provide_aid#submit_with_repport_aid.xhtml"
+  PATH="/views/provide_aid/submit_with_repport_aid.xhtml"
+  SHAPE="240,2833,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#receive_money#receive_money_take.xhtml"
+  PATH="/views/receive_money/receive_money_take.xhtml"
+  SHAPE="240,1601,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#company_repoort#repport_company.xhtml"
+  PATH="/views/company_repoort/repport_company.xhtml"
+  SHAPE="240,3729,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#provide_aid#submit_with_conditions_aid.xhtml"
+  PATH="/views/provide_aid/submit_with_conditions_aid.xhtml"
+  SHAPE="240,2385,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#reports#mediator-reports#mediator-report.xhtml"
+  PATH="/views/reports/mediator-reports/mediator-report.xhtml"
+  SHAPE="240,2945,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#repport_rabit#list_rabit.xhtml"
+  PATH="/views/repport_rabit/list_rabit.xhtml" SHAPE="240,3393,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#provide_aid#direct_submission_aid_give.xhtml"
+  PATH="/views/provide_aid/direct_submission_aid_give.xhtml"
+  SHAPE="240,2609,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#SponsorRepport#SponsorRepportGiven.xhtml"
+  PATH="/views/SponsorRepport/SponsorRepportGiven.xhtml"
+  SHAPE="240,1713,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#mediator#mediator-card.xhtml"
+  PATH="/views/mediator/mediator-card.xhtml" SHAPE="256,2049,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#provide_aid#provide_aid_basic.xhtml"
+  PATH="/views/provide_aid/provide_aid_basic.xhtml" SHAPE="240,2273,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#SponsorRepport#SponsorRepport.xhtml"
+  PATH="/views/SponsorRepport/SponsorRepport.xhtml" SHAPE="240,1825,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#mediator#mediator-list.xhtml"
+  PATH="/views/mediator/mediator-list.xhtml" SHAPE="240,1937,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::38" SHAPE="32,4385,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::38" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="dead-card::#views#deads#dead-persons#dead-card.xhtml"
+    NAME="output" PATH="/views/deads/dead-persons/dead-card.xhtml"
+    TARGET="rules:#views#deads#dead-persons#dead-card.xhtml"
+    TITLE="dead-card" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#Stores#stores_list.xhtml"
+  PATH="/views/Stores/stores_list.xhtml" SHAPE="240,4401,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::39" SHAPE="32,4497,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::39" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="dead-list::#views#deads#dead-persons#dead-list.xhtml"
+    NAME="output" PATH="/views/deads/dead-persons/dead-list.xhtml"
+    TARGET="rules:#views#deads#dead-persons#dead-list.xhtml"
+    TITLE="dead-list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#Stores#stores_card.xhtml"
+  PATH="/views/Stores/stores_card.xhtml" SHAPE="240,4513,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::40" SHAPE="32,4721,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::40" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="stores-list::#views#Stores#stores_list.xhtml" NAME="output"
+    PATH="/views/Stores/stores_list.xhtml"
+    TARGET="rules:#views#Stores#stores_list.xhtml" TITLE="stores-list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::41" SHAPE="32,4945,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::41" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="stores-card::#views#Stores#stores_card.xhtml" NAME="output"
+    PATH="/views/Stores/stores_card.xhtml"
+    TARGET="rules:#views#Stores#stores_card.xhtml" TITLE="stores-card" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#deads#dead-persons#dead-card.xhtml"
+  PATH="/views/deads/dead-persons/dead-card.xhtml" SHAPE="240,4625,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#deads#dead-persons#dead-list.xhtml"
+  PATH="/views/deads/dead-persons/dead-list.xhtml" SHAPE="240,4849,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::42" SHAPE="32,5057,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::42" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="needDeadDetails-list::#views#deadNeedDetails#needDetailsList#needDeadDetails-list.xhtml"
+    NAME="output"
+    PATH="/views/deadNeedDetails/needDetailsList/needDeadDetails-list.xhtml"
+    TARGET="rules:#views#deadNeedDetails#needDetailsList#needDeadDetails-list.xhtml"
+    TITLE="needDeadDetails-list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:#views#deadNeedDetails#needDetailsList#needDeadDetails-list.xhtml"
+  PATH="/views/deadNeedDetails/needDetailsList/needDeadDetails-list.xhtml"
+  SHAPE="240,5073,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::43" SHAPE="32,5169,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::43" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="purchase-voucher::#views#purchase_voucher#purchase_voucher.xhtml"
+    NAME="output" PATH="/views/purchase_voucher/purchase_voucher.xhtml"
+    TARGET="rules:#views#purchase_voucher#purchase_voucher.xhtml"
+    TITLE="purchase-voucher" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:#views#purchase_voucher#purchase_voucher.xhtml"
+  PATH="/views/purchase_voucher/purchase_voucher.xhtml"
+  SHAPE="240,5185,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::44" SHAPE="32,5281,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::44" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="stores_repport::#views#Stores#stores_repport.xhtml"
+    NAME="output" PATH="/views/Stores/stores_repport.xhtml"
+    TARGET="rules:#views#Stores#stores_repport.xhtml"
+    TITLE="stores_repport" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:#views#purchase_voucher#purchase_voucher_repport.xhtml"
+  PATH="/views/purchase_voucher/purchase_voucher_repport.xhtml"
+  SHAPE="240,5297,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::45" SHAPE="32,5393,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::45" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="purchase-voucher-repport::#views#purchase_voucher#purchase_voucher_repport.xhtml"
+    NAME="output"
+    PATH="/views/purchase_voucher/purchase_voucher_repport.xhtml"
+    TARGET="rules:#views#purchase_voucher#purchase_voucher_repport.xhtml"
+    TITLE="purchase-voucher-repport" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#Stores#stores_repport.xhtml"
+  PATH="/views/Stores/stores_repport.xhtml" SHAPE="240,5409,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::46" SHAPE="32,5505,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::46" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="deadNeed-report::#views#reports#deadNeeds-reports#deadNeed-report.xhtml"
+    NAME="output"
+    PATH="/views/reports/deadNeeds-reports/deadNeed-report.xhtml"
+    TARGET="rules:#views#reports#deadNeeds-reports#deadNeed-report.xhtml"
+    TITLE="deadNeed-report" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:#views#reports#deadNeeds-reports#deadNeed-report.xhtml"
+  PATH="/views/reports/deadNeeds-reports/deadNeed-report.xhtml"
+  SHAPE="240,5521,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::47" SHAPE="32,5617,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::47" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="remainingNeeds-report::#views#reports#deadNeeds-reports#remainingNeeds-report.xhtml"
+    NAME="output"
+    PATH="/views/reports/deadNeeds-reports/remainingNeeds-report.xhtml"
+    TARGET="rules:#views#reports#deadNeeds-reports#remainingNeeds-report.xhtml"
+    TITLE="remainingNeeds-report" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:#views#reports#deadNeeds-reports#remainingNeeds-report.xhtml"
+  PATH="/views/reports/deadNeeds-reports/remainingNeeds-report.xhtml"
+  SHAPE="240,5633,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules::48" SHAPE="32,5729,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::48" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="external-repport::#views#general-repport#extrnal-repport.xhtml"
+    NAME="output" PATH="/views/general-repport/extrnal-repport.xhtml"
+    TARGET="rules:#views#general-repport#extrnal-repport.xhtml"
+    TITLE="external-repport" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#general-repport#extrnal-repport.xhtml"
+  PATH="/views/general-repport/extrnal-repport.xhtml"
+  SHAPE="240,5745,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

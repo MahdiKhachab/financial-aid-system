@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+
+
+<ui:component>
+	<h4 class="form-section">
+		<h:outputText value="#{bundle.distriuted_list} " />
+
+		<h:commandLink id="btn-save"
+			action='#{needDetailsCardController.openAddDialog()}'
+			styleClass="btn btn-outline-primary waves-effect waves-light">
+			<f:ajax render="form-need-details :messageScript " />
+			<span class=" em em-heavy_plus_sign"></span>
+		</h:commandLink>
+	</h4>
+	<div class="row">
+		<p:dataTable
+			currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+			emptyMessage="#{bundle.no_records}"
+			filteredValue="#{needDetailsCardController.filteredList}"
+			id="tableId" paginator="true" paginatorPosition="bottom"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+			rowKey="#{item.id}" rows="10"
+			rowsPerPageTemplate="10,20,30,#{needDetailsCardController.needDetailsList.size()}"
+			styleClass="table table-striped table-hover"
+			value="#{needDetailsCardController.needDetailsList}" var="item"
+			widgetVar="needDetailsListTableWgVar">
+
+			<p:ajax event="rowToggle"
+				listener="#{needDetailsCardController.select(item)}" />
+			<p:column styleClass="toggler" id="relatedFileToggler" width="30"
+				exportable="false">
+				<p:rowToggler />
+			</p:column>
+			<p:ajax event="rowEdit" update=":messageScript" />
+			<p:column styleClass="no-header table-actions-column" width="100">
+
+				<p:commandLink style="margin-left:5px;"
+					action="#{needDetailsCardController.deleteService(item)}"
+					styleClass="btn btn-danger waves-effect waves-light btn-xs ">
+					<p:confirm header="#{bundle.delete}"
+						message="#{bundle.are_you_sure_from_delete}" />
+					<f:ajax render=" :messageScript  tableId " />
+					<span class="fa fa-trash"></span>
+				</p:commandLink>
+				<p:commandLink
+					styleClass="btn btn-warning waves-effect waves-light btn-xs"
+					title="#{bundle.edit}" update="form-need-details"
+					action="#{needDetailsCardController.openUpdateDialog(item)}">
+					<f:ajax render=":messageScript "></f:ajax>
+					<span class="dripicons-document-edit"></span>
+				</p:commandLink>
+
+
+			</p:column>
+
+			<p:column headerText="#{bundle.worker_name}"
+				sortBy="#{item.worker.name}" width="150">
+				<h:outputText styleClass="text-ellipsis" value="#{item.worker.name}" />
+			</p:column>
+
+			<p:column headerText="#{bundle.need_details_count}"
+				sortBy="#{item.count}" width="150">
+				<h:outputText styleClass="text-ellipsis" value="#{item.count}" />
+			</p:column>
+
+			<p:column headerText="#{bundle.person_needs_need_type}"
+				sortBy="#{item.needType.type}" width="150">
+				<h:outputText styleClass="text-ellipsis"
+					value="#{item.needType.type}" />
+			</p:column>
+
+			<p:column headerText="#{bundle.need_details_cost}:"
+				sortBy="#{item.cost}" width="150">
+				<h:outputText styleClass="text-ellipsis" value="#{item.cost}">
+					<f:convertNumber pattern="###,###,###" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="#{bundle.need_details_date}:"
+				sortBy="#{item.date}" width="150">
+				<h:outputText styleClass="text-ellipsis" value="#{item.date}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="#{bundle.need_details_received_cost}"
+				sortBy="#{item.receivedCost}" width="150">
+				<h:outputText styleClass="text-ellipsis"
+					value="#{item.receivedCost}">
+					<f:convertNumber pattern="###,###,###" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="#{bundle.person_needs_finished}"
+				sortBy="#{item.finished}" width="180">
+				<h:outputText
+					styleClass="#{item.finished ? 'em em-white_check_mark' : 'em em-x'}"
+					value="" />
+			</p:column>
+
+			<p:column headerText="#{bundle.need_details_note}"
+				sortBy="#{item.notes}" width="150">
+				<h:outputText styleClass="text-ellipsis" value="#{item.notes}" />
+			</p:column>
+			<p:rowExpansion>
+				<div class="card" style="margin-top: 10px;">
+					<div class="card-body">
+						<div class="row">
+							<ul class="nav nav-pills mb-3 nav-justified" id="pills-tab"
+								role="tablist">
+								<li class="nav-item"><a class="nav-link active"
+									id="general_chat_tab" data-toggle="pill" href="#general_chat">#{bundle.related_files}</a></li>
+							</ul>
+							<div class="tab-pane fade active show" id="general_chat">
+								<p:dataTable id="attachmentsProjectDataTable"
+									widgetVar="attachmentProjectVar" rows="5" paginator="true"
+									rowsPerPageTemplate="5,10" paginatorAlwaysVisible="false"
+									paginatorPosition="bottom"
+									value="#{needDetailsCardController.needDetails.attachmentList}"
+									var="attachment" rowKey="#{attachment.id}" rowIndexVar="index">
+
+									<p:column styleClass="no-header table-actions-column"
+										width="150">
+										<p:commandLink
+											actionListener="#{needDetailsCardController.deleteAttachment(attachment)}"
+											style="margin-left:5px;padding-top: 5px;"
+											styleClass="btn btn-danger waves-effect waves-light btn-xs">
+											<i class=" dripicons-trash  "
+												style="color: white; font-size: 11px;" />
+											<p:confirm header="#{bundle.delete}"
+												message="#{bundle.are_you_sure_from_delete}">
+											</p:confirm>
+											<p:ajax oncomplete="PF('attachmentProjectVar').filter()"
+												update=":messageScript">
+											</p:ajax>
+										</p:commandLink>
+									</p:column>
+
+									<p:column headerText="#{bundle.file_name}" id="attachmentName"
+										width="">
+										<h:outputText styleClass="badge badge-soft-purple"
+											value="#{attachment.fileName}" title="#{attachment.fileName}" />
+									</p:column>
+
+									<p:column id="sizeId" headerText="#{bundle.file_size}"
+										style="text-align: center">
+										<h:outputText styleClass="badge badge-primary mb-2"
+											value="#{attachment.sizeInMegaByte}"
+											title="#{attachment.sizeInMegaByte}" />
+									</p:column>
+
+									<p:column width="50">
+										<h:commandLink
+											action="#{needDetailsCardController.download(attachment)}"
+											styleClass="btn btn-sm btn-warning">
+											<i class="fa fa-download white" />
+										</h:commandLink>
+									</p:column>
+								</p:dataTable>
+							</div>
+							<div class="tab-pane fade active show" id="group_chat"></div>
+						</div>
+					</div>
+				</div>
+			</p:rowExpansion>
+		</p:dataTable>
+	</div>
+</ui:component>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html dir="rtl" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough">
+
+
+<ui:composition template="/views/template/template.xhtml">
+	<ui:define name="customStyleSheet">
+		<h:outputStylesheet name="template/general.css" library="css" />
+	</ui:define>
+
+
+	<ui:define name="breadcrumb">
+
+		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.services}</li>
+		<li class="breadcrumb-item active"><h:link
+				outcome="currency-exchange-select-submission"> #{bundle.currency_exchange_subbmittion} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.currency_exchange}</li>
+		<!--end col-->
+	</ui:define>
+	<ui:define name="customFormContent">
+		<div class="col-md-12" style="margin-top: 2%;">
+
+			<span class=" fab fa-google-drive  " style="font-size: 28px;"></span>
+
+			<h:outputText style="font-size: 22px;"
+				value=" #{bundle.services_exchange_moeney}" />
+
+
+		</div>
+
+		<div class="row" style="margin-top: 2%">
+			<div class="col-md-6">
+				<h:outputText
+					style="font-size: 18px; margin-right: 10px;  padding:2%; background-color:#0069d9 !important; "
+					styleClass="badge  badge-secondary"
+					value=" #{bundle.submissions_type_name}: #{subbmissionExchnageController.submissionDetailsCfg.type} " />
+
+			</div>
+		</div>
+		<h:panelGroup id="value-panel">
+			<div class="row" style="margin-top: 2%;">
+				<div class="col-lg-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="icon-contain">
+								<div class="row">
+									<div class="col-9 align-self-center">
+										<h5 style="margin-bottom: 20px;">#{bundle.total_cost_ll}</h5>
+
+										<h:outputText styleClass="mb-0 p-2 bg-soft-danger rounded"
+											id="orginalValueLL"
+											style="font-size: 16px;font-weight: bold; margin-top:5px; "
+											value="#{of:formatCurrency(subbmissionExchnageController.submissionDetailsCfg.balance_ll, '')}  "></h:outputText>
+
+
+
+
+
+									</div>
+
+
+									<!--end col-->
+
+									<!--end col-->
+								</div>
+								<!--end row-->
+							</div>
+							<!--end icon-contain-->
+						</div>
+						<!--end card-body-->
+					</div>
+					<!--end card-->
+				</div>
+
+
+
+
+				<div class="col-lg-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="icon-contain">
+								<div class="row">
+									<div class="col-9 align-self-center">
+										<h5 style="margin-bottom: 20px;">#{bundle.total_cost_dd}</h5>
+
+										<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+											id="originalValueDD"
+											style="font-size: 16px;font-weight: bold; margin-top:5px; "
+											value="#{of:formatCurrency(subbmissionExchnageController.submissionDetailsCfg.balance_dd, '')} "></h:outputText>
+
+
+
+									</div>
+
+
+									<!--end col-->
+
+									<!--end col-->
+								</div>
+								<!--end row-->
+							</div>
+							<!--end icon-contain-->
+						</div>
+						<!--end card-body-->
+					</div>
+					<!--end card-->
+				</div>
+				<!--end col-->
+			</div>
+
+
+		</h:panelGroup>
+
+
+
+		<div class="row" style="margin-top: 1%;">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+
+						<h:outputText style="font-size: 16px; padding : 1%"
+							styleClass="badge badge-success" value=" العملية المالية" />
+
+
+
+						<h:panelGroup id="form-save">
+
+							<div class="row" style="margin-top: 2%;">
+								<div class="col-md-4">
+									<div class="form-group">
+										<p:outputLabel class="control-label" for="valueTodd"
+											value="#{bundle.value_ll}:" />
+										<p:inputNumber id="valueTodd" required="true"
+											label="#{bundle.value_ll}:" inputStyleClass="form-control "
+											value="#{subbmissionExchnageController.subbmissionExchnage.liraValue}">
+											<p:ajax event="keyup" onstart="checkValue();" />
+											<p:ajax event="blur" onstart="checkValue();" />
+
+										</p:inputNumber>
+
+										<h:outputText id="error-messsage-vallueLL-bt-total"
+											style="display: none;"
+											value="#{bundle.value_to_LL_bigger_from_current_value}"
+											styleClass="error-message" for="valueTodd" />
+
+									</div>
+								</div>
+
+
+								<div class="col-md-4">
+									<div class="form-group">
+										<p:outputLabel class="control-label" for="rate"
+											value="#{bundle.rate}:" />
+										<p:inputNumber id="rate"
+											onkeypress="return isNumberKey(event)"
+											label="#{bundle.rate}:" inputStyleClass="form-control"
+											value="#{subbmissionExchnageController.subbmissionExchnage.rate}">
+											<p:ajax event="keyup" onstart="checkValue();" />
+											<p:ajax event="blur" onstart="checkValue();" />
+										</p:inputNumber>
+
+										<h:message styleClass="error-message" for="rate" />
+
+									</div>
+								</div>
+
+
+
+								<div class="col-md-4">
+									<div class="form-group">
+										<p:outputLabel class="control-label" for="totalDD"
+											value="#{bundle.value_dd}:" />
+										<h:inputText  id="totalDD" disabled="true"
+											label="#{bundle.value_dd}:" styleClass="form-control" />
+
+
+
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="float-right">
+										<h:commandLink action="currency-exchange-select-submission"
+											id="cancelButton" style="margin-left:6px;"
+											styleClass="btn btn-danger btn-cancel">
+											<span>#{bundle.back}</span>
+											<i class="fas fa-caret-square-left"></i>
+
+											<f:ajax></f:ajax>
+										</h:commandLink>
+										<p:tooltip id="toolTipGrow" for="cancelButton"
+											atPosition="right center" value="#{bundle.ctrl_d}"
+											hideEvent="mouseleave click" showEffect="slide"
+											hideEffect="slide" position="right" />
+										<h:commandLink value='#{bundle.save}' id="save_btn"
+											action='#{subbmissionExchnageController.submit()}'
+											styleClass="btn btn-primary  disabled">
+											<f:ajax render=":messageScript :formTemplate :form-save"
+												execute="form-save" />
+											<i class="fa fa-save" />
+											<p:tooltip id="toolTipGrow2" for="save_btn"
+												hideEvent="mouseleave click" atPosition="right center"
+												value="#{bundle.ctrl_s}" styleClass="btn-cancel"
+												showEffect="slide" hideEffect="slide" position="right" />
+
+
+
+										</h:commandLink>
+
+									</div>
+								</div>
+							</div>
+
+						</h:panelGroup>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+
+	<ui:define name="customOutputScript">
+		<h:outputScript name="pages/currency_exchange.js" library="js" />
+	</ui:define>
+</ui:composition>
+</html>

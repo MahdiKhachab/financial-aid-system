@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/views/template/template.xhtml">
+
+		<ui:define name="breadcrumb">
+			<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.cards}</li>
+			<li class="breadcrumb-item active">#{bundle.worker}</li>
+			<!--end col-->
+		</ui:define>
+
+
+		<ui:define name="customFormContent">
+			<o:onloadScript>
+	select2me();
+     
+       </o:onloadScript>
+
+
+
+			<div class="col-md-12">
+
+				<span class=" mdi mdi-account-plus " style="font-size: 28px;"></span>
+
+				<h:outputText style="font-size: 22px;" value=" #{bundle.new_worker}" />
+
+
+			</div>
+			<div class="card" style="margin-top: 10px;">
+
+				<div class="card-body">
+
+					<h:panelGroup id="form-save">
+
+						<div class="row" style="margin-top: 2%;">
+							<div class="form-group col-md-6">
+								<p:outputLabel class="control-label" for="worker_name"
+									value="#{bundle.worker_name} :" />
+								<h:inputText id="worker_name" required="true"
+									label="#{bundle.worker_name }:" styleClass="form-control"
+									value="#{workerCardController.worker.name}" />
+								<h:message styleClass="error-message" for="worker_name" />
+							</div>
+							<div class="form-group col-md-6">
+								<p:outputLabel class="control-label" for="worker_tel"
+									value="#{bundle.worker_phone_no}:" />
+								<h:inputText id="worker_tel"
+									onkeypress="return isNumberKey(event)"
+									label="#{bundle.worker_phone_no}:" styleClass="form-control"
+									value="#{workerCardController.worker.phoneNo}" />
+
+								<h:message styleClass="error-message" for="worker_tel" />
+
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+
+								<p:outputLabel class="control-label" for="religionId"
+									value="#{bundle.worker_religion}" />
+
+								<h:selectOneMenu style="width: 100% ;  margin-top:5px" disabled="#{workerCardController.worker.editOrDelete eq false}"
+									styleClass="select2 select2me form-control   custom-select"
+									immediate="true" converter="omnifaces.SelectItemsConverter"
+									id="religionId" label="#{bundle.worker_religion}"
+									placeHolder="#{bundle.worker_religion}"
+									value="#{workerCardController.worker.religion }">
+									<f:selectItem itemLabel="لا يوجد" itemValue="" />
+									<f:selectItems value="#{workerCardController.religions }"
+										var="re" itemLabel="#{re.name}" itemValue="#{re}" />
+									<f:ajax></f:ajax>
+								</h:selectOneMenu>
+								<h:message for="religionId" styleClass="error-message" />
+							</div>
+
+							<div class="form-group col-md-6">
+								<p:outputLabel class="control-label" for="worker_living_area"
+									value="#{bundle.worker_living_area}:" />
+								<h:inputText id="worker_living_area"
+									label="#{bundle.worker_living_area}" styleClass="form-control"
+									value="#{workerCardController.worker.livingArea}" />
+
+								<h:message styleClass="error-message" for="worker_living_area" />
+
+							</div>
+							<div class="col-md-6">
+								
+								<p:outputLabel class="control-label" for="serviceId"
+									value="#{bundle.service_name} :" />
+								<p:selectManyCheckbox id="serviceId"  
+									styleClass="  radioBtn checkBoxClass"
+									converter="omnifaces.SelectItemsConverter"
+									value="#{workerCardController.worker.services}" layout="grid"
+									columns="3">
+									<f:selectItems value="#{workerCardController.services}"
+										var="city" itemLabel="#{city.name}" itemValue="#{city}" />
+								</p:selectManyCheckbox>
+							</div>
+
+							<div class="form-group col-md-6">
+								<p:outputLabel class="control-label" for="worker_notes"
+									value="#{bundle.worker_notes}:" />
+								<h:inputText id="worker_notes" label="#{bundle.worker_notes}"
+									styleClass="form-control"
+									value="#{workerCardController.worker.notes}" />
+
+								<h:message styleClass="error-message" for="worker_notes" />
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="float-right">
+									<h:commandLink action="worker-list" id="cancelButton"
+										style="margin-left:6px;"
+										styleClass="btn btn-danger btn-cancel">
+										<span>#{bundle.back}</span>
+										<i class="fas fa-caret-square-left"></i>
+
+										<f:ajax></f:ajax>
+									</h:commandLink>
+									<p:tooltip id="toolTipGrow" for="cancelButton"
+										atPosition="right center" value="#{bundle.ctrl_d}"
+										hideEvent="mouseleave click" showEffect="slide"
+										hideEffect="slide" position="right" />
+									<h:commandLink value='#{bundle.save}' id="save_btn"
+										action='#{workerCardController.save()}'
+										styleClass="btn btn-primary btn-save">
+										<f:ajax render=":messageScript :formTemplate"
+											execute="form-save" />
+										<i class="fa fa-save" />
+										<p:tooltip id="toolTipGrow2" for="save_btn"
+											hideEvent="mouseleave click" atPosition="right center"
+											value="#{bundle.ctrl_s}" styleClass="btn-cancel"
+											showEffect="slide" hideEffect="slide" position="right" />
+									</h:commandLink>
+
+								</div>
+							</div>
+						</div>
+					</h:panelGroup>
+				</div>
+			</div>
+		</ui:define>
+
+
+
+	</ui:composition>
+
+
+</body>
+</html>

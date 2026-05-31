@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/views/template/template.xhtml">
+
+		<ui:define name="breadcrumb">
+
+
+			<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.services}</li>
+			<li class="breadcrumb-item active">#{bundle.distribution_dead_need}</li>
+
+			<!--end col-->
+		</ui:define>
+
+		<ui:define name="customStyleSheet">
+
+
+			<h:outputStylesheet name="toggle/bootstrap-toggle.min.css"
+				library="plugins" />
+		</ui:define>
+		<ui:define name="customFormContent">
+			<o:onloadScript>
+	select2me();
+	($('.toogle')).bootstrapToggle();
+     initDatePicker();
+       </o:onloadScript>
+
+			<o:importConstants type="enums.CurrencyEnum" var="currencyEnum" />
+			<o:importConstants type="enums.NeedTypeEnum" />
+			<div class="col-md-12" style="margin-top: 10px;">
+				<span style="font-size: 28px;">
+					<li class="breadcrumb-item active">
+						#{needDetailsCardController.deadNeed.service.name}</li>
+
+				</span>
+			</div>
+			<div class="card" style="margin-top: 10px;">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-3">
+							<h:outputText
+								style="font-size: 15px; margin-right: 10px;  padding:2%; background-color:#0069d9 !important; "
+								styleClass="m-0 btn btn-success waves-effect waves-light"
+								value=" المتوفي: #{needDetailsCardController.deadNeed.deadPerson.deadName} " />
+							<ui:remove>
+								<h:outputText
+									style="font-size: 15px; margin-right: 10px;  padding:2%; background-color:#f1646c !important; "
+									styleClass="badge  badge-secondary"
+									value=" المندوب عنه :  #{needDetailsCardController.deadNeed.deadPerson.delegator} " />
+							</ui:remove>
+						</div>
+						<div class="col-md-3">
+							<h:outputText
+								style="font-size: 15px; margin-right: 10px;  padding:2%; background-color:#f1646c !important; "
+								styleClass="m-0 btn btn-success waves-effect waves-light"
+								value=" المدة المطلوبة :  #{needDetailsCardController.deadNeed.count} #{needDetailsCardController.deadNeed.needType.type}" />
+						</div>
+						<div class="col-md-3">
+
+							<h:outputText styleClass="m-0 btn btn-success waves-effect waves-light"
+								style="font-size: 16px;font-weight: bold; margin:10px; "
+								value="#{needDetailsCardController.deadNeed.amount}
+						#{needDetailsCardController.deadNeed.currency.type}"></h:outputText>
+						</div>
+						<div class="col-md-3">
+							<h:commandLink style="float:left;margin-left: 5px;"
+								action="needDeadDetails-list" id="cancelButton"
+								styleClass="btn btn-danger btn-cancel">
+								<span>#{bundle.back}</span>
+								<i class="fas fa-caret-square-left"></i>
+
+								<f:ajax></f:ajax>
+							</h:commandLink>
+							<p:tooltip id="toolTipGrow3" for="cancelButton"
+								atPosition="right center" value="#{bundle.ctrl_d}"
+								hideEvent="mouseleave click" showEffect="slide"
+								hideEffect="slide" position="right" />
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="card" style="margin-top: 2%;">
+				<div class="card-body">
+					<h:panelGroup id="form-need-details" style="width:100%">
+
+						<h:panelGroup id="form-need-details-list"
+							rendered="#{needDetailsCardController.showPanel eq false}">
+
+							<ui:include
+								src="/snippets/distributNeeds/distributNeeds-list.xhtml" />
+
+						</h:panelGroup>
+
+						<h:panelGroup id="form-need-details-crud"
+							rendered="#{needDetailsCardController.showPanel eq true}">
+
+							<ui:include
+								src="/snippets/distributNeeds/distributNeeds-crud.xhtml" />
+
+
+						</h:panelGroup>
+
+					</h:panelGroup>
+				</div>
+			</div>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<h:commandLink value='#{bundle.yes}'
+					style="margin-left:10px  ; margin-top:5px;  margin-bottom:5px; color: white;"
+					styleClass="ui-confirmdialog-yes  btn btn-primary "
+					icon="ui-icon-check">
+					<f:ajax></f:ajax>
+					<em class="fa fa-check" />
+				</h:commandLink>
+				<h:commandLink value='#{bundle.no}'
+					style="color:white; margin-left:5px; margin-top:5px; margin-bottom:5px;"
+					styleClass="ui-confirmdialog-no btn btn-danger">
+					<em class="fa fa-times" />
+					<f:ajax></f:ajax>
+				</h:commandLink>
+			</p:confirmDialog>
+
+
+		</ui:define>
+
+
+		<ui:define name="customOutputScript">
+			<h:outputScript name="jquery.form-repeater.js" library="js" />
+
+			<h:outputScript name="jquery.repeater.min.js" library="js" />
+			<h:outputScript name="toggle/bootstrap-toggle.min.js"
+				library="plugins" />
+
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

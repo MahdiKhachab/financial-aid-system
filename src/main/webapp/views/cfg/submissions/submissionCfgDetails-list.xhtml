@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html dir="rtl" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:i="http://itunitfaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<ui:component>
+	<p:dataTable
+		currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+		editable="true" emptyMessage="#{bundle.no_records}"
+		id="submissionDetailsTableId" paginator="true"
+		paginatorPosition="bottom"
+		paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+		rowKey="#{item.id}" rows="10" rowsPerPageTemplate="10,20,30"
+		styleClass="table table-striped table-hover"
+		value="#{submissionCfgCardController.submissionCfg.submissionDetailsList}"
+		var="subItem" widgetVar="submissionDetailsWgVar"
+		rowStyleClass="#{item.error ? 'error-record' :''}">
+
+		<p:column style="width:50px">
+			<f:facet name="header">
+				<h:commandLink immediate="true" id="btn-new"
+					actionListener="#{submissionCfgCardController.addChild()}"
+					styleClass="btn btn-primary   waves-effect waves-light btn-xs   btn-new ">
+					<i class=" dripicons-plus " style="color: white;"></i>
+					<p:ajax update=":#{p:component('submissionDetailsTableId')}"
+						process=":#{p:component('submissionDetailsTableId')}"
+						oncomplete="PF('submissionDetailsWgVar').filter();" />
+
+					<p:tooltip id="toolTipGrow" for="btn-new" atPosition="right center"
+						value="#{bundle.ctrl_z}" showEffect="slide" hideEffect="slide"
+						position="right" />
+				</h:commandLink>
+			</f:facet>
+			<p:commandLink immediate="true"
+				actionListener="#{submissionCfgCardController.deleteSubmissionDetailsCfg(subItem)}"
+				styleClass="btn btn-danger actions-btn">
+				<i class="dripicons-trash" style="color: white; font-size: 11px;" />
+				<p:ajax update=":#{p:component('submissionDetailsTableId')}"
+					process=":#{p:component('submissionDetailsTableId')}"
+					oncomplete="PF('submissionDetailsWgVar').filter();" />
+			</p:commandLink>
+
+		</p:column>
+
+		<p:column headerText="#{bundle.submission_details_cfg_type}"
+			sortBy="#{subItem.type}" width="150">
+			<p:inputText styleClass="text-ellipsis" value="#{subItem.type}">
+				<f:ajax execute="@this"></f:ajax>
+			</p:inputText>
+		</p:column>
+
+		<p:column headerText="#{bundle.submission_details_cfg_dollar}"
+			sortBy="#{subItem.balance_dd}" width="150">
+			<h:outputText styleClass="text-ellipsis"
+				value=" #{of:formatCurrency(subItem.balance_dd, '')}  ">
+			</h:outputText>
+		</p:column>
+
+		<p:column headerText="#{bundle.submission_details_cfg_ll}"
+			sortBy="#{subItem.balance_ll}" width="150">
+			<h:outputText styleClass="text-ellipsis"
+				value=" #{of:formatCurrency(subItem.balance_ll, '')}  "
+				label="#{subItem.balance_ll}">
+			</h:outputText>
+		</p:column>
+
+	</p:dataTable>
+</ui:component>
+</html>

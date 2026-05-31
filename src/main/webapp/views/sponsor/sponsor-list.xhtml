@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/views/template/template.xhtml">
+	<ui:param name="title" value='#{bundle.deserved_list}' />
+	<ui:param name="subtitle" value='#{bundle.deserved_list}' />
+
+	<ui:define name="customStyleSheet">
+		<h:outputStylesheet name="template/general.css" library="css" />
+	</ui:define>
+	<ui:define name="breadcrumb">
+
+		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.cards}</li>
+		<li class="breadcrumb-item active">#{bundle.sponsor}</li>
+		<!--end col-->
+	</ui:define>
+
+	<ui:define name="customFormContent">
+		<o:importConstants type="enums.PersonGenre" var="personGenre" />
+
+		<div class="card" style="margin-top: 10px;">
+			<div class="card-body">
+				<div class="row">
+					<h:panelGroup id="conter-top" class="col-md-4 col-sm-6">
+						<span style="font-size: 16px;"><p:spacer width="5" />
+							#{bundle.person_sponsor} :</span>
+
+
+						<div class="avatar-box thumb-sm align-self-center mr-2">
+							<span id="countId" class="avatar-title rounded-circle"
+								style="color: white !important; background-color: #0069d9 !important;">#{sponsorList.countItems}</span>
+						</div>
+
+
+					</h:panelGroup>
+					<h:panelGroup id="save-form" class="col-md-8 col-sm-6 ">
+						<h:commandLink action='sponsor-card' id="btn-to-crud"
+							styleClass="btn btn-primary waves-effect waves-light btn-crud-page"
+							style="float:left;margin-left:5px;">
+							<i class="fa fa-plus"></i>
+							<span>#{bundle.add_sponsor}</span>
+						</h:commandLink>
+						<p:tooltip id="toolTipGrow" for="btn-to-crud"
+							atPosition="right center" value="#{bundle.ctrl_x}"
+							showEffect="slide" hideEffect="slide" position="right" />
+					</h:panelGroup>
+				</div>
+
+				<h:panelGroup id="tablePanelId">
+					<div class="row" style="margin-left: 8px; margin-top: 10px;">
+						<p:dataTable
+							currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+							emptyMessage="#{bundle.no_records}"
+							filteredValue="#{sponsorList.filteredList}" id="tableId"
+							paginator="true" paginatorPosition="bottom"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+							rowKey="#{item.id}" rows="10"
+							rowsPerPageTemplate="10,20,30,#{sponsorList.pageItems.size()}"
+							styleClass="table table-striped table-hover"
+							value="#{sponsorList.pageItems}" var="item"
+							widgetVar="pageItemsTableWgVar">
+							<p:ajax event="rowEdit" update=":messageScript" />
+							<p:column styleClass="no-header table-actions-column" width="80">
+								<span><p:commandLink
+										actionListener="#{sponsorList.delete(item)}"
+										update=":messageScript conter-top"
+										style="margin-left:5px;"
+										styleClass="btn btn-danger waves-effect waves-light btn-xs ">
+										<i class=" dripicons-trash  "
+											style="color: white; font-size: 11px;" />
+										<p:confirm header="#{bundle.delete}"
+											message="#{bundle.are_you_sure_from_delete}">
+										</p:confirm>
+										<p:ajax oncomplete="PF('pageItemsTableWgVar').filter()"
+										>
+										</p:ajax>
+									</p:commandLink> <h:link outcome="sponsor-card"
+										styleClass="btn btn-warning  waves-effect waves-light   btn-xs">
+										<f:param name="id" value="#{item.id}" />
+										<span class=" dripicons-document-edit  " style="color: white;" />
+										<f:ajax></f:ajax>
+									</h:link> </span>
+							</p:column>
+
+
+							<p:column filterBy="#{item.fullName}" filterMatchMode="contains"
+								headerText="#{bundle.sponsor_fullName}"
+								sortBy="#{item.fullName}" width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+										placeholder="#{bundle.sponsor_fullName}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText id="fullName" styleClass="text-ellipsis"
+									title="#{item.fullName}" value="#{item.fullName}" />
+
+
+
+
+							</p:column>
+
+
+
+							<p:column filterBy="#{item.phoneNo}"
+								headerText="#{bundle.sponsor_phoneNo}" sortBy="#{item.phoneNo}"
+								width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+										placeholder="#{bundle.sponsor_phoneNo}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText id="phoneNo" styleClass="text-ellipsis"
+									title="#{item.phoneNo}" value="#{item.phoneNo}" />
+
+
+
+
+							</p:column>
+
+							<p:column filterBy="#{item.livingArea}"
+								headerText="#{bundle.sponsor_livingArea}"
+								sortBy="#{item.livingArea}" width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+										placeholder="#{bundle.sponsor_livingArea}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText id="livingArea" styleClass="text-ellipsis"
+									title="#{item.livingArea}" value="#{item.livingArea}" />
+
+
+
+
+							</p:column>
+
+
+							<p:column filterBy="#{item.religionReferenceCfg.name}"
+								filterMatchMode="startsWith"
+								headerText="#{bundle.sponsor_religionReferenceCfg}"
+								sortBy="#{item.religionReferenceCfg.name}" width="180">
+								<f:facet name="filter">
+									<p:selectOneMenu onchange="PF('pageItemsTableWgVar').filter()"
+										style="width:100% ;   " styleClass="inputtext-filter">
+										<f:selectItem
+											itemLabel="#{bundle.sponsor_religionReferenceCfg}"
+											itemValue="#{null}" noSelectionOption="true" />
+										<f:selectItems value="#{sponsorList.religionReferenceCfgList}"
+											var="religion" itemLabel="#{religion.name}"
+											itemValue="#{religion.name}" />
+										<f:ajax></f:ajax>
+									</p:selectOneMenu>
+								</f:facet>
+								<h:outputText value="#{item.religionReferenceCfg.name}"
+									styleClass="text-ellipsis"
+									title="#{item.religionReferenceCfg.name}"></h:outputText>
+							</p:column>
+						</p:dataTable>
+					</div>
+				</h:panelGroup>
+			</div>
+		</div>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<h:commandLink value='#{bundle.yes}'
+				style="margin-left:10px  ; margin-top:5px;  margin-bottom:5px; color: white;"
+				styleClass="ui-confirmdialog-yes  btn btn-primary "
+				icon="ui-icon-check">
+				<f:ajax></f:ajax>
+				<em class="fa fa-check" />
+			</h:commandLink>
+			<h:commandLink value='#{bundle.no}'
+				style="color:white; margin-left:5px; margin-top:5px; margin-bottom:5px;"
+				styleClass="ui-confirmdialog-no btn btn-danger">
+				<em class="fa fa-times" />
+				<f:ajax></f:ajax>
+			</h:commandLink>
+		</p:confirmDialog>
+
+	</ui:define>
+</ui:composition>
+
+</html>

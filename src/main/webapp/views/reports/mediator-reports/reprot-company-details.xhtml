@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/views/template/template.xhtml">
+
+		<ui:define name="breadcrumb">
+
+			<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.reports}</li>
+			<li class="breadcrumb-item "><h:link outcome="mediator-report">#{bundle.mediator_report} </h:link></li>
+
+			<!--end col-->
+		</ui:define>
+
+		<ui:define name="customStyleSheet">
+			<h:outputStylesheet name="toggle/bootstrap-toggle.min.css"
+				library="plugins" />
+		</ui:define>
+		<ui:define name="customFormContent">
+			<o:onloadScript>
+	select2me();
+	($('.toogle')).bootstrapToggle();
+     initDatePicker();
+       </o:onloadScript>
+			<o:importConstants type="enums.CurrencyEnum" var="currencyEnum" />
+			<div class="col-md-12" style="margin-top: 10px;">
+
+				<span class="  fas fa-chart-line  "
+					style="font-size: 28px; margin-right: 5px;"></span>
+
+				<h:outputText style="font-size: 22px;"
+					value=" #{bundle.mediator_report}" />
+
+			</div>
+			<div class="row" style="margin-top: 2%">
+				<div class="card">
+					<div class="card-body">
+
+						<div class="row">
+							<div class="col-md-3">
+								<h:selectOneRadio style="margin :5px;"
+									styleClass="radio-primary radioBtn"
+									value="#{reportCompanyDetails.currency}">
+									<f:selectItem itemLabel="#{bundle.dollar}"
+										itemValue="#{currencyEnum.DD}" />
+									<f:selectItem itemLabel="#{bundle.lira}"
+										itemValue="#{currencyEnum.Lira}" />
+									<f:ajax execute="@this"></f:ajax>
+								</h:selectOneRadio>
+							</div>
+							<div class="col-md-9">
+
+								<h:commandLink action="mediator-report" id="cancelButton"
+									style="float:left;margin-left:6px;" styleClass="btn btn-danger btn-cancel">
+									<span>#{bundle.back}</span>
+									<i class="fas fa-caret-square-left"></i>
+
+									<f:ajax></f:ajax>
+								</h:commandLink>
+								<p:tooltip id="toolTipGrowCancel" for="cancelButton"
+									atPosition="right center" value="#{bundle.ctrl_d}"
+									hideEvent="mouseleave click" showEffect="slide"
+									hideEffect="slide" position="right" />
+									
+								<h:commandLink value='#{bundle.search}' id="btn-save"
+									style="float:left;margin-left:10px;"
+									action='#{reportCompanyDetails.search()}'
+									styleClass="btn btn-warning  waves-effect waves-light btn-new">
+									<f:ajax render="companyDetailsTableId :messageScript" />
+									<span class="fas fa-search"></span>
+								</h:commandLink>
+
+								<p:tooltip id="toolTipGrow" for="btn-save"
+									atPosition="right center" value="#{bundle.ctrl_z}"
+									showEffect="slide" hideEffect="slide" position="right" />
+							</div>
+						</div>
+
+						<p:dataTable style="margin-top: 1%;"
+							currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+							editable="true" emptyMessage="#{bundle.no_records}"
+							id="companyDetailsTableId" paginator="true"
+							paginatorPosition="bottom"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+							rows="10" rowsPerPageTemplate="5,10,15"
+							styleClass="table table-striped table-hover"
+							value="#{reportCompanyDetails.pageItems}" var="company"
+							widgetVar="companyDetailsWegVar">
+							<p:ajax event="rowEdit" update=":messageScript" />
+
+
+							<p:column headerText="#{bundle.mediator_to_company_name}"
+								sortBy="#{company.name.name}" width="150">
+								<h:outputText id="companyDetailsId" styleClass="text-ellipsis"
+									title="#{company.name.name}" value="#{company.name.name}">
+								</h:outputText>
+							</p:column>
+
+							<p:column headerText="#{bundle.total_amount}"
+								sortBy="#{company.total}" width="150">
+								<h:outputText id="companyDetailsTotalId"
+									styleClass="text-ellipsis" title="#{company.total}"
+									value="#{company.total}">
+								</h:outputText>
+							</p:column>
+
+							<p:column headerText="#{bundle.mediator_currency}"
+								sortBy="#{company.currency.type}" width="150">
+								<h:outputText id="companyDetailsCurrencyId"
+									styleClass="text-ellipsis" title="#{company.currency.type}"
+									value="#{company.currency.type}">
+								</h:outputText>
+							</p:column>
+
+						</p:dataTable>
+					</div>
+				</div>
+
+			</div>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

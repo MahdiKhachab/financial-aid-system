@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html dir="rtl" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+<ui:composition template="/views/template/template.xhtml">
+	<ui:param name="title" value='#{bundle.mediator_list}' />
+	<ui:param name="subtitle" value='#{bundle.mediator_list}' />
+
+
+	<ui:define name="breadcrumb">
+		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+
+		<li class="breadcrumb-item active">#{bundle.cards}</li>
+
+
+		<li class="breadcrumb-item "><h:link outcome="mediator-list"> #{bundle.mediator_list} </h:link></li>
+
+		<li class="breadcrumb-item active">#{bundle.mediator_add_new}</li>
+
+	</ui:define>
+	<ui:define name="customFormContent">
+		<o:onloadScript>
+	select2me();
+     
+       </o:onloadScript>
+		<o:importConstants type="enums.CurrencyEnum" var="currency" />
+		<o:importConstants type="enums.MediatorMonyEnum" />
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="page-title-box">
+					<h4 class="page-title">
+						<span><p:spacer width="5" /> #{bundle.mediator_add_new}</span>
+					</h4>
+				</div>
+				<!--end page-title-box-->
+			</div>
+			<!--end col-->
+		</div>
+		<div class="panel-body">
+			<div class="card" style="margin-top: 10px;">
+				<div class="card-body">
+
+					<div class="row">
+
+						<div class="col-md-3 form-group">
+							<h:outputLabel value="#{bundle.mediator_select_sponsor}"
+								style="margin-top: 15px;" />
+
+							<div class="skin">
+								<h:selectBooleanCheckbox
+									label="#{bundle.mediator_select_sponsor}"
+									style="height:20px;width:25px" id="selectPersonId"
+									value="#{mediatorCardController.selectSponsor}">
+									<f:ajax render="selectCheckBoxId"></f:ajax>
+								</h:selectBooleanCheckbox>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 form-group">
+							<h:panelGroup id="selectCheckBoxId">
+
+								<h:panelGroup id="selectDelegateId"
+									rendered="#{mediatorCardController.selectSponsor eq false}">
+									<p:outputLabel class="control-label" for="mediatorNameId"
+										value="#{bundle.mediator_name}" />
+
+									<h:inputText id="mediatorNameId"
+										label="#{bundle.mediator_name}" required="true"
+										styleClass="form-control"
+										value="#{mediatorCardController.mediator.delegateName}">
+										<f:ajax execute="@this"></f:ajax>
+									</h:inputText>
+									<h:message for="mediatorNameId" styleClass="error-message" />
+								</h:panelGroup>
+								<h:panelGroup id="selectSponsrId"
+									rendered="#{mediatorCardController.selectSponsor eq true}">
+
+									<p:outputLabel class="control-label" for="sposnrId"
+										value="#{bundle.mediator_from_sponsor_name}" />
+
+									<h:selectOneMenu required="true" style="width: 100%;"
+										styleClass="select2  select2me form-control  custom-select"
+										converter="omnifaces.SelectItemsConverter" id="sposnrId"
+										label="#{bundle.mediator_from_sponsor_name}"
+										placeHolder="#{bundle.mediator_from_sponsor_name}"
+										value="#{mediatorCardController.mediator.fromSponsor}">
+										<f:selectItem itemLabel="#{bundle.mediator_from_sponsor_name}"
+											itemValue="" />
+										<f:selectItems value="#{mediatorCardController.sponsors}"
+											var="sp" itemLabel="#{sp.fullName}" itemValue="#{sp}" />
+										<f:ajax
+											listener="#{mediatorCardController.listenerSelectedSponsor()}"
+											execute="@this " render="delegateTel"></f:ajax>
+									</h:selectOneMenu>
+
+									<h:message for="sposnrId"  styleClass="error-message" />
+
+								</h:panelGroup>
+
+							</h:panelGroup>
+
+
+						</div>
+
+						<div class="col-md-3">
+							<div class="form-group">
+								<p:outputLabel class="control-label" for="delegateTel"
+									value="#{bundle.mediator_phone_number}:" />
+								<h:inputText id="delegateTel"
+									onkeypress="return isNumberKey(event)"
+									label="#{bundle.mediator_phone_number}:"
+									styleClass="form-control"
+									value="#{mediatorCardController.mediator.phoneNo}" />
+
+								<h:message styleClass="error-message" for="delegateTel" />
+
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<div class="form-group">
+								<p:outputLabel class="control-label" for="amountId"
+									value="#{bundle.mediator_ammount}">
+								</p:outputLabel>
+
+								<p:inputNumber decimalPlaces="2" id="amountId"
+									label="#{bundle.mediator_ammount}" required="true"
+									value="#{mediatorCardController.mediator.ammount}"
+									styleClass="form-control">
+									<f:ajax execute="@this"></f:ajax>
+								</p:inputNumber>
+								<h:message for="amountId" styleClass="error-message" />
+
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<p:outputLabel for="moneyTypeId" class="control-label">#{bundle.mediator_money_type }</p:outputLabel>
+							<h:selectOneMenu required="true" style="width: 100%;"
+								styleClass="select2  select2me form-control  custom-select"
+								converter="omnifaces.SelectItemsConverter" id="moneyTypeId"
+								label="#{bundle.mediator_money_type}"
+								placeHolder="#{bundle.mediator_money_type}"
+								value="#{mediatorCardController.mediator.monyEnum}">
+								<f:selectItem itemLabel="#{bundle.select_money_type}"
+									noSelectionOption="true" itemDisabled="true" />
+								<f:selectItems value="#{MediatorMonyEnum.values()}" var="money"
+									itemLabel="#{money.type}" itemValue="#{money}" />
+								<f:ajax execute="@this"></f:ajax>
+							</h:selectOneMenu>
+							<h:message for="moneyTypeId" styleClass="error-message" />
+						</div>
+					</div>
+					<div class="row">
+
+						<div class="col-md-3">
+							<p:outputLabel for="currencyId" class="control-label">#{bundle.mediator_currency}</p:outputLabel>
+							<h:selectOneMenu required="true" style="width: 100%;"
+								styleClass="select2  select2me form-control  custom-select"
+								converter="omnifaces.SelectItemsConverter" id="currencyId"
+								label="#{bundle.mediator_currency}"
+								placeHolder="#{bundle.mediator_currency}"
+								value="#{mediatorCardController.mediator.currency}">
+								<f:selectItem itemLabel="#{bundle.mediator_currency}"
+									noSelectionOption="true" itemDisabled="true" />
+								<f:selectItems value="#{currency.values()}" var="c"
+									itemLabel="#{c.type}" itemValue="#{c}" />
+								<f:ajax execute="@this"></f:ajax>
+							</h:selectOneMenu>
+							<h:message for="currencyId" styleClass="error-message" />
+						</div>
+						<div class="col-md-3">
+
+							<p:outputLabel for="companyId" class="control-label">#{bundle.mediator_to_company_name}</p:outputLabel>
+
+							<h:selectOneMenu style="width: 100%;"
+								styleClass="select2  select2me form-control  custom-select"
+								converter="omnifaces.SelectItemsConverter" id="companyId"
+								label="#{bundle.mediator_to_company_name}"
+								placeHolder="#{bundle.mediator_to_company_name}"
+								value="#{mediatorCardController.mediator.toCompany}">
+								<f:selectItem itemLabel="#{bundle.mediator_select_company}"
+									itemValue="" />
+								<f:selectItems value="#{mediatorCardController.companies}"
+									var="co" itemLabel="#{co.name}" itemValue="#{co}" />
+								<f:ajax execute="@this"></f:ajax>
+							</h:selectOneMenu>
+
+							<h:message for="companyId" styleClass="error-message" />
+
+						</div>
+						
+						<div class="col-md-3">
+							<div class="form-group">
+								<p:outputLabel for="receiveDate" class="control-label">#{bundle.mediator_receive_date} 
+																									 
+																								</p:outputLabel>
+
+								<p:inputMask mask="99/99/9999" id="receiveDate"
+									styleClass="form-control "
+									value="#{mediatorCardController.mediator.receiveDate}">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+									<f:ajax execute="@this"></f:ajax>
+								</p:inputMask>
+
+								<h:message for="receiveDate" styleClass="error-message" />
+							</div>
+						</div>
+
+
+						<div class="col-md-3">
+							<div class="form-group">
+								<h:outputLabel value="#{bundle.mediator_delivered}"
+									style="margin-top: 15px;" />
+
+								<div class="skin">
+									<h:selectBooleanCheckbox label="#{bundle.mediator_delivered}"
+										style="height:20px;width:25px" id="deliveredId"
+										value="#{mediatorCardController.mediator.delivered}">
+										<f:ajax listener="#{mediatorCardController.resetReceiver()}"
+											render="panelReceiver"></f:ajax>
+									</h:selectBooleanCheckbox>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<h:panelGroup styleClass="form-group row col-md-12"
+							id="panelReceiver">
+							<div class="form-group col-md-3">
+
+
+								<h:panelGroup
+									rendered="#{mediatorCardController.mediator.delivered}">
+									<p:outputLabel class="control-label" for="receiverOfCompanyId"
+										value="#{bundle.mediator_receiever}" />
+
+									<h:inputText id="receiverOfCompanyId"
+										label="#{bundle.mediator_receiever}" required="true"
+										styleClass="form-control"
+										value="#{mediatorCardController.mediator.receiverOfCompany}">
+										<f:ajax execute="@this"></f:ajax>
+									</h:inputText>
+									<h:message for="receiverOfCompanyId" styleClass="error-message" />
+								</h:panelGroup>
+
+							</div>
+							<div class="  col-md-3">
+								<h:panelGroup id="panelRelatedFile"
+									rendered="#{mediatorCardController.mediator.delivered}">
+
+									<h:commandLink id="relatedfileId" style="margin-top: 30px;"
+										value="#{bundle.mediator_related_file}"
+										styleClass="btn btn-primary  "
+										onclick="$('.fileProjectUploadVar input').click()"
+										title="#{bundle.mediator_related_file}">
+										<i class="ti-file"></i>
+										<f:ajax render=":messageScript" />
+									</h:commandLink>
+
+									<p:fileUpload widgetVar="fileProjectUploadVar" multiple="true"
+										auto="true" styleClass="fileProjectUploadVar"
+										style="visibility: hidden;"
+										fileUploadListener="#{mediatorCardController.handleOtherFileUpload}"
+										process="@this" update=":messageScript" />
+
+									<h:message for="relatedfileId" styleClass="error-message" />
+								</h:panelGroup>
+							</div>
+						</h:panelGroup>
+					</div>
+				</div>
+			</div>
+
+			<div class="float-right">
+
+				<h:commandLink action="mediator-list" id="cancelButton"
+					style="margin-left:6px;" styleClass="btn btn-danger btn-cancel">
+					<span>#{bundle.back}</span>
+					<i class="fas fa-caret-square-left"></i>
+
+					<f:ajax render=":formTemplate"></f:ajax>
+				</h:commandLink>
+				<p:tooltip id="toolTipGrow" for="cancelButton"
+					atPosition="right center" value="#{bundle.ctrl_d}"
+					hideEvent="mouseleave click" showEffect="slide" hideEffect="slide"
+					position="right" />
+
+				<h:commandLink value='#{bundle.save}' id="save_btn"
+					action='#{mediatorCardController.save()}'
+					styleClass="btn btn-primary btn-save">
+					<f:ajax render=":messageScript :formTemplate"
+						execute=":formTemplate" />
+					<i class="fa fa-save" />
+					<p:tooltip id="toolTipGrow2" for="save_btn"
+						hideEvent="mouseleave click" atPosition="right center"
+						value="#{bundle.ctrl_s}" styleClass="btn-cancel"
+						showEffect="slide" hideEffect="slide" position="right" />
+				</h:commandLink>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

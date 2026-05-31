@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough">
+
+
+<ui:composition template="/views/template/template.xhtml">
+	<ui:param name="title" value='#{bundle.submission_cfg_card_submission}' />
+	<ui:param name="subtitle"
+		value='#{bundle.submission_cfg_card_submission}' />
+
+
+	<ui:define name="breadcrumb">
+
+		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.configurations}</li>
+
+
+		<li class="breadcrumb-item "><h:link outcome="submissionCfg-list"> #{bundle.submission_cfg_list} </h:link></li>
+
+		<li class="breadcrumb-item active">#{bundle.submission_details}</li>
+
+
+
+
+		<!--end col-->
+	</ui:define>
+	<ui:define name="customFormContent">
+
+		<div class="panel-body">
+
+			<div class="card" style="margin-top: 10px;">
+				<div class="card-body">
+					<div class="row">
+						<div class=" col-md-12">
+							<div class="col-md-3">
+								<div class="form-group">
+									<h:outputLabel class="control-label" for="fullNameId"
+										value="#{bundle.submission_cfg_name}">
+										<span class="required">*</span>
+									</h:outputLabel>
+									<h:inputText id="submissionNameId" required="true"
+										f5:placeholder="#{bundle.submission_cfg_name}"
+										label="#{bundle.submission_cfg_name}"
+										title="#{bundle.submission_cfg_name}"
+										value="#{submissionCfgCardController.submissionCfg.name}"
+										styleClass="form-control">
+										<f:ajax render=":messageScript"></f:ajax>
+									</h:inputText>
+									<h:message for="submissionNameId" styleClass="error-message" />
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="card" style="margin-top: 10px;">
+				<div class="card-body">
+					<div class="row">
+						<div class="row ">
+							<div class="col-md-12">
+								<h:panelGroup id="submissionDetailsCfgPanel">
+
+									<div
+										class="bs-callout-success callout-border-left callout-transparent "
+										style="padding: 0px 5px 0px 5px;">
+										<h4 class="success bold">#{bundle.table_submission_details_cfg_list}</h4>
+
+										<ui:include
+											src="/views/cfg/submissions/submissionCfgDetails-list.xhtml" />
+									</div>
+
+								</h:panelGroup>
+							</div>
+						</div>
+					</div>
+					<div>
+						<h:panelGroup id="save-group">
+							<div class="row ">
+								<div class="col-md-12">
+									<h:commandLink id="saveSubmissionId" value='#{bundle.save}'
+										style=" float:left ; margin-right:5px;"
+										action='#{submissionCfgCardController.save()}'
+										styleClass="btn btn-primary btn-save">
+										<f:ajax render=":messageScript :submissionDetailsTableId"
+											execute="  save-group submissionNameId :submissionDetailsTableId"
+											oncomplete="PF('submissionDetailsWgVar').filter()" />
+										<i class="fa fa-save" />
+									</h:commandLink>
+
+									<p:tooltip id="toolTipGrow" for="saveSubmissionId"
+										atPosition="right center" value="#{bundle.ctrl_s}"
+										showEffect="slide" hideEffect="slide" position="right" />
+
+									<h:commandLink id="cancle_button"
+										action="/views/cfg/submissions/submissionCfg-list.xhtml"
+										value="#{bundle.back}" style="float:left"
+										styleClass="btn btn-danger  btn-cancel">
+										<i class="fa fa-times" />
+										<f:ajax></f:ajax>
+
+									</h:commandLink>
+
+									<p:tooltip id="toolTipGrow2" for="cancle_button"
+										atPosition="right center" value="#{bundle.ctrl_d}"
+										styleClass="btn-cancel" showEffect="slide" hideEffect="slide"
+										position="right" />
+
+								</div>
+							</div>
+						</h:panelGroup>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+	</ui:define>
+
+</ui:composition>
+</html>

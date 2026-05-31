@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/views/template/template.xhtml">
+
+		<ui:define name="breadcrumb">
+
+			<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.reports}</li>
+			<li class="breadcrumb-item "><h:link outcome="mediator-report">#{bundle.mediator_report} </h:link></li>
+
+			<!--end col-->
+		</ui:define>
+
+		<ui:define name="customStyleSheet">
+			<h:outputStylesheet name="toggle/bootstrap-toggle.min.css"
+				library="plugins" />
+		</ui:define>
+		<ui:define name="customFormContent">
+			<o:onloadScript>
+	select2me();
+	($('.toogle')).bootstrapToggle();
+     initDatePicker();
+       </o:onloadScript>
+			<o:importConstants type="enums.CurrencyEnum" var="currencyEnum" />
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-8">
+					<span class="  fas fa-chart-line  "
+						style="font-size: 28px; margin-right: 5px;"></span>
+
+					<h:outputText style="font-size: 22px;"
+						value=" #{bundle.mediator_report}" />
+				</div>
+				<div class="col-md-4">
+					<h:link styleClass="btn-primary"
+						outcome="/views/reports/mediator-reports/reprot-company-details.xhtml"
+						style="float:left;font-size: 15px;padding: 5px;font-weight: 400;color: white;border-radius: 15px;"
+						value="#{bundle.report_mediator_not_delivered}">
+
+						<i class="em em-arrow_backward"></i>
+					</h:link>
+				</div>
+			</div>
+
+			<div class="row" style="margin-top: 2%">
+				<div class="col-md-3">
+					<h:selectOneRadio style="margin :5px;"
+						styleClass="radio-primary radioBtn"
+						value="#{reportMediatorController.byCompany}">
+						<f:selectItem itemLabel="#{bundle.report_by_company}"
+							itemValue="#{true}" />
+						<f:selectItem itemLabel="#{bundle.report_by_name}"
+							itemValue="#{false}" />
+						<f:ajax execute="@this" render="filterPanel"></f:ajax>
+					</h:selectOneRadio>
+				</div>
+				<div class="col-md-9">
+					<h:commandLink value='#{bundle.search}' id="btn-save"
+						style="float:left;margin-left:10px;"
+						action='#{ reportMediatorController.search()}'
+						styleClass="btn btn-primary  waves-effect waves-light btn-new">
+						<f:ajax execute="filterPanel" render="filterPanel :messageScript" />
+						<span class="fas fa-search"></span>
+					</h:commandLink>
+
+					<p:tooltip id="toolTipGrow" for="btn-save"
+						atPosition="right center" value="#{bundle.ctrl_z}"
+						showEffect="slide" hideEffect="slide" position="right" />
+				</div>
+			</div>
+
+			<h:panelGroup id="filterPanel">
+				<h:panelGroup id="panelByCompany"
+					rendered="#{reportMediatorController.byCompany eq true}">
+					<ui:include
+						src="/views/reports/mediator-reports/report-by-company.xhtml" />
+
+				</h:panelGroup>
+
+				<h:panelGroup id="panelByName"
+					rendered="#{reportMediatorController.byCompany eq false}">
+					<ui:include
+						src="/views/reports/mediator-reports/report-by-name.xhtml" />
+
+				</h:panelGroup>
+
+			</h:panelGroup>
+		</ui:define>
+		<ui:define name="customOutputScript">
+			<h:outputScript name="toggle/bootstrap-toggle.min.js"
+				library="plugins" />
+
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

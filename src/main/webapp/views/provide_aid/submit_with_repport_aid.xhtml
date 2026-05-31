@@ -1,0 +1,468 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/views/template/template.xhtml">
+	<ui:param name="title" value='#{bundle.deserved_list}' />
+	<ui:param name="subtitle" value='#{bundle.deserved_list}' />
+
+	<ui:define name="customStyleSheet">
+		<h:outputStylesheet name="template/general.css" library="css" />
+	</ui:define>
+	<ui:define name="breadcrumb">
+
+
+		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.services}</li>
+		<li class="breadcrumb-item ">><h:link outcome="provide-aid-basic">#{bundle.provide_aid} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.submit_with_conditions
+			}</li>
+	</ui:define>
+
+
+
+	<ui:define name="customStyleSheet">
+		<o:onloadScript>
+	select2me();
+	($('.toogle')).bootstrapToggle();
+     initDatePicker();
+     inputNumberPicker();
+       </o:onloadScript>
+
+
+		<h:outputStylesheet name="toggle/bootstrap-toggle.min.css"
+			library="plugins" />
+	</ui:define>
+
+	<ui:define name="customFormContent">
+
+		<!--end col-->
+		<div class="col-md-12" style="margin-top: 2%;">
+
+			<span class=" fas fa-filter " style="font-size: 25px;"></span>
+
+			<h:outputText style="font-size: 22px;"
+				value=" #{bundle.select_rule_desrved}" />
+
+
+		</div>
+
+
+
+		<div class="card " id="myDIV" style="margin-top: 1%;">
+			<div class="card-body">
+				<h:panelGroup style="width:100%" id="filter-panel">
+
+
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="healthyId">#{bundle.deserved_healthy_status}</label>
+								<h:selectOneMenu id="healthyId"
+									converter="omnifaces.SelectItemsConverter" style="width: 100%;"
+									label="#{bundle.select_healthy_status}"
+									styleClass="select2 select2me form-control custom-select"
+									value="#{subbmissionWithConditionAidController.healthyStatusCfg}">
+									<f:selectItem itemLabel="لا يوجد" itemValue="" />
+									<f:selectItems
+										value="#{subbmissionWithConditionAidController.healthyStatusList}"
+										var="healthy" itemLabel="#{healthy.status}"
+										itemValue="#{healthy}" />
+									<f:ajax></f:ajax>
+								</h:selectOneMenu>
+								<h:message for="healthyId" styleClass="error-message" />
+							</div>
+						</div>
+
+
+
+						<div class="col-md-3">
+							<label for="religionId">#{bundle.deserved_religion_reference}</label>
+							<h:selectOneMenu style="width: 100%;"
+								styleClass="select2  select2me form-control  custom-select"
+								converter="omnifaces.SelectItemsConverter" id="religionId"
+								label="#{bundle.deserved_religion_reference}"
+								placeHolder="#{bundle.deserved_religion_reference}"
+								value="#{subbmissionWithConditionAidController.religionReferenceCfg}">
+								<f:selectItem itemLabel="لا يوجد" itemValue="" />
+								<f:selectItems
+									value="#{subbmissionWithConditionAidController.religionReferenceCfgList}"
+									var="re" itemLabel="#{re.name}" itemValue="#{re}" />
+								<f:ajax></f:ajax>
+							</h:selectOneMenu>
+							<h:message for="religionId" styleClass="error-message" />
+
+						</div>
+
+
+
+						<div class="col-md-3">
+							<label for="InssuranceId">#{bundle.deserved_inssurance}</label>
+							<h:selectOneMenu style="width: 100%;"
+								styleClass="select2  select2me form-control  custom-select"
+								converter="omnifaces.SelectItemsConverter" id="InssuranceId"
+								label="#{bundle.deserved_religion_reference}"
+								placeHolder="#{bundle.deserved_religion_reference}"
+								value="#{subbmissionWithConditionAidController.inssuranceCfg}">
+								<f:selectItem itemLabel="لا يوجد" itemValue="" />
+								<f:selectItems value="#{deservedController.inssuranceCfgList}"
+									var="in" itemLabel="#{in.name}" itemValue="#{in}" />
+								<f:ajax></f:ajax>
+							</h:selectOneMenu>
+							<h:message for="InssuranceId" styleClass="error-message" />
+						</div>
+
+						<div class="col-md-3">
+							<label for="poorId">#{bundle.deserved_poor_percentage}</label>
+							<h:selectOneMenu style="width: 100%;"
+								styleClass="select2  select2me form-control  custom-select"
+								converter="omnifaces.SelectItemsConverter" id="poorId"
+								label="#{bundle.deserved_poor_percentage}"
+								placeHolder="#{bundle.deserved_religion_reference}"
+								value="#{subbmissionWithConditionAidController.poorPercenatageCfg}">
+								<f:selectItem itemLabel="لا يوجد" itemValue="" />
+								<f:selectItems
+									value="#{subbmissionWithConditionAidController.poorPercentageCfgList}"
+									var="poor" itemLabel="#{poor.description}" itemValue="#{poor}" />
+								<f:ajax></f:ajax>
+							</h:selectOneMenu>
+							<h:message for="poorId" styleClass="error-message" />
+						</div>
+
+					</div>
+
+					<div class="row">
+
+
+						<div class="col-md-4">
+							<div class="form-group-sm">
+								<p:outputLabel class="control-label" for="nb_child_from"
+									value="#{bundle.nb_child_from}:" />
+								<h:inputText id="nb_child_from" label="#{bundle.nb_child_from}"
+									h5:step="1" type="number" h5:min="0" h5:max="100"
+									styleClass="form-control-sm input-number-picker"
+									value="#{subbmissionWithConditionAidController.nbChildFrom}" />
+
+								<h:message styleClass="error-message" for="nb_child_from" />
+
+							</div>
+						</div>
+
+
+
+						<div class="col-md-4">
+							<div class="form-group-sm">
+								<p:outputLabel class="control-label" for="nb_child_to"
+									value="#{bundle.nb_child_to}:" />
+
+								<h:inputText id="nb_child_to" label="#{bundle.nb_child_to}"
+									h5:step="1" h5:min="0" h5:max="100"
+									styleClass="form-control-sm input-number-picker"
+									value="#{subbmissionWithConditionAidController.nbChildTo}">
+
+								</h:inputText>
+								<h:message styleClass="error-message" for="nb_child_to" />
+
+							</div>
+						</div>
+
+
+
+						<div class="col-md-4">
+							<div class="form-group-sm">
+								<p:outputLabel class="control-label" for="livingAreaId"
+									value="#{bundle.deserved_living_are}:" />
+								<h:inputText id="livingAreaId"
+									label="#{bundle.deserved_living_are}" styleClass="form-control"
+									value="#{subbmissionWithConditionAidController.livingArea}" />
+
+								<h:message styleClass="error-message" for="livingAreaId" />
+
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+
+
+
+							<p:outputLabel class="control-label" for="nb_child_to"
+								value="#{bundle.deserved_has_car}" />
+							<div class="skin">
+								<h:selectBooleanCheckbox id="booelanSelectDate"
+									label="#{bundle.deserved_has_car}" styleClass="toogle"
+									h5:data-width="100%" h5:data-offstyle="danger"
+									onchange="showHideToogle();" data-style="slow"
+									h5:data-toggle="toogle" h5:data-off="#{bundle.no}"
+									h5:data-on="#{bundle.yes}" h5:data-onstyle="info"
+									value="#{subbmissionWithConditionAidController.hasCar}">
+
+									<f:ajax onevent="showHideToogle();" event="change"></f:ajax>
+								</h:selectBooleanCheckbox>
+
+
+							</div>
+						</div>
+
+
+
+						<div class="col-md-2">
+
+
+
+							<p:outputLabel class="control-label" for="richLogical"
+								value="#{bundle.deserved_rich_logical}" />
+							<div class="skin">
+								<h:selectBooleanCheckbox id="richLogical"
+									label="#{bundle.deserved_rich_logical}" styleClass="toogle"
+									h5:data-width="100%" h5:data-offstyle="danger"
+									onchange="showHideToogle();" data-style="slow"
+									h5:data-toggle="toogle" h5:data-off="#{bundle.no}"
+									h5:data-on="#{bundle.yes}" h5:data-onstyle="info"
+									value="#{subbmissionWithConditionAidController.richLogical}">
+
+									<f:ajax onevent="showHideToogle();" event="change"></f:ajax>
+								</h:selectBooleanCheckbox>
+
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+
+					<div class="row" style="margin-top: 1.5%">
+						<div class="col-md-12">
+							<h:commandLink value='#{bundle.search}' id="btn-save"
+								style="float:left;"
+								action='#{subbmissionWithConditionAidController.search()}'
+								styleClass="btn btn-warning  waves-effect waves-light btn-new">
+								<f:ajax execute="filter-panel"
+									render=" :messageScript table-result" />
+								<span class="fas fa-search"></span>
+							</h:commandLink>
+
+							<p:tooltip id="toolTipGrow" for="btn-save"
+								atPosition="right center" value="#{bundle.ctrl_z}"
+								showEffect="slide" hideEffect="slide" position="right" />
+						</div>
+					</div>
+
+
+				</h:panelGroup>
+
+			</div>
+
+
+
+
+			<div class="card-body">
+
+				<h:panelGroup id="table-result">
+
+
+
+					<p:dataTable
+						currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+						emptyMessage="#{bundle.no_records}"
+						filteredValue="#{subbmissionWithConditionAidController.filteredList}"
+						id="tableId" paginator="true" paginatorPosition="bottom"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+						rowKey="#{item.id}" rows="10" scrollable="true"
+						rowsPerPageTemplate="10,20,30,#{subbmissionWithConditionAidController.pageItems.size()}"
+						styleClass="table table-striped table-hover"
+						value="#{subbmissionWithConditionAidController.pageItems}"
+						var="item" widgetVar="pageItemsTableWgVar">
+						<p:ajax event="rowEdit" update=":messageScript" />
+						<p:column styleClass="no-header table-actions-column" width="80">
+							<span> <h:link outcome="person_desrved_repport"
+									styleClass="btn  btn-success waves-effect waves-light   btn-xs">
+									<f:param name="id" value="#{item.id}" />
+									<span class="   mdi mdi-chevron-right-circle  "
+										style="font-size: 16px; color: white;" />
+									<f:ajax></f:ajax>
+								</h:link>
+							</span>
+						</p:column>
+						<p:column filterBy="#{item.fullName}" filterMatchMode="contains"
+							headerText="#{bundle.deserved_full_name}"
+							sortBy="#{item.fullName}" width="150">
+							<f:facet name="filter">
+								<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+									placeholder="#{bundle.deserved_full_name}"
+									styleClass="inputtext-filter" />
+							</f:facet>
+							<h:outputText id="fullNameId" styleClass="text-ellipsis"
+								title="#{item.fullName}" value="#{item.fullName}" />
+						</p:column>
+
+						<p:column filterBy="#{item.nbOfIndividuals}"
+							headerText="#{bundle.deserved_nb_of_individuals}"
+							filterMatchMode="startsWith" sortBy="#{item.nbOfIndividuals}"
+							width="180">
+							<f:facet name="filter">
+								<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+									placeholder="#{bundle.deserved_nb_of_individuals}"
+									styleClass="inputtext-filter" />
+							</f:facet>
+							<h:outputText value="#{item.nbOfIndividuals}"
+								styleClass="text-ellipsis" title="#{item.nbOfIndividuals}"></h:outputText>
+						</p:column>
+
+
+						<p:column filterBy="#{item.nbOfExpatiateChildren}"
+							headerText="#{bundle.deserved_nb_of_expatiate_children}"
+							filterMatchMode="startsWith" sortBy="#{item.nbOfIndividuals}"
+							width="180">
+							<f:facet name="filter">
+								<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+									placeholder="#{bundle.deserved_nb_of_expatiate_children}"
+									styleClass="inputtext-filter" />
+							</f:facet>
+							<h:outputText value="#{item.nbOfExpatiateChildren}"
+								styleClass="text-ellipsis" title="#{item.nbOfExpatiateChildren}"></h:outputText>
+						</p:column>
+
+						<p:column filterBy="#{item.livingArea}"
+							headerText="#{bundle.deserved_living_are}"
+							filterMatchMode="startsWith" sortBy="#{item.livingArea}"
+							width="180">
+							<f:facet name="filter">
+								<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+									placeholder="#{bundle.deserved_living_are}"
+									styleClass="inputtext-filter" />
+							</f:facet>
+							<h:outputText value="#{item.livingArea}"
+								styleClass="text-ellipsis" title="#{item.livingArea}"></h:outputText>
+						</p:column>
+
+
+						<p:column filterBy="#{item.knownBy}"
+							headerText="#{bundle.deserved_known_by}"
+							filterMatchMode="startsWith" sortBy="#{item.knownBy}" width="180">
+							<f:facet name="filter">
+								<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+									placeholder="#{bundle.deserved_known_by}"
+									styleClass="inputtext-filter" />
+							</f:facet>
+							<h:outputText value="#{item.knownBy}" styleClass="text-ellipsis"
+								title="#{item.knownBy}"></h:outputText>
+						</p:column>
+
+
+						<p:column filterBy="#{item.salary}" filterMatchMode="startsWith"
+							sortBy="#{item.salary}" headerText="#{bundle.deserved_salary}"
+							width="180">
+							<f:facet name="filter">
+								<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+									placeholder="#{bundle.deserved_salary}"
+									styleClass="inputtext-filter" />
+							</f:facet>
+							<h:outputText value="#{item.salary}" styleClass="text-ellipsis"
+								title="#{item.salary}"></h:outputText>
+						</p:column>
+
+
+
+						<p:column filterBy="#{item.working}" filterMatchMode="exact"
+							headerText="#{bundle.deserved_working}" sortBy="#{item.working}"
+							width="180">
+							<f:facet name="filter">
+								<p:selectOneMenu onchange="PF('pageItemsTableWgVar').filter()"
+									converter="javax.faces.Boolean" style="width:100% ;   "
+									styleClass="inputtext-filter">
+									<f:selectItem itemLabel="الجميع" itemValue="#{null}"
+										noSelectionOption="true" />
+									<f:selectItem itemLabel="#{bundle.no}" itemValue="false" />
+									<f:selectItem itemLabel="#{bundle.yes}" itemValue="true" />
+									<f:ajax></f:ajax>
+								</p:selectOneMenu>
+							</f:facet>
+							<h:outputText
+								styleClass="#{item.working ? 'fa fa-check' : 'fa fa-times'}"
+								style=" color: #{item.working ? 'green;' : '#f1646c'}" value="" />
+						</p:column>
+
+
+
+
+
+
+						<p:column filterBy="#{item.richLogical}" filterMatchMode="exact"
+							headerText="#{bundle.deserved_rich_logical}"
+							sortBy="#{item.working}" width="180">
+							<f:facet name="filter">
+								<p:selectOneMenu onchange="PF('pageItemsTableWgVar').filter()"
+									converter="javax.faces.Boolean" style="width:100% ;   "
+									styleClass="inputtext-filter">
+									<f:selectItem itemLabel="الجميع" itemValue="#{null}"
+										noSelectionOption="true" />
+									<f:selectItem itemLabel="#{bundle.no}" itemValue="false" />
+									<f:selectItem itemLabel="#{bundle.yes}" itemValue="true" />
+									<f:ajax></f:ajax>
+								</p:selectOneMenu>
+							</f:facet>
+							<h:outputText
+								styleClass="#{item.richLogical ? 'fa fa-check' : 'fa fa-times'}"
+								style=" color: #{item.richLogical ? 'green;' : '#f1646c'}"
+								value="" />
+						</p:column>
+
+
+
+						<p:column headerText="#{bundle.deserved_person_genre}"
+							style="width:150px" sortBy="#{item.personGenre.type}"
+							filterBy="#{item.personGenre.type}" filterMatchMode="startsWith"
+							width="180">
+							<f:facet name="filter">
+								<p:selectOneMenu onchange="PF('pageItemsTableWgVar').filter()"
+									style="width:100% ;   " styleClass="inputtext-filter">
+									<f:selectItem itemLabel="#{bundle.deserved_person_genre}"
+										itemValue="#{null}" noSelectionOption="true" />
+									<f:selectItems value="#{personGenre.values()}" var="genre"
+										itemValue="#{genre.type}" itemLabel="#{genre.type}"></f:selectItems>
+									<f:ajax></f:ajax>
+								</p:selectOneMenu>
+							</f:facet>
+							<h:outputText value="#{item.personGenre.type}"
+								styleClass="text-ellipsis" title="#{item.personGenre.type}"></h:outputText>
+						</p:column>
+					</p:dataTable>
+				</h:panelGroup>
+
+
+
+
+			</div>
+		</div>
+
+	</ui:define>
+
+	<ui:define name="customOutputScript">
+
+		<h:outputScript name="toggle/bootstrap-toggle.min.js"
+			library="plugins" />
+
+		<script type="text/javascript">
+
+		function widthCorrection() {
+			   var element = document.getElementById("myDIV");
+			   element.classList.toggle("myTableWidth");
+			}
+		
+		window.onload = widthCorrection;
+		
+</script>
+	</ui:define>
+
+
+</ui:composition>
+</html>

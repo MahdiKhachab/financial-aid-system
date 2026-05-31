@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/views/template/template.xhtml">
+
+		<ui:define name="breadcrumb">
+			<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.reports}</li>
+			<li class="breadcrumb-item active"><h:link outcome="rabit_list"> #{bundle.rabit_qarua_name } </h:link></li>
+
+			<li class="breadcrumb-item active">#{bundle.repport_rabit }</li>
+
+			<!--end col-->
+		</ui:define>
+
+		<ui:define name="customStyleSheet">
+
+
+			<h:outputStylesheet name="toggle/bootstrap-toggle.min.css"
+				library="plugins" />
+		</ui:define>
+		<ui:define name="customFormContent">
+			<o:onloadScript>
+	select2me();
+     initDatePicker();
+       </o:onloadScript>
+
+			<o:importConstants type="enums.CurrencyEnum" var="currencyEnum" />
+
+
+			<div class="col-md-12" style="margin-top: 10px;">
+
+				<span class="  fas fa-chart-line  "
+					style="font-size: 28px; margin-right: 5px;"></span>
+
+				<h:outputText style="font-size: 22px;"
+					value=" #{bundle.repport_rabit}" />
+
+
+			</div>
+
+			<div class="row" style="margin-top: 2%">
+				<div class="col-md-6">
+					<h:outputText
+						style="font-size: 18px; margin-right: 10px;  padding:2%; background-color:#0069d9 !important; "
+						styleClass="badge  badge-secondary"
+						value=" #{bundle.rabit_qarua_name}: #{rabitRepportController.rabitQaryeName} " />
+
+				</div>
+
+
+
+				<h:panelGroup id="save-form" class="col-md-6">
+					<h:link value='#{bundle.new_give}' id="btn-go"
+						style="float:left;margin-left:10px;" outcome="submit-rabit"
+						styleClass="btn btn-success waves-effect waves-light btn-new">
+
+
+
+						<span class="   fas fa-plus-circle    "></span>
+					</h:link>
+
+					<p:tooltip id="toolTipGrow" for="btn-go" atPosition="right center"
+						value="#{bundle.ctrl_z}" showEffect="slide" hideEffect="slide"
+						position="right" />
+				</h:panelGroup>
+
+
+			</div>
+
+
+
+
+			<h:panelGroup id="filter-panel">
+
+
+
+
+				<div class="card" style="margin-top: 2%;">
+					<div class="card-body">
+						<div class="row">
+
+
+
+							<h:outputText styleClass="text-muted" style="margin-right:4px;"
+								value="#{bundle.repport_sponsor_can_select_date_details}" />
+
+
+
+
+
+
+
+						</div>
+
+
+						<div class="row" style="margin-top: 1%">
+
+							<div class="col-md-4">
+
+								<p:outputLabel value="#{bundle.from_date}" class="control-label"
+									for="fromDate" />
+
+								<h:inputText id="fromDate" styleClass="form-control "
+								h5:type="date"
+									value="#{rabitRepportController.dateFrom}">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+								</h:inputText>
+							</div>
+
+
+
+							<div class="col-md-4">
+
+								<p:outputLabel value="#{bundle.to_date}" class="control-label"
+									for="toDate" />
+
+								<h:inputText id="toDate" styleClass="form-control "
+								h5:type="date"
+									
+									value="#{rabitRepportController.dateTo}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+								</h:inputText>
+							</div>
+
+
+
+
+							<div class="col-md-4">
+								<p:outputLabel class="control-label"
+									value="#{bundle.receive_money_submissionDetailsCfg}:" />
+
+
+
+								<h:selectOneMenu style="width: 100% ;  margin-top:5px"
+									styleClass="select2 select2me form-control   custom-select"
+									immediate="true" converter="omnifaces.SelectItemsConverter"
+									id="subbmitionid" label="#{bundle.deserved_religion_reference}"
+									value="#{rabitRepportController.submissionDetailsCfg}"
+									placeHolder="#{bundle.receive_money_submissionDetailsCfg}:">
+									<f:selectItem itemLabel="لا يوجد" itemValue="" />
+									<f:selectItems
+										value="#{rabitRepportController.listSubmissionDetailsCfg}"
+										var="re" itemLabel="#{re.type}" itemValue="#{re}" />
+									<f:ajax></f:ajax>
+								</h:selectOneMenu>
+
+
+
+							</div>
+
+
+						</div>
+
+						<div class="row" style="margin-top: 1.5%">
+							<div class="col-md-12">
+								<h:commandLink value='#{bundle.search}' id="btn-save"
+									style="float:left;margin-left:10px;"
+									actionListener="#{rabitRepportController.filterByDate}"
+									styleClass="btn btn-warning  waves-effect waves-light btn-new">
+									<f:ajax execute="filter-panel"
+										render=" :messageScript tableId value-panel" />
+									<span class="fas fa-search"></span>
+								</h:commandLink>
+
+								<p:tooltip id="toolTipGrow2" for="btn-save"
+									atPosition="right center" value="#{bundle.ctrl_z}"
+									showEffect="slide" hideEffect="slide" position="right" />
+							</div>
+						</div>
+
+
+
+					</div>
+				</div>
+
+
+
+
+
+			</h:panelGroup>
+			<h:panelGroup id="value-panel">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="card">
+							<div class="card-body">
+								<div class="icon-contain">
+									<div class="row">
+										<div class="col-9 align-self-center">
+											<h5 style="margin-bottom: 20px;">#{bundle.total_cost_ll}</h5>
+
+											<h:outputText styleClass="mb-0 p-2 bg-soft-danger rounded"
+												style="font-size: 16px;font-weight: bold; margin-top:5px; "
+												
+												value=" #{of:formatCurrency(rabitRepportController.totalValueLL, '')} LBP "></h:outputText>
+
+
+
+										</div>
+
+
+										<!--end col-->
+
+										<!--end col-->
+									</div>
+									<!--end row-->
+								</div>
+								<!--end icon-contain-->
+							</div>
+							<!--end card-body-->
+						</div>
+						<!--end card-->
+					</div>
+
+
+
+
+					<div class="col-lg-6">
+						<div class="card">
+							<div class="card-body">
+								<div class="icon-contain">
+									<div class="row">
+										<div class="col-9 align-self-center">
+											<h5 style="margin-bottom: 20px;">#{bundle.total_cost_dd}</h5>
+
+											<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+												style="font-size: 16px;font-weight: bold; margin-top:5px; "
+												
+												
+												value="#{of:formatCurrency(rabitRepportController.totalValueDD, '')} USD"></h:outputText>
+
+
+
+										</div>
+
+
+										<!--end col-->
+
+										<!--end col-->
+									</div>
+									<!--end row-->
+								</div>
+								<!--end icon-contain-->
+							</div>
+							<!--end card-body-->
+						</div>
+						<!--end card-->
+					</div>
+					<!--end col-->
+				</div>
+
+
+			</h:panelGroup>
+
+			<div class="card" style="margin-top: 1%;">
+				<div class="card-body">
+					<span
+						style="font-size: 16px; margin-top: 10px; margin-bottom: 10px;"><p:spacer
+							width="5" /> #{bundle.gives_details} :</span>
+
+
+					<p:dataTable
+						currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+						emptyMessage="#{bundle.no_records}" style="margin-top:12px;"
+						filteredValue="#{rabitRepportController.filteredList}"
+						id="tableId" paginator="true" paginatorPosition="bottom"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+						rowKey="#{item.id}" rows="10"
+						rowsPerPageTemplate="10,20,30,#{rabitRepportController.pageItems.size()}"
+						styleClass="table table-striped table-hover"
+						value="#{rabitRepportController.pageItems}" var="item"
+						widgetVar="pageItemsTableWgVar">
+						<p:ajax event="rowEdit" update=":messageScript" />
+
+
+
+						<p:column filterBy="#{item.submissionDetailsCfg.type}"
+							filterMatchMode="startsWith"
+							headerText="#{bundle.receive_money_submissionDetailsCfg}:"
+							sortBy="#{item.submissionDetailsCfg.type}" width="180">
+							<f:facet name="filter">
+								<p:selectOneMenu onchange="PF('pageItemsTableWgVar').filter()"
+									style="width:100% ;   " styleClass="inputtext-filter">
+									<f:selectItem
+										itemLabel="#{bundle.receive_money_submissionDetailsCfg}"
+										itemValue="#{null}" noSelectionOption="true" />
+
+
+									<f:selectItems
+										value="#{rabitRepportController.listSubmissionDetailsCfg}"
+										var="re" itemLabel="#{re.type}" itemValue="#{re}" />
+									<f:ajax></f:ajax>
+								</p:selectOneMenu>
+							</f:facet>
+							<h:outputText value="#{item.submissionDetailsCfg.type}"
+								styleClass="text-ellipsis"
+								title="#{item.submissionDetailsCfg.type}"></h:outputText>
+						</p:column>
+
+
+
+
+						<p:column headerText="#{bundle.delgate_name}"
+							sortBy="#{item.delagate}" width="150">
+
+							<h:outputText id="delgate" styleClass="text-ellipsis"
+								title="#{item.delagate}" value="#{item.delagate}" />
+
+
+
+
+						</p:column>
+
+
+						<p:column headerText="#{bundle.receive_money_value}"
+							sortBy="#{item.value}" width="150">
+
+							<h:outputText id="Lira" styleClass="text-ellipsis"
+							
+							
+								title="#{item.value}" value="#{of:formatCurrency(item.value , '')}" />
+
+
+
+
+						</p:column>
+
+
+						<p:column headerText="#{bundle.receive_money_isLira}"
+							sortBy="#{item.currencyEnum.type}" width="150">
+
+							<h:outputText id="Currency"
+								styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 bg-soft-success rounded ' : ' mb-0 p-2 bg-soft-danger rounded ' } "
+								style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
+								title="#{item.currencyEnum.type}"
+								value="#{item.currencyEnum.type}" />
+
+
+
+
+
+						</p:column>
+
+
+						<p:column headerText="#{bundle.date}"
+							sortBy="#{item.deliveryDate}" width="150">
+
+							<h:outputText id="date" styleClass="text-ellipsis"
+								title="#{item.deliveryDate}" value="#{item.deliveryDate}">
+
+								<f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+							</h:outputText>
+
+
+
+						</p:column>
+
+					</p:dataTable>
+
+				</div>
+
+
+			</div>
+
+
+
+
+
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

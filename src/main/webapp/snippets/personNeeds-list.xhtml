@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="rtl" xmlns="http://www.w4.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/functions"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+<ui:component>
+	<h4 class="form-section">
+		<h:outputText value="#{bundle.dead_needs} " />
+	</h4>
+	<div class="row">
+		<p:dataTable id="personNeedsTable" emptyMessage="#{bundle.no_records}"
+			rowStyleClass=" #{needs.forDelete ? 'removed':''}"
+			styleClass="table table-striped table-hover"
+			tableStyleClass="removed-row-table" rowIndexVar="index"
+			value="#{deadPersonCardController.deadPerson.deadNeedList}"
+			var="needs">
+
+			<p:column styleClass="no-header table-actions-column" width="50">
+				<f:facet name="header">
+					<p:commandLink
+						styleClass="btn btn-primary waves-effect waves-light"
+						title="#{bundle.dead_need_new}"
+						action="#{deadPersonCardController.openAddDialog()}">
+						<i class="fa fa-plus"></i>
+					</p:commandLink>
+				</f:facet>
+
+				<p:commandLink onclick="toggleRemove(#{index})"
+					action="#{deadPersonCardController.removePersonNeed(needs)}"
+					styleClass="btn btn-danger waves-effect waves-light "
+					update=":messageScript form-needs">
+					<p:confirm header="#{bundle.delete}"
+						disabled="#{needs.forDelete eq true}"
+						message="#{bundle.existe_in_service_delete}" />
+					<f:ajax render=" :messageScript  form-needs " />
+					<span class="fa fa-trash"></span>
+				</p:commandLink>
+			</p:column>
+			<p:column headerText="#{bundle.service_name}"
+				sortBy="#{needs.service.name}" width="150">
+				<h:outputText styleClass="text-ellipsis"
+					value="#{needs.service.name}" />
+			</p:column>
+
+			<p:column headerText="#{bundle.person_needs_count}"
+				sortBy="#{needs.count}" width="150">
+				<h:outputText styleClass="text-ellipsis" value="#{needs.count}" />
+			</p:column>
+
+			<p:column headerText="#{bundle.person_needs_need_type}"
+				sortBy="#{needs.needType.type}" width="150">
+				<h:outputText styleClass="text-ellipsis"
+					value="#{needs.needType.type}" />
+			</p:column>
+
+			<p:column headerText="#{bundle.person_needs_amount}"
+				sortBy="#{needs.amount}" width="150">
+				<h:outputText styleClass="text-ellipsis" value="#{needs.amount}">
+					<f:convertNumber pattern="###,###,###" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="#{bundle.person_needs_currency}"
+				sortBy="#{needs.currency.type}" width="150">
+				<h:outputText
+					style="font-size: 16px;font-weight: bold; padding: 4px !important; "
+					styleClass="#{needs.currency eq 'DD' ? 'mb-0 p-2 bg-soft-success rounded':'mb-0 p-2 bg-soft-danger rounded '} "
+					value="#{needs.currency.type}" />
+			</p:column>
+		</p:dataTable>
+	</div>
+
+	<script type="text/javascript"> 
+	
+	function toggleRemove( index) {
+		
+		$('.ui-widget-content.ui-datatable-odd[data-ri="' + index +'"]').toggleClass('removed'); 
+		
+		$('.ui-widget-content.ui-datatable-even[data-ri="' + index +'"]').toggleClass('removed'); 
+	}
+</script>
+</ui:component>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+
+<ui:composition template="/views/template/template.xhtml">
+
+	<ui:define name="breadcrumb">
+		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.reports}</li>
+		<li class="breadcrumb-item active">#{bundle.remaining_needs_report}</li>
+		<!--end col-->
+	</ui:define>
+
+	<ui:define name="customStyleSheet">
+		<h:outputStylesheet name="toggle/bootstrap-toggle.min.css"
+			library="plugins" />
+	</ui:define>
+	<ui:define name="customFormContent">
+		<o:onloadScript>
+	select2me();
+	($('.toogle')).bootstrapToggle();
+     initDatePicker();
+       </o:onloadScript>
+
+		<o:importConstants type="enums.CurrencyEnum" />
+		<o:importConstants type="enums.NeedTypeEnum" />
+
+		<div class="panel-body">
+			<div class="card" style="margin-top: 10px;">
+				<div class="card-body">
+					<h:panelGroup id="form-conditions">
+
+						<h4 class="form-section">
+							<h:outputText value="#{bundle.conditions} " />
+						</h4>
+
+						<div class="row">
+
+							<div class="col-md-3">
+
+								<p:outputLabel for="servicesId" class="control-label">#{bundle.services}</p:outputLabel>
+
+								<h:selectOneMenu required="true" style="width: 100%;"
+									styleClass="select2  select2me form-control  custom-select"
+									converter="omnifaces.SelectItemsConverter" id="servicesId"
+									label="#{bundle.services}" placeHolder="#{bundle.services}"
+									value="#{reportRemainingNeedsController.service}">
+									<f:selectItem itemLabel="#{bundle.service_name}"
+										itemValue="#{null}" />
+									<f:selectItems
+										value="#{reportRemainingNeedsController.serviceList}" var="s"
+										itemLabel="#{s.name}" itemValue="#{s}" />
+									<f:ajax></f:ajax>
+								</h:selectOneMenu>
+
+								<h:message for="servicesId" styleClass="error-message" />
+
+							</div>
+
+							<div class="col-md-3">
+
+								<h:commandLink value='#{bundle.search}' id="btn-save"
+									style="float:left;margin-left:10px;"
+									action="#{reportRemainingNeedsController.search()}"
+									styleClass="btn btn-primary  waves-effect waves-light btn-new  mt-4">
+									<f:ajax execute="form-conditions"
+										render="form-result :messageScript" />
+									<span class="fas fa-search"></span>
+								</h:commandLink>
+
+							</div>
+
+						</div>
+					</h:panelGroup>
+				</div>
+			</div>
+
+
+			<div class="card" style="margin-top: 10px;">
+				<div class="card-body">
+					<h:panelGroup id="form-result">
+
+						<h4 class="form-section">
+							<h:outputText value="#{bundle.result} " />
+						</h4>
+
+						<div class="row">
+							<p:dataTable
+								currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+								emptyMessage="#{bundle.no_records}" id="tableId"
+								paginator="true" paginatorPosition="bottom"
+								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+								rowKey="#{item.deadNeed.id}" rows="10" rowIndexVar="index"
+								rowsPerPageTemplate="10,20,30,#{reportRemainingNeedsController.deadNeedList.size()}"
+								styleClass="table table-striped table-hover"
+								value="#{reportRemainingNeedsController.remainingNeedsList}"
+								var="item" widgetVar="reportRemainingNeedsListTableWgVar">
+
+
+								<p:column headerText="#{bundle.dead_person_fullName}"
+									sortBy="#{item.deadNeed.deadPerson.deadName}" width="150">
+									<h:outputText styleClass="text-ellipsis"
+										value="#{item.deadNeed.deadPerson.deadName}" />
+								</p:column>
+
+								<p:column headerText="#{bundle.person_needs_count}"
+									sortBy="#{item.deadNeed.count}" width="150">
+									<h:outputText styleClass="text-ellipsis"
+										value="#{item.deadNeed.count}" />
+								</p:column>
+
+								<p:column headerText="#{bundle.person_needs_need_type}"
+									sortBy="#{item.deadNeed.needType.type}" width="150">
+									<h:outputText styleClass="text-ellipsis"
+										value="#{item.deadNeed.needType.type}" />
+								</p:column>
+
+								<p:column headerText="#{bundle.report_remaining_dist_value}"
+									sortBy="#{item.distributedValue}" width="150">
+									<h:outputText styleClass="text-ellipsis"
+										value="#{item.distributedValue}" />
+								</p:column>
+
+								<p:column headerText="#{bundle.report_remaining_rest_value}"
+									sortBy="#{item.restValue}" width="150">
+									<h:outputText styleClass="text-ellipsis"
+										value="#{item.restValue}" />
+								</p:column>
+
+							</p:dataTable>
+
+						</div>
+					</h:panelGroup>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

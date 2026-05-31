@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/views/template/template.xhtml">
+	<ui:param name="title" value='#{bundle.deserved_list}' />
+	<ui:param name="subtitle" value='#{bundle.deserved_list}' />
+
+	<ui:define name="customStyleSheet">
+		<h:outputStylesheet name="template/general.css" library="css" />
+	</ui:define>
+	<ui:define name="breadcrumb">
+
+		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.services}</li>
+		<li class="breadcrumb-item active">#{bundle.dead_person}</li>
+		<!--end col-->
+	</ui:define>
+
+	<ui:define name="customFormContent">
+		<o:importConstants type="enums.NeedTypeEnum" var="needType" />
+
+		<div class="card" style="margin-top: 10px;">
+			<div class="card-body">
+				<div class="row">
+					<h:panelGroup id="conter-top" class="col-md-4 col-sm-6">
+						<span style="font-size: 16px;"><p:spacer width="5" />
+							#{bundle.dead_person} :</span>
+
+						<div class="avatar-box thumb-sm align-self-center mr-2">
+							<span id="countId" class="avatar-title rounded-circle"
+								style="color: white !important; background-color: #0069d9 !important;">#{needDetailsListController.countItems()}</span>
+						</div>
+
+					</h:panelGroup>
+				</div>
+
+				<h:panelGroup id="tablePanelId">
+					<div class="row" style="margin-left: 8px; margin-top: 10px;">
+						<p:dataTable
+							currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+							emptyMessage="#{bundle.no_records}"
+							filteredValue="#{needDetailsListController.filteredList}"
+							id="tableId" paginator="true" paginatorPosition="bottom"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+							rowKey="#{item.id}" rows="10"
+							rowsPerPageTemplate="10,20,30,#{needDetailsListController.pageItems.size()}"
+							styleClass="table table-striped table-hover"
+							value="#{needDetailsListController.pageItems}" var="item"
+							widgetVar="pageItemsTableWgVar">
+
+							<p:column styleClass="no-header table-actions-column" width="80">
+								<h:commandLink style="margin-left:5px;" 
+									action="#{needDetailsListController.select(item)}"
+									styleClass="btn btn-danger waves-effect waves-light btn-xs ">
+									<span class="mdi mdi-chevron-right-circle"
+										style="font-size: 16px; color: white;" />
+									<f:ajax render="panelSelectionNeedId selectionNeedId"></f:ajax>
+								</h:commandLink>
+							</p:column>
+							<p:column filterBy="#{item.deadName}" filterMatchMode="contains"
+								sortBy="#{item.deadName}" width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+										placeholder="#{bundle.dead_person_fullName}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText id="fullName" title="#{item.deadName}"
+									value="#{item.deadName}" styleClass="text-ellipsis" />
+							</p:column>
+
+							<p:column filterBy="#{item.deadMotherName}"
+								sortBy="#{item.deadMotherName}" width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+										placeholder="#{bundle.dead_mother_name}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText id="deadMotherNameId" styleClass="text-ellipsis"
+									title="#{item.deadMotherName}" value="#{item.deadMotherName}" />
+							</p:column>
+
+							<p:column filterBy="#{item.delegator}"
+								sortBy="#{item.delegator}" width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+										placeholder="#{bundle.dead_person_delegator}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText id="livingArea" styleClass="text-ellipsis"
+									title="#{item.delegator}" value="#{item.delegator}" />
+							</p:column>
+
+							<p:column filterBy="#{item.delegatorPhone}"
+								sortBy="#{item.delegator}"   width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+										placeholder="#{bundle.dead_person_delegator_phone}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText id="phoneId" styleClass="text-ellipsis"
+									title="#{item.delegatorPhone}" value="#{item.delegatorPhone}" />
+							</p:column>
+						</p:dataTable>
+					</div>
+				</h:panelGroup>
+			</div>
+		</div>
+		<ui:include src="/views/deadNeedDetails/needDetailsList/needsDead-dlg.xhtml" />
+	</ui:define>
+</ui:composition>
+
+</html>

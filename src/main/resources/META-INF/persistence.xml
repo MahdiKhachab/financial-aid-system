@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="ShariaFunds-persistence-unit"
+		transaction-type="JTA">
+		<description>Forge Persistence Unit</description>
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<jta-data-source>java:jboss/datasources/ShariaFunds</jta-data-source>
+		<class>cfg.model.CompanyCfg</class>
+		<class>cfg.model.HealthyStatusCfg</class>
+		<class>cfg.model.InssuranceCfg</class>
+		<class>cfg.model.PoorPercentageCfg</class>
+		<class>cfg.model.ReligionReferenceCfg</class>
+		<class>cfg.model.SubmissionCfg</class>
+		<class>cfg.model.SubmissionDetailsCfg</class>
+		<class>org.model.MainEntity</class>
+		<class>org.model.Deserved</class>
+		<class>org.model.Sponsor</class>
+		<class>org.model.ReceiveMoney</class>
+		<class>org.model.Mediator</class>
+		<class>org.model.ProvideAid</class>
+		<class>org.model.ProvideAidRabet</class>
+		<class>org.model.ProvideAidCompany</class>
+		<class>org.model.ProvideAidDesrvedPerson</class>
+		<class>org.model.Attachment</class>
+		<class>org.model.Worker</class>
+		<class>org.model.DeadNeed</class>
+		<class>org.model.DeadPerson</class>
+		<class>org.model.NeedDetails</class>
+		<class>cfg.model.Service</class>
+		<class>org.model.SubbmissionExchnage</class>
+		<class>org.model.Stores</class>
+		<class>org.model.PurchaseVoucherCoupon</class>
+		<class>org.model.PurchaseVoucher</class>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			
+			<property name="eclipselink.deploy-on-startup" value="true" />
+			<property name="eclipselink.logging.level.sql" value="FINE" />
+			<property name="eclipselink.logging.parameters" value="true" />
+			<property name="eclipselink.logging.parameters" value="true" />
+			<property name="eclipselink.target-database"
+				value="org.eclipse.persistence.platform.database.PostgreSQLPlatform" />
+
+
+		</properties>
+	</persistence-unit>
+</persistence>

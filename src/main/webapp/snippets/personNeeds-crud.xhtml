@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="rtl" xmlns="http://www.w4.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/functions"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+<ui:component>
+
+	<h4 class="form-section">
+		<h:outputText value="#{bundle.dead_need_new}" />
+	</h4>
+	<div class="row">
+		<div class="col-md-3">
+			<p:outputLabel for="servicesId" class="control-label">#{bundle.service_name}</p:outputLabel>
+			<h:selectOneMenu required="true" style="width: 100%;"
+				styleClass="select2  select2me form-control  custom-select"
+				converter="omnifaces.SelectItemsConverter" id="servicesId"
+				label="#{bundle.service_name}" placeHolder="#{bundle.service_name}"
+				value="#{deadPersonCardController.deadNeed.service}">
+				<f:selectItems value="#{deadPersonCardController.services}" var="c"
+					itemLabel="#{c.name}" itemValue="#{c}" />
+				<f:ajax execute="@this" render="form-needs-crud"></f:ajax>
+			</h:selectOneMenu>
+			<h:message for="servicesId" styleClass="error-message" />
+		</div>
+		<div class="col-md-3">
+			<div class="form-group">
+				<p:outputLabel class="control-label" for="needs_count"
+					value="#{bundle.person_needs_count}">
+				</p:outputLabel>
+				<h:inputText id="needs_count" onkeypress="return isNumberKey(event)"
+					label="#{bundle.person_needs_count}"
+					disabled="#{deadPersonCardController.deadNeed.service.counted eq false}"
+					required="true" styleClass="form-control"
+					value="#{deadPersonCardController.deadNeed.count}">
+				</h:inputText>
+				<h:message for="needs_count" styleClass="error-message" />
+
+			</div>
+		</div>
+
+		<div class="col-md-3">
+			<p:outputLabel for="need_type" class="control-label">#{bundle.person_needs_need_type}</p:outputLabel>
+			<h:selectOneMenu required="true" style="width: 100%;"
+				styleClass="select2  select2me form-control  custom-select"
+				converter="omnifaces.SelectItemsConverter" id="need_type"
+				label="#{bundle.person_needs_need_type}"
+				disabled="#{deadPersonCardController.deadNeed.service.counted eq false}"
+				placeHolder="#{bundle.person_needs_need_type}"
+				value="#{deadPersonCardController.deadNeed.needType}">
+				<f:selectItems value="#{NeedTypeEnum.values()}" var="n"
+					itemLabel="#{n.type}" itemValue="#{n}" />
+				<f:ajax execute="@this"></f:ajax>
+			</h:selectOneMenu>
+			<h:message for="need_type" styleClass="error-message" />
+		</div>
+
+		<div class="col-md-3">
+			<div class="form-group">
+				<p:outputLabel class="control-label" for="needs_amount"
+					value="#{bundle.person_needs_amount}">
+				</p:outputLabel>
+				<p:inputNumber id="needs_amount" decimalPlaces="2"
+					label="#{bundle.person_needs_amount}" required="true"
+					styleClass="form-control"
+					value="#{deadPersonCardController.deadNeed.amount}">
+				</p:inputNumber>
+				<h:message for="needs_amount" styleClass="error-message" />
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+
+		<div class="col-md-3">
+			<p:outputLabel for="currencyId" class="control-label">#{bundle.person_needs_currency}</p:outputLabel>
+			<h:selectOneMenu required="true" style="width: 100%;"
+				styleClass="select2  select2me form-control  custom-select"
+				converter="omnifaces.SelectItemsConverter" id="currencyId"
+				label="#{bundle.person_needs_currency}"
+				placeHolder="#{bundle.person_needs_currency}"
+				value="#{deadPersonCardController.deadNeed.currency}">
+				<f:selectItems value="#{CurrencyEnum.values()}" var="c"
+					itemLabel="#{c.type}" itemValue="#{c}" />
+				<f:ajax execute="@this"></f:ajax>
+			</h:selectOneMenu>
+			<h:message for="currencyId" styleClass="error-message" />
+		</div>
+		<ui:remove>
+			<div class="col-md-3">
+				<div class="form-group">
+					<h:outputLabel value="#{bundle.person_needs_finished}"
+						style="margin-top: 15px;" />
+					<div class="skin">
+						<h:selectBooleanCheckbox disabled="false"
+							label="#{bundle.person_needs_finished}"
+							style="height:20px;width:25px" id="deliveredId"
+							value="#{deadPersonCardController.deadNeed.finished}">
+						</h:selectBooleanCheckbox>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group">
+					<h:panelGroup id="panelunitCount"
+						rendered="#{deadPersonCardController.deadNeed.service.counted}">
+						<p:outputLabel class="control-label" for="needs_unitCount"
+							value="#{bundle.person_needss_unit_count}">
+						</p:outputLabel>
+						<h:inputText id="needs_unitCount" disabled="true"
+							label="#{bundle.person_needss_unit_count}"
+							styleClass="form-control"
+							value="#{deadPersonCardController.deadNeed.unitCount}">
+						</h:inputText>
+						<h:message for="needs_unitCount" styleClass="error-message" />
+					</h:panelGroup>
+				</div>
+			</div>
+		</ui:remove>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h:commandLink styleClass="btn btn-secondary cancel-crud"
+				style="float:left;margin-left: 20px;" value="#{bundle.cancel}"
+				action="#{deadPersonCardController.cancelDialog()}">
+				<f:ajax render="form-needs">
+				</f:ajax>
+				<f:actionListener
+					type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+			</h:commandLink>
+			<h:commandLink styleClass="btn    btn-success"
+				action="#{deadPersonCardController.saveDialog()}"
+				style="float:left;margin-left:20px  !important"
+				value=" #{ bundle.add}">
+				<f:ajax execute="form-needs-crud" render="form-needs :messageScript" />
+			</h:commandLink>
+		</div>
+	</div>
+</ui:component>
+</html>

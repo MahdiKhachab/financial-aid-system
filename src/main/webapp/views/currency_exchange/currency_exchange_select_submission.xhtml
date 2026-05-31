@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html dir="rtl" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+<ui:composition template="/views/template/template.xhtml">
+	<ui:param name="title" value='#{bundle.submission_cfg_list}' />
+	<ui:param name="subtitle" value='#{bundle.submission_cfg_list}' />
+
+	<ui:define name="customStyleSheet">
+		<h:outputStylesheet name="template/general.css" library="css" />
+	</ui:define>
+
+
+	<ui:define name="breadcrumb">
+
+		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.services}</li>
+		<li class="breadcrumb-item active">#{bundle.currency_exchange_subbmittion}</li>
+		<!--end col-->
+	</ui:define>
+	<ui:define name="customFormContent">
+
+		<h:panelGroup id="value-panel">
+			<div class="row" style="margin-top: 2%;">
+				
+				<div class="col-lg-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="icon-contain">
+								<div class="row">
+									<div class="col-9 align-self-center">
+										<h5 style="margin-bottom: 20px;">#{bundle.total_cost_ll}</h5>
+
+										<h:outputText styleClass="mb-0 p-2 bg-soft-danger rounded"
+											style="font-size: 16px;font-weight: bold; margin-top:5px; "
+											value="#{of:formatCurrency(submissionCfgListController.totalValueLL, '')} LBP "></h:outputText>
+									</div>
+
+
+									<!--end col-->
+
+									<!--end col-->
+								</div>
+								<!--end row-->
+							</div>
+							<!--end icon-contain-->
+						</div>
+						<!--end card-body-->
+					</div>
+					<!--end card-->
+				</div>
+				<div class="col-lg-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="icon-contain">
+								<div class="row">
+									<div class="col-9 align-self-center">
+										<h5 style="margin-bottom: 20px;">#{bundle.total_cost_dd}</h5>
+
+										<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+											style="font-size: 16px;font-weight: bold; margin-top:5px; "
+											value="#{of:formatCurrency(submissionCfgListController.totalValueDD , '')} USD "></h:outputText>
+
+
+
+									</div>
+
+
+									<!--end col-->
+
+									<!--end col-->
+								</div>
+								<!--end row-->
+							</div>
+							<!--end icon-contain-->
+						</div>
+						<!--end card-body-->
+					</div>
+					<!--end card-->
+				</div>
+				<!--end col-->
+			</div>
+
+
+		</h:panelGroup>
+
+
+
+		<div class="card" style="margin-top: 5px;">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-2">
+						<span style="font-size: 16px;"><p:spacer width="5" />
+							#{bundle.submission_cfg_list} :</span> <span style="font-size: 16px;"
+							class="label label-warning countClass" id="countId">#{submissionCfgListController.countItems}
+						</span>
+					</div>
+
+				</div>
+			</div>
+			<p:dataTable
+				currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+				emptyMessage="#{bundle.no_records}"
+				filteredValue="#{submissionCfgListController.filteredList}"
+				id="submissionCfgListControllerPageItems" paginator="true"
+				paginatorPosition="bottom"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+				rowKey="#{item.id}" rows="10"
+				rowsPerPageTemplate="10,20,30,#{submissionCfgListController.pageItems.size()}"
+				styleClass="table table-striped table-hover"
+				value="#{submissionCfgListController.pageItems}" var="item"
+				widgetVar="pageItemsTableWgVar" rowExpandMode="single">
+				<p:ajax event="rowToggle"
+					listener="#{submissionCfgListController.select(item)}" />
+
+
+				<p:column styleClass="toggler" id="submissionCfgToggler" width="17"
+					exportable="false">
+					<p:rowToggler />
+				</p:column>
+
+
+				<p:ajax event="rowEdit" update=":messageScript" />
+
+
+
+				<p:column filterBy="#{item.name}" filterMatchMode="startsWith"
+					headerText="#{bundle.submission_cfg_name}" sortBy="#{item.name}"
+					width="120">
+					<f:facet name="filter">
+						<h:inputText
+							style="margin-top:5px  ; width: 40%; margin-right: 30%; "
+							onkeyup="PF('pageItemsTableWgVar').filter()"
+							h5:placeholder="#{bundle.submission_cfg_name}"
+							styleClass="inputtext-filter form-control" />
+					</f:facet>
+
+					<h:outputText title="#{bundle.submission_cfg_name}"
+						value="#{item.name}" styleClass="text-ellipsis" />
+
+				</p:column>
+
+				<p:rowExpansion>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="tabbable tabbable-tabdrop">
+								<ul class="nav nav-tabs">
+									<li class="active"><a href="#tab1" data-toggle="tab"
+										aria-expanded="true">#{bundle.submission_details_cfg_type}</a></li>
+								</ul>
+
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab1">
+										<div>
+											<p:dataTable id="tabDetailsTabView-table"
+												emptyMessage="#{bundle.no_records}"
+												tableStyleClass=" table table-bordered mb-1"
+												value="#{submissionCfgListController.submissionCfg.submissionDetailsList}"
+												var="itemDetails">
+
+												<p:column styleClass="no-header table-actions-column"
+													width="80">
+													<span> <h:link outcome="currency-exchange-action"
+															styleClass="btn  btn-success waves-effect waves-light   btn-xs">
+															<f:param name="id" value="#{itemDetails.id}" />
+															<span class="   mdi mdi-chevron-right-circle  "
+																style="font-size: 16px; color: white;" />
+															<f:ajax></f:ajax>
+														</h:link>
+													</span>
+												</p:column>
+												<p:column headerText="#{bundle.submission_details_cfg_type}"
+													sortBy="#{itemDetails.type}" width="150">
+													<h:outputText styleClass="text-ellipsis"
+														value="#{itemDetails.type}" />
+												</p:column>
+
+												<p:column
+													headerText="#{bundle.submission_details_cfg_dollar}"
+													sortBy="#{itemDetails.balance_dd}" width="150">
+													<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+														style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
+														value="#{of:formatCurrency(itemDetails.balance_dd, '')}" />
+												</p:column>
+
+												<p:column headerText="#{bundle.submission_details_cfg_ll}"
+													sortBy="#{itemDetails.balance_ll}" width="150">
+													<h:outputText
+														style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
+														styleClass="mb-0 p-2 bg-soft-danger rounded "
+														value="#{of:formatCurrency(itemDetails.balance_ll, '')}" />
+												</p:column>
+
+
+											</p:dataTable>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</p:rowExpansion>
+			</p:dataTable>
+		</div>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<h:commandLink value='#{bundle.yes}'
+				style="margin-left:10px  ; margin-top:5px;  margin-bottom:5px; color: white;"
+				styleClass="ui-confirmdialog-yes  btn btn-primary "
+				icon="ui-icon-check">
+				<f:ajax></f:ajax>
+				<em class="fa fa-check" />
+			</h:commandLink>
+			<h:commandLink value='#{bundle.no}'
+				style="color:white; margin-left:5px; margin-top:5px; margin-bottom:5px;"
+				styleClass="ui-confirmdialog-no btn btn-danger">
+				<em class="fa fa-times" />
+				<f:ajax></f:ajax>
+			</h:commandLink>
+		</p:confirmDialog>
+	</ui:define>
+
+</ui:composition>
+</html>

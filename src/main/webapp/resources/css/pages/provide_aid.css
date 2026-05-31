@@ -1,0 +1,17 @@
+.box-aid {
+	border-radius: 5px;
+	height: 150px;
+	text-align: center;
+	background-color: #48cfad;
+	border-right: 1.20rem solid #fff !important;
+}
+
+.label-box {
+	position: relative;
+	float: left;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 20px;
+	color: white;
+}

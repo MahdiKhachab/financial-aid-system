@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/views/template/template.xhtml">
+
+		<ui:define name="breadcrumb">
+			<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.cards}</li>
+			<li class="breadcrumb-item "><h:link outcome="dead-card">#{bundle.dead_person} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.new_dead_person}</li>
+			<!--end col-->
+		</ui:define>
+
+		<ui:define name="customStyleSheet">
+			<h:outputStylesheet name="toggle/bootstrap-toggle.min.css"
+				library="plugins" />
+		</ui:define>
+		<ui:define name="customFormContent">
+			<o:onloadScript>
+	select2me();
+	($('.toogle')).bootstrapToggle();
+     initDatePicker();
+       </o:onloadScript>
+
+			<o:importConstants type="enums.CurrencyEnum" />
+			<o:importConstants type="enums.NeedTypeEnum" />
+			<div class="row">
+				<div class="col-sm-12">
+					<!--end page-title-box-->
+				</div>
+				<!--end col-->
+			</div>
+			<div class="panel-body">
+				<div class="card" style="margin-top: 10px;">
+					<div class="card-body">
+						<h:panelGroup id="form-save-dead">
+
+							<h4 class="form-section">
+								<h:outputText value="#{bundle.dead_person_card} " />
+							</h4>
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<p:outputLabel class="control-label " for="fullNameId"
+											value="#{bundle.dead_person_fullName}">
+
+										</p:outputLabel>
+										<h:inputText id="fullNameId"
+											label="#{bundle.dead_person_fullName}" required="true"
+											styleClass="form-control"
+											value="#{deadPersonCardController.deadPerson.deadName }">
+
+										</h:inputText>
+										<h:message for="fullNameId" styleClass="error-message" />
+
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<p:outputLabel class="control-label " for="motherNameId"
+											value="#{bundle.dead_mother_name}">
+
+										</p:outputLabel>
+										<h:inputText id="motherNameId"
+											label="#{bundle.dead_mother_name}" required="true"
+											styleClass="form-control"
+											value="#{deadPersonCardController.deadPerson.deadMotherName}">
+
+										</h:inputText>
+										<h:message for="motherNameId" styleClass="error-message" />
+
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<p:outputLabel class="control-label " for="delegatorId"
+											value="#{bundle.dead_person_delegator}">
+
+										</p:outputLabel>
+										<h:inputText id="delegatorId"
+											label="#{bundle.dead_person_delegator}" required="true"
+											styleClass="form-control"
+											value="#{deadPersonCardController.deadPerson.delegator}">
+
+										</h:inputText>
+										<h:message for="delegatorId" styleClass="error-message" />
+
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<p:outputLabel class="control-label " for="delegatorphoneId"
+											value="#{bundle.dead_person_delegator_phone}">
+
+										</p:outputLabel>
+										<h:inputText id="delegatorphoneId"
+											onkeypress="return isNumberKey(event)"
+											label="#{bundle.dead_person_delegator}" required="true"
+											styleClass="form-control"
+											value="#{deadPersonCardController.deadPerson.delegatorPhone}">
+											<f:ajax></f:ajax>
+										</h:inputText>
+										<h:message for="delegatorphoneId" styleClass="error-message" />
+
+									</div>
+								</div>
+							</div>
+						</h:panelGroup>
+					</div>
+				</div>
+
+				<div class="card" style="margin-top: 10px;">
+					<div class="card-body">
+						<h:panelGroup id="form-needs">
+
+							<h:panelGroup id="form-needs-table"
+								rendered="#{deadPersonCardController.showPanel eq false}">
+								<ui:include src="/snippets/personNeeds-list.xhtml" />
+							</h:panelGroup>
+
+							<h:panelGroup id="form-needs-crud"
+								rendered="#{deadPersonCardController.showPanel}">
+								<ui:include src="/snippets/personNeeds-crud.xhtml" />
+							</h:panelGroup>
+
+						</h:panelGroup>
+					</div>
+				</div>
+			</div>
+			<div class="fixed">
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-12">
+						<div class="float-right">
+							<h:commandLink action="dead-list" id="cancelButton"
+								style="margin-left:6px;" styleClass="btn btn-danger btn-cancel">
+								<span>#{bundle.back}</span>
+								<i class="fas fa-caret-square-left"></i>
+								<f:ajax></f:ajax>
+							</h:commandLink>
+							<p:tooltip id="toolTipGrow3" for="cancelButton"
+								atPosition="right center" value="#{bundle.ctrl_d}"
+								hideEvent="mouseleave click" showEffect="slide"
+								hideEffect="slide" position="right" />
+							<h:commandLink value='#{bundle.save}' id="save_btn"
+								actionListener="#{deadPersonCardController.save()}"
+								styleClass="btn btn-primary btn-save">
+								<f:ajax render=":messageScript form-needs   form-save-dead"
+									execute="  form-save-dead  " />
+								<i class="fa fa-save" />
+								<p:tooltip id="toolTipGrow2" for="save_btn"
+									hideEvent="mouseleave click" atPosition="right center"
+									value="#{bundle.ctrl_s}" styleClass="btn-cancel"
+									showEffect="slide" hideEffect="slide" position="right" />
+							</h:commandLink>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<h:commandLink value='#{bundle.yes}'
+					style="margin-left:10px  ; margin-top:5px;  margin-bottom:5px; color: white;"
+					styleClass="ui-confirmdialog-yes  btn btn-primary "
+					icon="ui-icon-check">
+					<f:ajax render=""></f:ajax>
+					<em class="fa fa-check" />
+				</h:commandLink>
+				<h:commandLink value='#{bundle.no}'
+					style="color:white; margin-left:5px; margin-top:5px; margin-bottom:5px;"
+					styleClass="ui-confirmdialog-no btn btn-danger">
+					<em class="fa fa-times" />
+					<f:ajax></f:ajax>
+				</h:commandLink>
+			</p:confirmDialog>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

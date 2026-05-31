@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/views/template/template.xhtml">
+
+		<ui:define name="breadcrumb">
+
+			<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.cards}</li>
+			<li class="breadcrumb-item active"><h:link outcome="stores-list"> #{bundle.stores} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.add_new_stores}</li>
+
+			<!--end col-->
+		</ui:define>
+
+
+		<ui:define name="customFormContent">
+
+
+
+
+			<div class="col-md-12">
+
+				<span class=" mdi mdi-account-plus " style="font-size: 28px;"></span>
+
+				<h:outputText style="font-size: 22px;"
+					value=" #{bundle.add_new_stores}" />
+
+
+			</div>
+			<div class="card" style="margin-top: 10px;">
+
+				<div class="card-body">
+
+					<h:panelGroup id="form-save">
+
+						<div class="row" style="margin-top: 2%;">
+							<div class="col-md-6">
+								<div class="form-group">
+									<p:outputLabel class="control-label" for="store_name"
+										value="#{bundle.stores_name}:" />
+									<h:inputText id="store_name" required="true"
+										label="#{bundle.stores_name}:" styleClass="form-control"
+										value="#{storeCard.stores.storeName}" />
+									<h:message styleClass="error-message" for="store_name" />
+
+								</div>
+							</div>
+
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<p:outputLabel class="control-label" for="store_tel"
+										value="#{bundle.stores_phone_number}:" />
+									<h:inputText id="store_tel"
+										onkeypress="return isNumberKey(event)"
+										label="#{bundle.stores_phone_number}:"
+										styleClass="form-control" value="#{storeCard.stores.phoneNo}" />
+
+									<h:message styleClass="error-message" for="store_tel" />
+
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<p:outputLabel class="control-label" for="store_address"
+										value="#{bundle.stores_address}:" />
+									<h:inputText id="store_address"
+										label="#{bundle.stores_address}:" styleClass="form-control"
+										value="#{storeCard.stores.address}" />
+
+									<h:message styleClass="error-message" for="store_address" />
+
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="float-right">
+									<h:commandLink action="stores-list" id="cancelButton"
+										style="margin-left:6px;"
+										styleClass="btn btn-danger btn-cancel">
+										<span>#{bundle.back}</span>
+										<i class="fas fa-caret-square-left"></i>
+
+										<f:ajax></f:ajax>
+									</h:commandLink>
+									<p:tooltip id="toolTipGrow" for="cancelButton"
+										atPosition="right center" value="#{bundle.ctrl_d}"
+										hideEvent="mouseleave click" showEffect="slide"
+										hideEffect="slide" position="right" />
+									<h:commandLink value='#{bundle.save}' id="save_btn"
+										action='#{storeCard.save()}'
+										styleClass="btn btn-primary btn-save">
+										<f:ajax render=":messageScript :formTemplate"
+											execute="form-save" />
+										<i class="fa fa-save" />
+										<p:tooltip id="toolTipGrow2" for="save_btn"
+											hideEvent="mouseleave click" atPosition="right center"
+											value="#{bundle.ctrl_s}" styleClass="btn-cancel"
+											showEffect="slide" hideEffect="slide" position="right" />
+
+
+
+									</h:commandLink>
+
+								</div>
+							</div>
+						</div>
+					</h:panelGroup>
+				</div>
+			</div>
+		</ui:define>
+
+
+
+	</ui:composition>
+
+
+</body>
+</html>

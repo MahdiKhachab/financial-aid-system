@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/views/template/template.xhtml">
+
+		<ui:define name="breadcrumb">
+
+
+			<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.services}</li>
+			<li class="breadcrumb-item ">><h:link
+					outcome="provide-aid-basic">#{bundle.provide_aid} </h:link></li>
+			<li class="breadcrumb-item "><h:link
+					outcome="direct_submission_aid.xhtml">#{bundle.direct_submission} </h:link>
+			</li>
+			<li class="breadcrumb-item active">#{bundle.services}</li>
+
+			<!--end col-->
+		</ui:define>
+
+		<ui:define name="customStyleSheet">
+
+
+			<h:outputStylesheet name="toggle/bootstrap-toggle.min.css"
+				library="plugins" />
+		</ui:define>
+		<ui:define name="customFormContent">
+			<o:onloadScript>
+	select2me();
+	($('.toogle')).bootstrapToggle();
+     initDatePicker();
+       </o:onloadScript>
+
+			<o:importConstants type="enums.CurrencyEnum" var="currencyEnum" />
+
+
+			<div class="col-md-12" style="margin-top: 10px;">
+
+				<span class=" fas fa-money-check-alt  " style="font-size: 28px;"></span>
+
+				<h:outputText style="font-size: 22px;" value=" #{bundle.give_aid}" />
+
+
+			</div>
+
+			<div class="row" style="margin-top: 1%">
+
+
+
+
+				<h:panelGroup id="save-form" class="col-md-12">
+					<h:commandLink value='#{bundle.new_give}' id="btn-save"
+						style="float:left;margin-left:10px;"
+						action='#{directSubbmissionAidController.add()}'
+						styleClass="btn btn-primary waves-effect waves-light btn-new">
+						<f:ajax render=" :messageScript  :form-save " />
+						<span class="fa fa-plus"></span>
+					</h:commandLink>
+
+					<p:tooltip id="toolTipGrow" for="btn-save"
+						atPosition="right center" value="#{bundle.ctrl_z}"
+						showEffect="slide" hideEffect="slide" position="right" />
+				</h:panelGroup>
+
+			</div>
+
+
+
+
+
+
+			<div class="card" style="margin-top: 1.5%;">
+				<div class="card-body">
+
+					<div class="row">
+						<h:panelGroup class="col-md-4" id="rabit-panel" style="width:100%">
+
+							<div class="form-group">
+								<p:outputLabel class="control-label" for="rabit_qarya_name"
+									value="#{bundle.rabit_qarua_name}:" />
+								<h:inputText id="rabit_qarya_name" required="true"
+									label="#{bundle.rabit_qarua_name}:" styleClass="form-control"
+									value="#{subbmissionAidRabitController.rabitName}" />
+								<h:message styleClass="error-message" for="rabit_qarya_name" />
+
+							</div>
+
+						</h:panelGroup>
+
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<p:outputLabel class="control-label" for="delagetName"
+									value="#{bundle.delgate_name}:" />
+								<h:inputText id="delagetName" label="#{bundle.delgate_name}:"
+									styleClass="form-control"
+									value="#{subbmissionAidRabitController.delegate}" />
+
+								<h:message styleClass="error-message" for="delagetName" />
+
+							</div>
+						</div>
+						<h:panelGroup id="date-panel" class="col-md-4" style="width:100%">
+
+
+
+
+
+							<div class="row">
+
+
+
+								<h:outputText styleClass="text-muted" style="margin-right:2%;"
+									value="#{bundle.date_select_aid}" />
+							</div>
+							<div class="row">
+
+
+
+								<div class="col-md-8">
+
+
+
+
+									<div class="skin" style="margin-top: 10px">
+										<h:selectBooleanCheckbox id="booelanSelectDate"
+											label="#{bundle.receive_money_date}" styleClass="toogle"
+											h5:data-width="60%" h5:data-offstyle="warning"
+											onchange="showHideToogle();" data-style="slow"
+											h5:data-toggle="toogle" h5:data-off="#{bundle.date_default}"
+											h5:data-on="#{bundle.select_date}" h5:data-onstyle="info"
+											valueChangeListener="#{receiveMoneyController.changeDate()}"
+											value="#{subbmissionAidRabitController.showDate}">
+
+											<f:ajax onevent="showHideToogle();" event="change"></f:ajax>
+										</h:selectBooleanCheckbox>
+
+									</div>
+								</div>
+
+								<div class="col-md-4">
+									<h:inputText id="inputDate"
+										style="display:none; margin-top:5%; "
+										styleClass="form-control datepicker"
+										converter="javax.faces.DateTime"
+										value="#{subbmissionAidRabitController.dateReceive}">
+									</h:inputText>
+								</div>
+
+
+
+
+
+							</div>
+
+
+						</h:panelGroup>
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+			<h:panelGroup id="form-save" style="width:100%">
+
+
+				<ui:repeat var="var" varStatus="myVarStatus" style="width:100%"
+					value="#{subbmissionAidRabitController.provideAidList}">
+
+
+					<div class="card" style="margin-top: 2%;">
+						<div class="card-body">
+							<div class="row">
+
+								<div class="repeater-custom-show-hide" style="width: 100%">
+
+									<div class="row">
+										<div class="col-md-9">
+											<h:outputText style="font-size: 16px; padding : 2%"
+												styleClass="badge badge-success"
+												value=" #{bundle.give_number} : #{myVarStatus.index +1 }" />
+
+											<h:outputText id="subbmitonInitLL"
+												styleClass="mb-0 p-2 bg-soft-blue  rounded"
+												style="font-size: 16px;font-weight: bold; margin-top:5px; line-height:4 ; margin-right:1%"
+												value=" #{bundle.total_value_exist_init  }  : #{of:formatCurrency(var.submissionDetailsCfg.balance_ll, '')}  LBP "></h:outputText>
+
+
+											<h:outputText id="subbmitonInitDD"
+												styleClass="mb-0 p-2   rounded"
+												style="font-size: 16px;font-weight: bold; margin-top:5px; line-height:4 ; margin-right:1%  ;color: #ffffff !important;
+	background-color: #9ba7ca !important;"
+												value=" #{bundle.total_value_exist_init  }  : #{of:formatCurrency(var.submissionDetailsCfg.balance_dd, '')}  USD "></h:outputText>
+
+
+
+										</div>
+										<div class="col-md-3">
+											<h:commandLink value='#{bundle.remove}' style="float:left;"
+												action='#{subbmissionAidRabitController.removeObjFromList(var)}'
+												styleClass="btn btn-danger waves-effect waves-light ">
+												<f:ajax render=" :messageScript  :form-save" />
+												<span class="fa fa-trash"></span>
+											</h:commandLink>
+
+										</div>
+
+
+
+									</div>
+
+									<div class="row" style="margin-top: 2%;">
+										<div class="col-md-4">
+
+
+
+
+											<p:outputLabel class="control-label"
+												for="submissionDetailsCfgId"
+												value="#{bundle.receive_money_submissionDetailsCfg}:" />
+
+											<h:selectOneMenu style="width: 100% ;  margin-top:5px"
+												styleClass="select2 select2me form-control   custom-select"
+												immediate="true" converter="omnifaces.SelectItemsConverter"
+												id="submissionDetailsCfgId" required="true"
+												label="#{bundle.receive_money_submissionDetailsCfg}:"
+												placeHolder="#{bundle.receive_money_submissionDetailsCfg}:"
+												value="#{var.submissionDetailsCfg}">
+												<f:selectItem itemLabel="لا يوجد" itemValue="" />
+												<f:selectItems
+													value="#{subbmissionAidRabitController.listSubmissionDetailsCfg}"
+													var="re" itemLabel="#{re.type}" itemValue="#{re}" />
+												<f:ajax render=" subbmitonInitLL  subbmitonInitDD"></f:ajax>
+											</h:selectOneMenu>
+
+
+
+											<h:message for="submissionDetailsCfgId"
+												styleClass="error-message" />
+										</div>
+
+
+
+
+										<div class="col-md-4">
+											<div class="form-group">
+												<p:outputLabel class="control-label" for="x"
+													value="#{bundle.receive_money_value}:" />
+												<p:inputNumber id="x" required="true"
+													label="#{bundle.receive_money_value}:" decimalPlaces="0"
+													inputStyleClass="form-control" value="#{var.value}">
+													<f:ajax></f:ajax>
+												</p:inputNumber>
+												<h:message styleClass="error-message" for="x" />
+
+											</div>
+										</div>
+
+
+
+
+
+										<div class="col-md-4">
+
+											<p:outputLabel value="#{bundle.receive_money_isLira}"
+												class="control-label" for="Lira" />
+											<h:selectOneMenu required="true"
+												style="width: 100% ;  margin-top:5px"
+												styleClass="select2  select2me form-control  custom-select"
+												converter="omnifaces.SelectItemsConverter" id="Lira"
+												label="#{bundle.deserved_person_genre}"
+												placeHolder="#{bundle.deserved_person_genre}"
+												value="#{var.currencyEnum}">
+												<f:selectItem itemLabel="لا يوجد" itemValue="" />
+												<f:selectItems value="#{currencyEnum.values()}"
+													var="currency" itemLabel="#{currency.type}"
+													itemValue="#{currency}" />
+												<f:ajax></f:ajax>
+											</h:selectOneMenu>
+											<h:message for="Lira" styleClass="error-message" />
+
+										</div>
+
+
+
+									</div>
+
+									<div class="row">
+
+
+
+
+
+										<div class="col-md-12">
+											<p:outputLabel value="#{bundle.receive_money_note}:"
+												for="notesId" />
+											<h:inputTextarea id="notesId" rows="5"
+												label="#{bundle.receive_money_note}"
+												styleClass="form-control" value="#{var.note}">
+												<f:ajax></f:ajax>
+											</h:inputTextarea>
+
+
+										</div>
+
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</ui:repeat>
+			</h:panelGroup>
+
+
+
+				.
+
+				<div class="fixed">
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-12">
+						<div class="float-right">
+							<h:commandLink action="provide_aid" id="cancelButton"
+								style="margin-left:6px;" styleClass="btn btn-danger btn-cancel">
+								<span>#{bundle.back}</span>
+								<i class="fas fa-caret-square-left"></i>
+
+								<f:ajax></f:ajax>
+							</h:commandLink>
+							<p:tooltip id="toolTipGrow3" for="cancelButton"
+								atPosition="right center" value="#{bundle.ctrl_d}"
+								hideEvent="mouseleave click" showEffect="slide"
+								hideEffect="slide" position="right" />
+							<h:commandLink value='#{bundle.save}' id="save_btn"
+								actionListener="#{subbmissionAidRabitController.save()}"
+								styleClass="btn btn-primary btn-save">
+								<f:ajax
+									render=":messageScript :form-save rabit-panel delagetName "
+									execute=":form-save :date-panel rabit-panel delagetName" />
+								<i class="fa fa-save" />
+								<p:tooltip id="toolTipGrow2" for="save_btn"
+									hideEvent="mouseleave click" atPosition="right center"
+									value="#{bundle.ctrl_s}" styleClass="btn-cancel"
+									showEffect="slide" hideEffect="slide" position="right" />
+
+
+
+							</h:commandLink>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+		</ui:define>
+		<ui:define name="customOutputScript">
+			<h:outputScript name="jquery.form-repeater.js" library="js" />
+
+			<h:outputScript name="jquery.repeater.min.js" library="js" />
+			<h:outputScript name="toggle/bootstrap-toggle.min.js"
+				library="plugins" />
+
+
+		</ui:define>
+
+
+	</ui:composition>
+
+
+</body>
+</html>

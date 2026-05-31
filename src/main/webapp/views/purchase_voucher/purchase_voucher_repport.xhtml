@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/views/template/template.xhtml">
+
+		<ui:define name="breadcrumb">
+
+			<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.reports}</li>
+			<li class="breadcrumb-item active">#{bundle.purchase_voucher_repport}</li>
+
+			<!--end col-->
+		</ui:define>
+
+		<ui:define name="customStyleSheet">
+
+
+			<h:outputStylesheet name="toggle/bootstrap-toggle.min.css"
+				library="plugins" />
+		</ui:define>
+		<ui:define name="customFormContent">
+			<o:onloadScript>
+	select2me();
+     initDatePicker();
+       </o:onloadScript>
+
+
+
+			<div class="col-md-12" style="margin-top: 2%;">
+
+				<span class="  far fa-chart-bar  "
+					style="font-size: 28px; margin-right: 5px;"></span>
+
+				<h:outputText style="font-size: 22px;"
+					value=" #{bundle.purchase_voucher_repport}" />
+
+
+			</div>
+
+
+
+
+
+
+			<h:panelGroup id="filter-panel">
+
+
+
+
+				<div class="card" style="margin-top: 2%;">
+					<div class="card-body">
+						<div class="row">
+
+
+
+							<h:outputText styleClass="text-muted"
+								style="margin-right:4px;font-size:16px;"
+								value="#{bundle.select_purchase_voucher_btw_2_date}" />
+
+
+
+
+
+
+
+						</div>
+
+
+						<div class="row" style="margin-top: 1%">
+
+							<div class="col-md-6">
+
+								<p:outputLabel value="#{bundle.from_date}" class="control-label"
+									for="fromDate" />
+
+								<h:inputText id="fromDate" styleClass="form-control "
+									h5:type="date"
+									value="#{purchaseVoucherListController.fromDate}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+								</h:inputText>
+							</div>
+
+
+
+
+							<div class="col-md-6">
+
+								<p:outputLabel value="#{bundle.to_date}" class="control-label"
+									for="toDate" />
+
+								<h:inputText id="toDate" styleClass="form-control datepicker"
+									h5:type="date" value="#{purchaseVoucherListController.toDate}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+
+								</h:inputText>
+							</div>
+
+
+
+
+
+
+						</div>
+
+						<div class="row" style="margin-top: 1.5%">
+							<div class="col-md-12">
+								<h:commandLink value='#{bundle.search}' id="btn-save"
+									style="float:left;margin-left:10px;"
+									action='#{purchaseVoucherListController.seacrh()}'
+									styleClass="btn btn-warning  waves-effect waves-light btn-new">
+									<f:ajax execute="filter-panel"
+										render=" :messageScript tableShow " />
+									<span class="fas fa-search"></span>
+								</h:commandLink>
+
+								<p:tooltip id="toolTipGrow" for="btn-save"
+									atPosition="right center" value="#{bundle.ctrl_z}"
+									showEffect="slide" hideEffect="slide" position="right" />
+							</div>
+						</div>
+
+
+
+					</div>
+				</div>
+
+
+
+
+
+			</h:panelGroup>
+
+
+
+			<div class="col-md-12" style="margin-top: 2%;">
+
+				<span class="     mdi mdi-table-large   "
+					style="font-size: 28px; margin-right: 5px;"></span>
+
+				<h:outputText style="font-size: 22px;"
+					value=" #{bundle.purchase_result_table}" />
+
+
+			</div>
+			<h:panelGroup id="table-show">
+
+
+				<div class="card " style="margin-top: 2%;">
+					<div class="card-body">
+
+						<p:dataTable
+							currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+							emptyMessage="#{bundle.no_records}" style="margin-top: 2%;"
+							filteredValue="#{purchaseVoucherListController.listFilter}"
+							id="tableShow" paginator="true" paginatorPosition="bottom"
+							sortBy="#{item.creationDate}" rowIndexVar="index"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+							rowKey="#{item.id}" rows="10" scrollable="true"
+							rowsPerPageTemplate="10,20,30,#{purchaseVoucherListController.listPurchaseVoucher.size()}"
+							styleClass="table table-striped table-hover"
+							value="#{purchaseVoucherListController.listPurchaseVoucher}"
+							var="item" widgetVar="pageItemsTableWgVarShow">
+
+							<p:ajax event="rowToggle"
+								listener="#{purchaseVoucherListController.select(item)}" />
+
+							<p:column styleClass="  toggler" id="submissionCfgToggler"
+								width="5" exportable="false">
+								<p:rowToggler />
+							</p:column>
+
+							<p:column styleClass="no-header table-actions-column" width="20">
+								<span> <h:link outcome="purchase-voucher"
+										styleClass="btn  btn-success waves-effect waves-light   btn-xs">
+										<f:param name="id" value="#{item.id}" />
+										<span class="   mdi mdi-chevron-right-circle  "
+											style="font-size: 16px; color: white;" />
+										<f:ajax></f:ajax>
+									</h:link>
+								</span>
+							</p:column>
+
+							<p:column headerText="#{bundle.purchase_date}"
+								sortBy="#{item.creationDate}" width="150">
+
+								<h:outputText id="purchaseDate" styleClass="text-ellipsis "
+									title="#{item.creationDate}" value="#{item.creationDate}">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</p:column>
+
+							<p:column filterBy="#{item.stores.storeName}"
+								filterMatchMode="contains" headerText="#{bundle.stores_name}"
+								sortBy="#{bundle.stores_name}" width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVarShow').filter()"
+										placeholder="#{bundle.stores_name}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText id="fullNameId" styleClass="text-ellipsis"
+									value="#{item.stores.storeName}" />
+							</p:column>
+
+
+							<p:rowExpansion>
+								<div class="card" style="margin-top: 10px;">
+									<div class="card-body">
+										<div class="row">
+											<ul class="nav nav-pills mb-1 nav-justified" id="pills-tab"
+												role="tablist" style="min-width: 25%;">
+
+												<li class="nav-item"><a class="nav-link	active"
+													id="notes_tab" data-toggle="pill" href="#tab1_#{index}">#{bundle.type_sub_cfg}</a></li>
+
+												<li class="nav-item"><a class="nav-link "
+													id="related_file_tab" data-toggle="pill"
+													href="#related_file_#{index}">#{bundle.related_files}</a></li>
+											</ul>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="tab-content detail-list" id="pills-tabContent">
+
+													<div class="tab-pane fade" id="related_file_#{index}">
+
+														<p:dataTable id="attachmentsProjectDataTable"
+															widgetVar="attachmentProjectVar" rows="5"
+															paginator="true" rowsPerPageTemplate="5,10"
+															paginatorAlwaysVisible="false" paginatorPosition="bottom"
+															value="#{purchaseVoucherListController.purchaseVoucher.attachmentList}"
+															var="attachment" rowKey="#{attachment.id}"
+															rowIndexVar="subIndex" editable="true" editMode="cell">
+
+															<p:column headerText="Name" id="attachmentName" width="">
+																<h:outputText styleClass="badge badge-soft-purple"
+																	value="#{attachment.fileName}"
+																	title="#{attachment.fileName}" />
+															</p:column>
+
+															<p:column id="attachmentSize" headerText="Size"
+																style="text-align: center">
+																<h:outputText styleClass="badge badge-primary mb-2"
+																	value="#{attachment.sizeInMegaByte}"
+																	title="#{attachment.sizeInMegaByte}" />
+															</p:column>
+
+															<p:column width="50">
+																<h:commandLink
+																	action="#{purchaseVoucherListController.download(attachment)}"
+																	styleClass="btn btn-sm btn-warning">
+																	<i class="fa fa-download white" />
+																</h:commandLink>
+															</p:column>
+														</p:dataTable>
+													</div>
+
+													<div class="tab-pane fade active show" id="tab1_#{index}">
+														<p:dataTable id="tabDetailsTabView-table"
+															emptyMessage="#{bundle.no_records}" sortBy="#{1}"
+															tableStyleClass=" table table-bordered mb-1"
+															value="#{item.listPurchaseVoucherCoupon}"
+															var="itemDetails">
+
+															<p:column
+																headerText="#{bundle.submission_details_cfg_type}"
+																sortBy="#{itemDetails.submissionDetailsCfg.type}"
+																width="150">
+																<h:outputText styleClass="text-ellipsis"
+																	value="#{itemDetails.submissionDetailsCfg.type}" />
+															</p:column>
+
+															<p:column headerText="#{bundle.total_purcahse_value_sub}"
+																sortBy="#{itemDetails.value * itemDetails.nbOFdesrvedPerson}"
+																width="150">
+																<h:outputText
+																	style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
+																	styleClass="mb-0 p-2 bg-soft-primary rounded "
+																	value="#{of:formatCurrency(itemDetails.value * itemDetails.nbOFdesrvedPerson, '')} LBP" />
+															</p:column>
+															<p:summaryRow>
+																<p:column style="text-align:left">
+																</p:column>
+																<p:column style="text-align:left">
+																	<h:outputText style="color:#da4453 ; font-size:16px;"
+																		value="#{bundle.total_purcahse_value} :	#{of:formatCurrency(item.listPurchaseVoucherCoupon.stream().map(y-> (y.value * y.nbOFdesrvedPerson) ).sum(), '')}
+																		   LBP" />
+																</p:column>
+															</p:summaryRow>
+														</p:dataTable>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</p:rowExpansion>
+						</p:dataTable>
+					</div>
+				</div>
+			</h:panelGroup>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

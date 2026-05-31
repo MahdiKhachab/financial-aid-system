@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/views/template/template.xhtml">
+	<ui:param name="title" value='#{bundle.deserved_list}' />
+	<ui:param name="subtitle" value='#{bundle.deserved_list}' />
+
+	<ui:define name="customStyleSheet">
+		<h:outputStylesheet name="template/general.css" library="css" />
+	</ui:define>
+	<ui:define name="breadcrumb">
+
+
+		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.services}</li>
+		<li class="breadcrumb-item ">><h:link outcome="provide-aid-basic">#{bundle.provide_aid} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.submit_a_voucher }</li>
+
+
+		<!--end col-->
+	</ui:define>
+
+</ui:composition>
+</html>

@@ -1,0 +1,831 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/views/template/template.xhtml">
+
+		<ui:define name="breadcrumb">
+			<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.reports}</li>
+
+
+
+			<li class="breadcrumb-item"><h:link outcome="external-repport"> #{bundle.general_repport} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.repport_details }</li>
+
+
+			<!--end col-->
+		</ui:define>
+
+		<ui:define name="customStyleSheet">
+
+
+			<h:outputStylesheet name="toggle/bootstrap-toggle.min.css"
+				library="plugins" />
+		</ui:define>
+		<ui:define name="customFormContent">
+			<o:onloadScript>
+	select2me();
+       </o:onloadScript>
+
+			<div class="col-md-12" style="margin-top: 10px;">
+
+				<span class="  fas fa-chart-line  "
+					style="font-size: 28px; margin-right: 5px;"></span>
+
+				<h:outputText style="font-size: 22px;"
+					value=" #{bundle.repport_details  } للتقديم: ' #{repportDetailsController.submissionDetailsCfg.type} '" />
+
+
+			</div>
+			<div class="panel-body" style="margin-top: 2%;">
+				<div class="card">
+
+					<div class="card-body">
+						<h:panelGroup id="form-conditions">
+
+							<h4 class="form-section">
+								<h:outputText value="#{bundle.conditions} " />
+							</h4>
+
+
+							<div class="row">
+
+								<div class="col-md-6">
+
+									<p:outputLabel value="#{bundle.from_date}"
+										class="control-label" for="fromDate" />
+
+									<h:inputText id="fromDate" styleClass="form-control "
+										h5:type="date" value="#{repportDetailsController.fromDate}">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+									</h:inputText>
+								</div>
+
+
+
+
+								<div class="col-md-6">
+
+									<p:outputLabel value="#{bundle.to_date}" class="control-label"
+										for="toDate" />
+
+									<h:inputText id="toDate" styleClass="form-control datepicker"
+										h5:type="date" value="#{repportDetailsController.toDate}">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+
+									</h:inputText>
+								</div>
+
+
+
+
+
+
+							</div>
+
+							<div class="row" style="margin-top: 1.5%">
+								<div class="col-md-12">
+									<h:commandLink value='#{bundle.search}' id="btn-save"
+										style="float:left;margin-left:10px;"
+										action='#{repportDetailsController.search()}'
+										styleClass="btn btn-warning  waves-effect waves-light btn-new">
+										<f:ajax execute="form-conditions"
+											render=" :messageScript value-panel " />
+										<span class="fas fa-search"></span>
+									</h:commandLink>
+
+									<p:tooltip id="toolTipGrow" for="btn-save"
+										atPosition="right center" value="#{bundle.ctrl_z}"
+										showEffect="slide" hideEffect="slide" position="right" />
+								</div>
+							</div>
+						</h:panelGroup>
+					</div>
+				</div>
+			</div>
+
+
+
+			<h:panelGroup id="value-panel">
+				<div class="row" style="margin-top: 1.5%">
+					<div class="col-lg-6">
+						<div class="card">
+							<div class="card-body">
+								<div class="icon-contain">
+									<div class="row">
+										<div class="col-9 align-self-center">
+											<h5 style="margin-bottom: 20px;">#{bundle.total_cost_ll}</h5>
+
+											<h:outputText styleClass="mb-0 p-2 bg-soft-danger rounded"
+												style="font-size: 16px;font-weight: bold; margin-top:5px; "
+												value="#{of:formatNumber(repportDetailsController.totalValueLL, '#.00')} LBP"></h:outputText>
+
+
+
+										</div>
+
+
+										<!--end col-->
+
+										<!--end col-->
+									</div>
+									<!--end row-->
+								</div>
+								<!--end icon-contain-->
+							</div>
+							<!--end card-body-->
+						</div>
+						<!--end card-->
+					</div>
+
+
+
+
+					<div class="col-lg-6">
+						<div class="card">
+							<div class="card-body">
+								<div class="icon-contain">
+									<div class="row">
+										<div class="col-9 align-self-center">
+											<h5 style="margin-bottom: 20px;">#{bundle.total_cost_dd}</h5>
+
+											<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+												style="font-size: 16px;font-weight: bold; margin-top:5px; "
+												value=" #{of:formatNumber(repportDetailsController.totalValueDD, '#.00')}  USD"></h:outputText>
+
+
+
+										</div>
+
+
+										<!--end col-->
+
+										<!--end col-->
+									</div>
+									<!--end row-->
+								</div>
+								<!--end icon-contain-->
+							</div>
+							<!--end card-body-->
+						</div>
+						<!--end card-->
+					</div>
+					<!--end col-->
+				</div>
+
+				<div class="col-md-12" style="margin-top: 10px;">
+
+					<span class=" fas fa-user-tie "
+						style="font-size: 22px; margin-right: 5px;"></span>
+
+					<h:outputText style="font-size: 22px;"
+						value=" #{bundle.sponosr_give } " />
+
+
+				</div>
+				<div class="card" style="margin-top: 1%;">
+					<div class="card-body">
+
+						<p:dataTable
+							currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+							emptyMessage="#{bundle.no_records}"
+							filteredValue="#{repportDetailsController.filteredListMoneySponsor}"
+							id="sponnserTable" paginator="true" paginatorPosition="bottom"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+							rowKey="#{item.id}" rows="10"
+							rowsPerPageTemplate="10,20,30,#{repportDetailsController.listReceiveMoneySponsor.size()}"
+							styleClass="table table-striped table-hover"
+							value="#{repportDetailsController.listReceiveMoneySponsor}"
+							var="item" widgetVar="pageItemsTableWgVarSpnsor">
+							<p:ajax event="rowEdit" update=":messageScript" />
+
+
+							<p:column headerText="#{bundle.sponsor_fullName}:"
+								filterBy="#{item.sponser.fullName}"
+								sortBy="#{item.sponser.fullName}" width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVarSpnsor').filter()"
+										placeholder="#{bundle.sponsor_fullName}:"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText styleClass="text-ellipsis"
+									title="#{item.sponser.fullName}"
+									value="#{item.sponser.fullName}" />
+
+
+
+
+							</p:column>
+
+
+							<p:column
+								headerText="#{bundle.receive_money_submissionDetailsCfg}:"
+								sortBy="#{item.value}" width="150">
+
+								<h:outputText styleClass="text-ellipsis"
+									title="#{item.submissionDetailsCfg.type}"
+									value="#{item.submissionDetailsCfg.type}" />
+
+
+
+
+							</p:column>
+
+
+
+							<p:column headerText="#{bundle.receive_money_value}"
+								sortBy="#{item.value}" width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+										placeholder="#{bundle.receive_money_value}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText value="#{of:formatNumber(item.value, '#.00')}"
+									styleClass="text-ellipsis" title="#{item.value}" />
+
+
+
+
+							</p:column>
+
+
+							<p:column headerText="#{bundle.receive_money_isLira}"
+								sortBy="#{item.currencyEnum.type}" width="150">
+								<h:outputText
+									styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 bg-soft-success rounded ' : ' mb-0 p-2 bg-soft-danger rounded ' } "
+									style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
+									title="#{item.currencyEnum.type}"
+									value="#{item.currencyEnum.type}" />
+
+
+
+
+
+							</p:column>
+
+							<p:column headerText="#{bundle.date}" sortBy="#{item.date}"
+								width="150">
+
+								<h:outputText styleClass="text-ellipsis" title="#{item.date}"
+									value="#{item.date}">
+									<f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+
+								</h:outputText>
+
+
+
+
+							</p:column>
+						</p:dataTable>
+
+					</div>
+
+
+				</div>
+				<div class="col-md-12" style="margin-top: 10px;">
+
+					<span class="   fas fa-users   "
+						style="font-size: 22px; margin-right: 5px;"></span>
+
+					<h:outputText style="font-size: 22px;"
+						value=" #{bundle.desrved_aid } " />
+
+
+				</div>
+
+				<div class="card" style="margin-top: 1%;">
+					<div class="card-body">
+						<span
+							style="font-size: 16px; margin-top: 10px; margin-bottom: 10px;"><p:spacer
+								width="5" /> #{bundle.gives_details} :</span>
+
+
+
+
+						<p:dataTable
+							currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+							emptyMessage="#{bundle.no_records}" style="margin-top:12px;"
+							filteredValue="#{repportDetailsController.filteredListDesrvedProvide}"
+							id="tableIdDesrved" paginator="true" paginatorPosition="bottom"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+							rowKey="#{item.id}" rows="10"
+							rowsPerPageTemplate="10,20,30,#{repportDetailsController.listDesrvedProvide.size()}"
+							styleClass="table table-striped table-hover"
+							value="#{repportDetailsController.listDesrvedProvide}" var="item"
+							widgetVar="pageItemsTableWgVarDersved">
+							<p:ajax event="rowEdit" update=":messageScript" />
+
+
+
+
+							<p:column headerText="#{bundle.deserved_full_name}"
+								filterBy="#{item.desrvedPerson.fullName}"
+								filterMatchMode="contains"
+								sortBy="#{item.desrvedPerson.fullName}" width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+										placeholder="#{bundle.deserved_full_name}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText id="fullName" styleClass="text-ellipsis"
+									title="#{item.desrvedPerson.fullName}"
+									value="#{item.desrvedPerson.fullName}" />
+
+
+
+
+							</p:column>
+
+
+							<p:column headerText="#{bundle.receive_money_value}"
+								sortBy="#{item.value}" width="150">
+
+								<h:outputText value="#{of:formatNumber(item.value, '#.00')}"
+									styleClass="text-ellipsis" title="#{item.value}" />
+
+
+
+
+							</p:column>
+
+
+							<p:column headerText="#{bundle.receive_money_isLira}"
+								sortBy="#{item.currencyEnum.type}" width="150">
+
+								<h:outputText id="Currency"
+									styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 bg-soft-success rounded ' : ' mb-0 p-2 bg-soft-danger rounded ' } "
+									style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
+									title="#{item.currencyEnum.type}"
+									value="#{item.currencyEnum.type}" />
+
+
+
+
+							</p:column>
+
+
+							<p:column headerText="#{bundle.date}"
+								sortBy="#{item.deliveryDate}" width="150">
+
+								<h:outputText styleClass="text-ellipsis"
+									title="#{item.deliveryDate}" value="#{item.deliveryDate}">
+
+									<f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+								</h:outputText>
+
+
+
+							</p:column>
+
+						</p:dataTable>
+
+					</div>
+
+
+				</div>
+
+
+
+				<div class="col-md-12" style="margin-top: 10px;">
+
+					<span class="  mdi mdi-account-settings  "
+						style="font-size: 30px; margin-right: 5px;"></span>
+
+					<h:outputText style="font-size: 22px;"
+						value=" #{bundle.rabit_aid } " />
+
+
+				</div>
+
+
+
+				<div class="card" style="margin-top: 1%;">
+					<div class="card-body">
+						<span
+							style="font-size: 16px; margin-top: 10px; margin-bottom: 10px;"><p:spacer
+								width="5" /> #{bundle.gives_details} :</span>
+
+
+						<p:dataTable
+							currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+							emptyMessage="#{bundle.no_records}" style="margin-top:12px;"
+							filteredValue="#{repportDetailsController.filteredListRabit}"
+							id="tableRabit" paginator="true" paginatorPosition="bottom"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+							rowKey="#{item.id}" rows="10"
+							rowsPerPageTemplate="10,20,30,#{repportDetailsController.listRabit.size()}"
+							styleClass="table table-striped table-hover"
+							value="#{repportDetailsController.listRabit}" var="item"
+							widgetVar="pageItemsTableWgVarRabit">
+							<p:ajax event="rowEdit" update=":messageScript" />
+
+
+
+
+
+
+							<p:column headerText="#{bundle.rabit_qarua_name}"
+								filterBy="#{item.rabetName}" filterMatchMode="contains"
+								sortBy="#{item.rabetName}" width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVarRabit').filter()"
+										placeholder="#{bundle.rabit_qarua_name}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText id="rbait-quara-name" styleClass="text-ellipsis"
+									title="#{item.rabetName}" value="#{item.rabetName}" />
+
+
+
+
+							</p:column>
+
+
+
+							<p:column headerText="#{bundle.delgate_name}"
+								filterBy="#{item.delagate}" filterMatchMode="contains"
+								sortBy="#{item.delagate}" width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVarRabit').filter()"
+										placeholder="#{bundle.delgate_name}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText id="delgate" styleClass="text-ellipsis"
+									title="#{item.delagate}" value="#{item.delagate}" />
+
+
+
+
+							</p:column>
+
+
+							<p:column headerText="#{bundle.receive_money_value}"
+								sortBy="#{item.value}" width="150">
+
+								<h:outputText value="#{of:formatNumber(item.value, '#.00')}"
+									styleClass="text-ellipsis" title="#{item.value}" />
+
+
+
+
+							</p:column>
+
+
+							<p:column headerText="#{bundle.receive_money_isLira}"
+								sortBy="#{item.currencyEnum.type}" width="150">
+
+								<h:outputText
+									styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 bg-soft-success rounded ' : ' mb-0 p-2 bg-soft-danger rounded ' } "
+									style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
+									title="#{item.currencyEnum.type}"
+									value="#{item.currencyEnum.type}" />
+
+
+
+
+
+							</p:column>
+
+
+							<p:column headerText="#{bundle.date}"
+								sortBy="#{item.deliveryDate}" width="150">
+
+								<h:outputText id="date" styleClass="text-ellipsis"
+									title="#{item.deliveryDate}" value="#{item.deliveryDate}">
+
+									<f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+								</h:outputText>
+
+
+
+							</p:column>
+
+						</p:dataTable>
+
+					</div>
+
+
+				</div>
+
+
+
+
+				<div class="col-md-12" style="margin-top: 10px;">
+
+					<span class="    mdi mdi-office-building  "
+						style="font-size: 30px; margin-right: 5px;"></span>
+
+					<h:outputText style="font-size: 22px;"
+						value=" #{bundle.company_aid} " />
+
+
+				</div>
+
+
+
+
+				<div class="card" style="margin-top: 1%;">
+					<div class="card-body">
+						<span
+							style="font-size: 16px; margin-top: 10px; margin-bottom: 10px;"><p:spacer
+								width="5" /> #{bundle.gives_details} :</span>
+
+
+						<p:dataTable
+							currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+							emptyMessage="#{bundle.no_records}" style="margin-top:12px;"
+							filteredValue="#{repportDetailsController.filteredListCompany}"
+							id="tableId" paginator="true" paginatorPosition="bottom"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+							rowKey="#{item.id}" rows="10"
+							rowsPerPageTemplate="10,20,30,#{repportDetailsController.listCompanyAid.size()}"
+							styleClass="table table-striped table-hover"
+							value="#{repportDetailsController.listCompanyAid}" var="item"
+							widgetVar="pageItemsTableWgVarCompany">
+							<p:ajax event="rowEdit" update=":messageScript" />
+
+
+
+
+
+							<p:column headerText="#{bundle.company_company_name}"
+								filterBy="#{item.toCompany.name}" filterMatchMode="contains"
+								sortBy="#{item.toCompany.name}" width="150">
+								<f:facet name="filter">
+									<p:inputText
+										onkeyup="PF('pageItemsTableWgVarCompany').filter()"
+										placeholder="#{bundle.company_company_name}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText styleClass="text-ellipsis"
+									title="#{item.toCompany.name}" value="#{item.toCompany.name}" />
+
+
+
+
+							</p:column>
+
+
+
+							<p:column headerText="#{bundle.delgate_name}"
+								filterBy="#{item.delegate}" filterMatchMode="contains"
+								sortBy="#{item.delegate}" width="150">
+								<f:facet name="filter">
+									<p:inputText
+										onkeyup="PF('pageItemsTableWgVarCompany').filter()"
+										placeholder="#{bundle.delgate_name}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText id="delgate" styleClass="text-ellipsis"
+									title="#{item.delegate}" value="#{item.delegate}" />
+
+
+
+
+							</p:column>
+
+
+							<p:column headerText="#{bundle.receive_money_value}"
+								sortBy="#{item.value}" width="150">
+
+								<h:outputText value="#{of:formatNumber(item.value, '#.00')}"
+									styleClass="text-ellipsis" title="#{item.value}" />
+
+
+
+							</p:column>
+
+
+							<p:column headerText="#{bundle.receive_money_isLira}"
+								sortBy="#{item.currencyEnum.type}" width="150">
+
+
+								<h:outputText
+									styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 bg-soft-success rounded ' : ' mb-0 p-2 bg-soft-danger rounded ' } "
+									style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
+									title="#{item.currencyEnum.type}"
+									value="#{item.currencyEnum.type}" />
+
+
+
+
+
+							</p:column>
+
+
+							<p:column headerText="#{bundle.date}"
+								sortBy="#{item.deliveryDate}" width="150">
+
+								<h:outputText id="date" styleClass="text-ellipsis"
+									title="#{item.deliveryDate}" value="#{item.deliveryDate}">
+
+									<f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+								</h:outputText>
+
+
+
+							</p:column>
+
+						</p:dataTable>
+
+					</div>
+
+
+				</div>
+
+				<div class="col-md-12" style="margin-top: 10px;">
+
+					<span class="      mdi mdi-shopping     "
+						style="font-size: 30px; margin-right: 5px;"></span>
+
+					<h:outputText style="font-size: 22px;"
+						value=" #{bundle.purchase_gived} " />
+
+
+				</div>
+
+
+				<div class="card" style="margin-top: 1%;">
+					<div class="card-body">
+
+						<p:dataTable
+							currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+							emptyMessage="#{bundle.no_records}" style="margin-top:12px;"
+							filteredValue="#{repportDetailsController.filteredPurchaseVoucherCoupon}"
+							id="tableIExchange" paginator="true" paginatorPosition="bottom"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+							rowKey="#{item.id}" rows="10"
+							rowsPerPageTemplate="10,20,30,#{repportDetailsController.listPurchaseVoucherCoupon.size()}"
+							styleClass="table table-striped table-hover"
+							value="#{repportDetailsController.listPurchaseVoucherCoupon}"
+							var="item" widgetVar="pageItemseWgVar">
+							<p:ajax event="rowEdit" update=":messageScript" />
+
+
+
+
+
+
+							<p:column headerText="#{bundle.single_value}"
+								sortBy="#{item.value }" width="150">
+
+								<h:outputText value="#{of:formatNumber(item.value, '#.00')}"
+									styleClass="text-ellipsis" title="#{item.value}" />
+
+
+
+
+							</p:column>
+
+
+
+							<p:column headerText="#{bundle.nb_desrved}"
+								sortBy="#{item.nbOFdesrvedPerson }" width="150">
+
+								<h:outputText styleClass="text-ellipsis"
+									title="#{item.nbOFdesrvedPerson }"
+									value="#{item.nbOFdesrvedPerson } " />
+
+
+
+
+							</p:column>
+
+
+
+
+							<p:column headerText="#{bundle.total_value}"
+								sortBy="#{item.value * item.nbOFdesrvedPerson}" width="150">
+
+								<h:outputText styleClass="text-ellipsis"
+									title="#{item.value * item.nbOFdesrvedPerson}"
+									value="#{of:formatNumber(item.value * item.nbOFdesrvedPerson , '#.00')}" />
+
+
+
+
+							</p:column>
+
+							<p:column headerText="#{bundle.receive_money_isLira}" width="150">
+
+
+								<h:outputText
+									styleClass="   mb-0 p-2 bg-soft-danger rounded  } "
+									style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
+									title="LBP" value="LBP" />
+
+
+
+
+
+							</p:column>
+
+							<p:column headerText="#{bundle.date}"
+								sortBy="#{item.creationDate}" width="150">
+
+								<h:outputText id="date" styleClass="text-ellipsis"
+									title="#{item.creationDate}" value="#{item.creationDate}">
+
+									<f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+								</h:outputText>
+
+
+
+							</p:column>
+						</p:dataTable>
+					</div>
+				</div>
+
+
+
+				<div class="col-md-12" style="margin-top: 10px;">
+
+					<span class="     mdi mdi-google-drive    "
+						style="font-size: 30px; margin-right: 5px;"></span>
+
+					<h:outputText style="font-size: 22px;"
+						value=" #{bundle.currency_exchange} " />
+
+
+				</div>
+	<div class="card" style="margin-top: 1%;">
+					<div class="card-body">
+				<p:dataTable
+					currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+					emptyMessage="#{bundle.no_records}" style="margin-top:12px;"
+					filteredValue="#{repportDetailsController.filteredSubbmissionExchnage}"
+					id="tableIdPurshase" paginator="true" paginatorPosition="bottom"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+					rowKey="#{item.id}" rows="10"
+					rowsPerPageTemplate="10,20,30,#{repportDetailsController.listSubbmissionExchnage.size()}"
+					styleClass="table table-striped table-hover"
+					value="#{repportDetailsController.listSubbmissionExchnage}"
+					var="item" widgetVar="pageItemseWgVarExchange">
+					<p:ajax event="rowEdit" update=":messageScript" />
+
+
+					<p:column headerText="#{bundle.value_ll}"
+						sortBy="#{item.liraValue}" width="150">
+
+						<h:outputText styleClass="text-ellipsis" title="#{item.liraValue}"
+							value="#{of:formatNumber(item.liraValue , '#.00')} LBP" />
+
+
+
+
+					</p:column>
+
+					<p:column headerText="#{bundle.value_dd}"
+						sortBy="#{item.dollarsValue}" width="150">
+
+						<h:outputText styleClass="text-ellipsis" title="#{item.dollarsValue}"
+							value="#{of:formatNumber(item.dollarsValue , '#.00')} USD " />
+
+
+
+
+					</p:column>
+
+
+					<p:column headerText="#{bundle.rate}" sortBy="#{item.rate}"
+						width="150">
+
+						<h:outputText styleClass="text-ellipsis" title="#{item.rate}"
+							value="#{of:formatNumber(item.rate , '#.00')} LBP" />
+
+
+
+
+					</p:column>
+
+					<p:column headerText="#{bundle.date}" sortBy="#{item.creationDate}"
+						width="150">
+
+						<h:outputText id="date" styleClass="text-ellipsis"
+							title="#{item.creationDate}" value="#{item.creationDate}">
+
+							<f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+						</h:outputText>
+
+
+
+					</p:column>
+				</p:dataTable>
+				</div>
+				</div>
+
+			</h:panelGroup>
+
+
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

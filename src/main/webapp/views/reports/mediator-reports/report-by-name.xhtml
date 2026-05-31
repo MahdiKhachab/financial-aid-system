@@ -1,0 +1,165 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:i="http://itunitfaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+<ui:component>
+
+	<div class="card" style="margin-top: 2%;">
+		<div class="card-body">
+			<h4 class="form-section">
+				<h:outputText value="#{bundle.conditions} " />
+			</h4>
+			<div class="row">
+				<h:outputText styleClass="text-muted" style="margin-right:4px;"
+					value="#{bundle.report_mediator_select_date}" />
+			</div>
+			<div class="row" style="margin-top: 1%">
+				<div class="col-md-4">
+					<p:outputLabel class="control-label" for="sposnrId"
+						value="#{bundle.mediator_from_sponsor_name}" />
+
+					<h:selectOneMenu required="true" style="width: 100%;"
+						styleClass="select2  select2me form-control  custom-select"
+						converter="omnifaces.SelectItemsConverter" id="sposnrId"
+						label="#{bundle.mediator_from_sponsor_name}"
+						placeHolder="#{bundle.mediator_from_sponsor_name}"
+						value="#{reportMediatorController.name}">
+						<f:selectItem itemLabel="#{bundle.mediator_from_sponsor_name}"
+							itemValue="" />
+						<f:selectItems value="#{reportMediatorController.nameList}"
+							var="name" itemLabel="#{name}" itemValue="#{name}" />
+						<f:ajax execute="@this"></f:ajax>
+					</h:selectOneMenu>
+
+					<h:message for="sposnrId" styleClass="error-message" />
+				</div>
+				<div class="col-md-4">
+					<p:outputLabel value="#{bundle.from_date}" class="control-label"
+						for="fromDate" />
+
+					<h:inputText id="fromDate" styleClass="form-control "
+						f5:type="date" value="#{reportMediatorController.fromDate}">
+						<f:convertDateTime pattern="yyyy-MM-dd" />
+					</h:inputText>
+				</div>
+
+				<div class="col-md-4">
+
+					<p:outputLabel value="#{bundle.to_date}" class="control-label"
+						for="toDate" />
+
+					<h:inputText id="toDate" styleClass="form-control " f5:type="date"
+						value="#{reportMediatorController.toDate}">
+						<f:convertDateTime pattern="yyyy-MM-dd" />
+					</h:inputText>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card" style="margin-top: 1%;">
+		<div class="card-body">
+
+			<h4 class="form-section">
+				<h:outputText value="#{bundle.result} " />
+			</h4>
+			<p:dataTable
+				currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+				editable="true" emptyMessage="#{bundle.no_records}"
+				id="searchByNameTableId" paginator="true" paginatorPosition="bottom"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+				rowKey="#{itemName.id}" rows="10" rowsPerPageTemplate="5,10,15"
+				styleClass="table table-striped table-hover"
+				value="#{reportMediatorController.listByName}" var="itemName"
+				widgetVar="nameWgVar">
+				<p:ajax event="rowEdit" update=":messageScript" />
+
+
+				<p:column headerText="#{bundle.mediator_to_company_name}"
+					sortBy="#{itemName.toCompany.name}" width="150">
+					<h:outputText id="nCompanyName" styleClass="text-ellipsis"
+						title="#{itemName.toCompany.name}"
+						value="#{itemName.toCompany.name}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="#{bundle.mediator_ammount}"
+					sortBy="#{itemName.ammount}" width="150">
+					<h:outputText id="cAmountId" styleClass="text-ellipsis"
+						title="#{itemName.ammount}" value="#{itemName.ammount}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="#{bundle.mediator_currency}"
+					sortBy="#{itemName.currency.type}" width="150">
+					<h:outputText id="cCurrencyId" style="    padding: 4px;"
+						styleClass="#{itemName.currency eq 'DD' ? 'bg-soft-success rounded' :'bg-soft-danger rounded'}"
+						title="#{itemName.currency.type}"
+						value="#{itemName.currency.type}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="#{bundle.mediator_receive_date}"
+					sortBy="#{itemName.receiveDate}" width="150">
+					<h:outputText id="nReceiveDateId" styleClass="text-ellipsis"
+						title="#{itemName.receiveDate}" value="#{itemName.receiveDate}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="#{bundle.mediator_delivered}"
+					sortBy="#{itemName.delivered}" width="180">
+					<h:outputText
+						styleClass="#{itemName.delivered  ? 'em em-white_check_mark' : 'em em-x'}"
+						value="" />
+				</p:column>
+
+				<p:column headerText="#{bundle.mediator_receiever}"
+					sortBy="#{itemName.receiverOfCompany}" width="150">
+					<h:outputText id="nreceiverOfCompany" styleClass="text-ellipsis"
+						title="#{itemName.receiverOfCompany}"
+						value="#{itemName.receiverOfCompany}">
+					</h:outputText>
+				</p:column>
+
+			</p:dataTable>
+
+
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="icon-contain">
+						<div class="row">
+							<div class="col-9 align-self-center">
+								<h5 style="margin-bottom: 20px;">#{bundle.total_cost_ll}</h5>
+
+								<h:outputText styleClass="mb-0 p-2 bg-soft-danger rounded"
+									style="font-size: 16px;font-weight: bold; margin-top:5px; "
+									value="#{of:formatCurrency(reportMediatorController.totalLira, '')} LBP "></h:outputText>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="icon-contain">
+						<div class="row">
+							<div class="col-9 align-self-center">
+								<h5 style="margin-bottom: 20px;">#{bundle.total_cost_dd}</h5>
+
+								<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+									style="font-size: 16px;font-weight: bold; margin-top:5px; "
+									value="#{of:formatCurrency(reportMediatorController.totalDollars , '')} USD "></h:outputText>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</ui:component>
+</html>

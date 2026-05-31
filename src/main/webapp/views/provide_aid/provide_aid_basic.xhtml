@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/views/template/template.xhtml">
+	<ui:param name="title" value='#{bundle.recieve_money}' />
+	<ui:param name="subtitle" value='#{bundle.recieve_money}' />
+
+	<ui:define name="customStyleSheet">
+		<h:outputStylesheet name="pages/provide_aid.css" library="css" />
+	</ui:define>
+	<ui:define name="breadcrumb">
+
+		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.services}</li>
+		<li class="breadcrumb-item active">#{bundle.provide_aid}</li>
+		<!--end col-->
+	</ui:define>
+
+	<ui:define name="customFormContent">
+
+
+		<div class="row"
+			style="margin-top: 4%; margin-left: 1%; margin-right: 1%">
+
+			<div class="col-md-6">
+				<h:link outcome="direct-submission-aid">
+
+					<div class="box-aid " style="background-color: #48cfad;">
+
+						<h:outputLabel value="#{bundle.direct_submission}"
+							styleClass="label-box " />
+
+
+
+
+					</div>
+				</h:link>
+
+			</div>
+			<div class="col-md-6">
+				<h:link outcome="submit-with-repport-aid">
+
+					<div class="box-aid " style="background-color: #fcbb42;">
+						<h:outputLabel value= "#{bundle.submit_with_conditions}"
+							styleClass="label-box " />
+
+
+					</div>
+				</h:link>
+			</div>
+
+
+
+		</div>
+		<div class="row"
+			style="margin-top: 2%; margin-left: 1%; margin-right: 1%">
+
+			
+			<div class="col-md-6">
+				<h:link outcome="submit-with-conditions-aid">
+					<div class="box-aid " style="background-color: #ac92ec;">
+
+						<h:outputLabel value="#{bundle.submit_with_repport}"
+							styleClass="label-box " />
+
+					</div>
+				</h:link>
+			</div>
+			
+				<div class="col-md-6">
+				<h:link outcome="submit-rabit">
+					<div class="box-aid " style="background-color: #da4453;">
+
+						<h:outputLabel value="#{bundle.provide_aid_rabit}"
+							styleClass="label-box " />
+
+					</div>
+				</h:link>
+			</div>
+
+		</div>
+
+
+
+
+
+
+	<div class="row"
+			style="margin-top: 2%; margin-left: 1%; margin-right: 1%">
+
+		
+			<div class="col-md-6">
+				<h:link outcome="submit-company">
+					<div class="box-aid " style="background-color: #3bafda;">
+
+						<h:outputLabel value="#{bundle.provide_aid_company}"
+							styleClass="label-box " />
+
+					</div>
+				</h:link>
+			</div>
+
+		</div>
+
+	</ui:define>
+</ui:composition>
+</html>

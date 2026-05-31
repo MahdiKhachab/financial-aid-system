@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/views/template/template.xhtml">
+
+		<ui:define name="breadcrumb">
+
+			<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.reports}</li>
+			<li class="breadcrumb-item ">><h:link outcome="sponsor_repport">#{bundle.select_sponsor} </h:link></li>
+			<li class="breadcrumb-item active">#{bundle.sponsor_repport_take}</li>
+
+			<!--end col-->
+		</ui:define>
+
+		<ui:define name="customStyleSheet">
+
+
+			<h:outputStylesheet name="toggle/bootstrap-toggle.min.css"
+				library="plugins" />
+		</ui:define>
+		<ui:define name="customFormContent">
+			<o:onloadScript>
+	select2me();
+     initDatePicker();
+       </o:onloadScript>
+
+			<o:importConstants type="enums.CurrencyEnum" var="currencyEnum" />
+
+
+			<div class="col-md-12" style="margin-top: 10px;">
+
+				<span class="  fas fa-chart-line  "
+					style="font-size: 28px; margin-right: 5px;"></span>
+
+				<h:outputText style="font-size: 22px;"
+					value=" #{bundle.sponsor_repport}" />
+
+
+			</div>
+
+			<div class="row" style="margin-top: 2%">
+				<div class="col-md-6">
+					<h:outputText
+						style="font-size: 18px; margin-right: 10px;  padding:2%; background-color:#0069d9 !important; "
+						styleClass="badge  badge-secondary"
+						value=" #{bundle.receive_money_sponser}: #{repportSponsorController.sponsor.fullName} " />
+
+				</div>
+
+
+
+			</div>
+
+
+
+
+			<h:panelGroup id="filter-panel">
+
+
+
+
+				<div class="card" style="margin-top: 2%;">
+					<div class="card-body">
+						<div class="row">
+
+
+
+							<h:outputText styleClass="text-muted" style="margin-right:4px;font-size:14px;"
+								value="#{bundle.repport_sponsor_can_select_date_details}" />
+
+
+
+
+
+
+
+						</div>
+
+
+						<div class="row" style="margin-top: 1%">
+
+							<div class="col-md-4">
+
+								<p:outputLabel value="#{bundle.from_date}" class="control-label"
+								
+									for="fromDate" />
+
+								<h:inputText id="fromDate" styleClass="form-control "
+									h5:type="date"
+									value="#{repportSponsorController.fromDate}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+									
+								</h:inputText>
+							</div>
+
+
+
+							<div class="col-md-4">
+
+								<p:outputLabel value="#{bundle.to_date}" class="control-label"
+									 for="toDate" />
+
+								<h:inputText id="toDate" styleClass="form-control "
+									h5:type="date"
+									value="#{repportSponsorController.toDate}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+									
+								</h:inputText>
+							</div>
+
+
+
+
+							<div class="col-md-4">
+								<p:outputLabel class="control-label" for="subbmitionid"
+									value="#{bundle.receive_money_submissionDetailsCfg}:" />
+
+
+
+
+								<h:selectOneMenu style="width: 100% ;  margin-top:5px"
+									styleClass="select2 select2me form-control   custom-select"
+									immediate="true" converter="omnifaces.SelectItemsConverter"
+									id="subbmitionid" label="#{bundle.deserved_religion_reference}"
+									placeHolder="#{bundle.receive_money_submissionDetailsCfg}:"
+									value="#{repportSponsorController.submissionDetailsCfg}">
+									<f:selectItem itemLabel="لا يوجد" itemValue="" />
+									<f:selectItems
+										value="#{repportSponsorController.listSubmissionDetailsCfg}"
+										var="re" itemLabel="#{re.type}" itemValue="#{re}" />
+									<f:ajax></f:ajax>
+								</h:selectOneMenu>
+
+
+
+							</div>
+
+						</div>
+
+						<div class="row" style="margin-top: 1.5%">
+							<div class="col-md-12">
+								<h:commandLink value='#{bundle.search}' id="btn-save"
+									style="float:left;margin-left:10px;"
+									action='#{repportSponsorController.fillRepport()}'
+									styleClass="btn btn-warning  waves-effect waves-light btn-new">
+									<f:ajax execute="filter-panel"
+										render=" :messageScript tableId value-panel" />
+									<span class="fas fa-search"></span>
+								</h:commandLink>
+
+								<p:tooltip id="toolTipGrow" for="btn-save"
+									atPosition="right center" value="#{bundle.ctrl_z}"
+									showEffect="slide" hideEffect="slide" position="right" />
+							</div>
+						</div>
+
+
+
+					</div>
+				</div>
+
+
+
+
+
+			</h:panelGroup>
+
+			<h:panelGroup id="value-panel">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="card">
+							<div class="card-body">
+								<div class="icon-contain">
+									<div class="row">
+										<div class="col-9 align-self-center">
+											<h5 style="margin-bottom: 20px;">#{bundle.total_cost_ll}</h5>
+
+											<h:outputText styleClass="mb-0 p-2 bg-soft-danger rounded"
+												style="font-size: 16px;font-weight: bold; margin-top:5px; "
+												
+												
+												
+												value="#{of:formatCurrency(repportSponsorController.totalValueLL, '')} LBP"></h:outputText>
+
+
+
+										</div>
+
+
+										<!--end col-->
+
+										<!--end col-->
+									</div>
+									<!--end row-->
+								</div>
+								<!--end icon-contain-->
+							</div>
+							<!--end card-body-->
+						</div>
+						<!--end card-->
+					</div>
+
+
+
+
+					<div class="col-lg-6">
+						<div class="card">
+							<div class="card-body">
+								<div class="icon-contain">
+									<div class="row">
+										<div class="col-9 align-self-center">
+											<h5 style="margin-bottom: 20px;">#{bundle.total_cost_dd}</h5>
+
+											<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+												style="font-size: 16px;font-weight: bold; margin-top:5px; "
+												
+												
+												value="#{of:formatCurrency(repportSponsorController.totalValueDD, '')}USD"></h:outputText>
+
+
+
+										</div>
+
+
+										<!--end col-->
+
+										<!--end col-->
+									</div>
+									<!--end row-->
+								</div>
+								<!--end icon-contain-->
+							</div>
+							<!--end card-body-->
+						</div>
+						<!--end card-->
+					</div>
+					<!--end col-->
+				</div>
+			</h:panelGroup>
+
+			<div class="card" style="margin-top: 1%;">
+				<div class="card-body">
+
+					<p:dataTable
+						currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+						emptyMessage="#{bundle.no_records}"
+						filteredValue="#{sponsorList.filteredList}" id="tableId"
+						paginator="true" paginatorPosition="bottom"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+						rowKey="#{item.id}" rows="10"
+						rowsPerPageTemplate="10,20,30,#{repportSponsorController.listReceiveMoney.size()}"
+						styleClass="table table-striped table-hover"
+						value="#{repportSponsorController.listReceiveMoney}" var="item"
+						widgetVar="pageItemsTableWgVar">
+						<p:ajax event="rowEdit" update=":messageScript" />
+
+
+
+
+
+						<p:column
+							headerText="#{bundle.receive_money_submissionDetailsCfg}:"
+							sortBy="#{item.submissionDetailsCfg.type}}" width="150">
+
+							<h:outputText id="Type" styleClass="text-ellipsis"
+								title="#{item.submissionDetailsCfg.type}"
+								value="#{item.submissionDetailsCfg.type}" />
+
+
+
+
+						</p:column>
+
+
+
+						<p:column headerText="#{bundle.receive_money_value}"
+							sortBy="#{item.value}" width="150">
+
+							<h:outputText id="Lira" styleClass="text-ellipsis"
+								title="#{item.value}" value="#{of:formatCurrency(item.value, '')}" />
+
+
+
+
+						</p:column>
+
+
+						<p:column headerText="#{bundle.receive_money_isLira}"
+							sortBy="#{item.currencyEnum.type}" width="150">
+							<h:outputText id="Currency"
+								styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 bg-soft-success rounded ' : ' mb-0 p-2 bg-soft-danger rounded ' } "
+								style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
+								title="#{item.currencyEnum.type}"
+								value="#{item.currencyEnum.type}" />
+
+
+
+
+
+						</p:column>
+
+						<p:column headerText="#{bundle.date}" sortBy="#{item.date}"
+							width="150">
+
+							<h:outputText id="date" styleClass="text-ellipsis"
+								title="#{item.date}" value="#{item.date}">
+								<f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+
+							</h:outputText>
+
+
+
+
+						</p:column>
+					</p:dataTable>
+
+				</div>
+
+
+			</div>
+
+
+
+
+
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

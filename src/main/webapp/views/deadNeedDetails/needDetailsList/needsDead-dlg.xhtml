@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="rtl" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:attach="http://java.sun.com/jsf/composite/components/attachment"
+	xmlns:i="http://itunitfaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough">
+<ui:component>
+
+	<div id="selectionNeedId" class="modal fade text-xs-left in modalClass"
+		aria-labelledby="myModalLabel10" role="dialog" tabindex="-1"
+		style="display: none;" aria-hidden="true" data-toggle="modal">
+		<div class="modal-dialog width50">
+			<h:panelGroup id="panelSelectionNeedId">
+				<div class="modal-content">
+					<div class="modal-header white" style="background-color: #4d79f6">
+						<button class="close white" aria-label="Close"
+							data-dismiss="modal" type="button" id="selectionNeedBtnhideId"
+							style="display: none;">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 id="myModalLabel10" class="modal-title">#{bundle.dead_needs}</h4>
+					</div>
+					<div class="modal-body">
+
+						<div class="form-group ">
+							<p:dataTable id="personNeedsTable"
+								emptyMessage="#{bundle.no_records}"
+								tableStyleClass=" table table-bordered mb-1"
+								value="#{needDetailsListController.deadNeedList}" var="needs">
+
+								<p:column styleClass="no-header table-actions-column" width="80">
+									<span><h:link
+											outcome="/views/deadNeedDetails/needDetailsCard/needDeadDetails-card.xhtml"
+											styleClass="btn btn-warning  waves-effect waves-light   btn-xs">
+											<f:param name="id" value="#{needs.id}" />
+											<span class=" dripicons-document-edit  "
+												style="color: white;" />
+											<f:ajax></f:ajax>
+										</h:link> </span>
+								</p:column>
+
+								<p:column headerText="#{bundle.service_name}"
+									sortBy="#{needs.service.name}" width="150">
+									<h:outputText styleClass="text-ellipsis"
+										value="#{needs.service.name}" />
+								</p:column>
+
+								<p:column headerText="#{bundle.person_needs_count}"
+									sortBy="#{needs.count}" width="150">
+									<h:outputText styleClass="text-ellipsis" value="#{needs.count}" />
+								</p:column>
+
+								<p:column headerText="#{bundle.person_needs_need_type}"
+									sortBy="#{needs.needType.type}" width="150">
+									<h:outputText styleClass="text-ellipsis"
+										value="#{needs.needType.type}" />
+								</p:column>
+
+								<p:column headerText="#{bundle.person_needs_amount}"
+									sortBy="#{needs.amount}" width="150">
+									<h:outputText styleClass="text-ellipsis"
+										value="#{needs.amount}" />
+								</p:column>
+
+								<p:column headerText="#{bundle.person_needs_currency}"
+									sortBy="#{needs.currency.type}" width="150">
+									<h:outputText
+										style="font-size: 16px;font-weight: bold; padding: 4px !important; "
+										styleClass="#{needs.currency eq 'DD' ? 'mb-0 p-2 bg-soft-success rounded':'mb-0 p-2 bg-soft-danger rounded '} "
+										value="#{needs.currency.type}" />
+								</p:column>
+							</p:dataTable>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-outline-secondary" data-dismiss="modal"
+							type="button">#{bundle.cancel}</button>
+					</div>
+				</div>
+
+			</h:panelGroup>
+		</div>
+	</div>
+
+	<button
+		class="btn btn-outline-danger block btn-lg open-confirmation-dlg"
+		id="selectionNeedBtnId" style="display: none;"
+		data-target="#selectionNeedId" data-backdrop="false"
+		data-keyboard="false" data-toggle="modal" type="button">Launch
+		Modal</button>
+
+</ui:component>
+
+</html>
+

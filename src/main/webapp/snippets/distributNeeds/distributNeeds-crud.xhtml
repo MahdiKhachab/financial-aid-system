@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+
+
+<ui:component>
+
+	<h4 class="form-section">
+		<h:outputText
+			value="#{needDetailsCardController.editMode?  bundle.edit : bundle.add}" />
+	</h4>
+	<div class="row" style="margin-top: 2%;">
+		<div class="col-md-4">
+			<p:outputLabel class="control-label" for="workerId"
+				value="#{bundle.need_details_worker_name}" />
+			<h:selectOneMenu style="width: 100% ;  margin-top:5px"
+				styleClass="select2 select2me form-control   custom-select"
+				immediate="true" converter="omnifaces.SelectItemsConverter"
+				id="workerId" required="true"
+				label="#{bundle.need_details_worker_name}"
+				placeHolder="#{bundle.need_details_worker_name}"
+				value="#{needDetailsCardController.needDetails.worker}">
+				<f:selectItem itemLabel="#{bundle.not_existe}" itemValue="" />
+				<f:selectItems value="#{needDetailsCardController.workers}" var="re"
+					itemLabel="#{re.name}" itemValue="#{re}" />
+				<f:ajax></f:ajax>
+			</h:selectOneMenu>
+			<h:message for="workerId" styleClass="error-message" />
+		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<p:outputLabel class="control-label" for="costId"
+					value="#{bundle.need_details_cost}:" />
+				<ui:remove>
+					<h:inputText id="costId" required="true"
+						disabled="#{needDetailsCardController.deadNeed.service.counted eq false}"
+						label="#{bundle.need_details_cost}:"
+						onkeypress="return isNumberKey(event)" styleClass="form-control"
+						value="#{needDetailsCardController.needDetails.cost}">
+						<f:ajax></f:ajax>
+					</h:inputText>
+				</ui:remove>
+
+				<p:inputNumber id="costId" required="true" minValue="0"
+					disabled="#{needDetailsCardController.deadNeed.service.counted eq false}"
+					label="#{bundle.need_details_cost}:" style="border-color: aliceblue;"
+					onkeypress="return isNumberKey(event)" styleClass="form-control"
+					value="#{needDetailsCardController.needDetails.cost}">
+					<f:ajax></f:ajax>
+				</p:inputNumber>
+
+
+				<h:message styleClass="error-message" for="costId" />
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<p:outputLabel class="control-label" for="x"
+					value="#{bundle.need_details_count}:" />
+				<h:inputText id="x" required="true"
+					disabled="#{needDetailsCardController.deadNeed.service.counted eq false}"
+					label="#{bundle.need_details_count}"
+					onkeypress="return isNumberKey(event)" styleClass="form-control"
+					value="#{needDetailsCardController.needDetails.count}">
+					<f:ajax></f:ajax>
+				</h:inputText>
+				<h:message styleClass="error-message" for="x" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<p:outputLabel for="need_type" class="control-label">#{bundle.person_needs_need_type}</p:outputLabel>
+			<h:selectOneMenu required="true" style="width: 100%;"
+				disabled="#{needDetailsCardController.deadNeed.service.counted eq false}"
+				styleClass="select2  select2me form-control  custom-select"
+				converter="omnifaces.SelectItemsConverter" id="need_type"
+				label="#{bundle.person_needs_need_type}"
+				placeHolder="#{bundle.person_needs_need_type}"
+				value="#{needDetailsCardController.needDetails.needType}">
+				<f:selectItem itemLabel=" #{bundle.duration}" itemValue="" />
+				<f:selectItems value="#{NeedTypeEnum.values()}" var="n"
+					itemLabel="#{n.type}" itemValue="#{n}" />
+				<f:ajax execute="@this"></f:ajax>
+			</h:selectOneMenu>
+			<h:message for="need_type" styleClass="error-message" />
+		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<p:outputLabel class="control-label" for="x1"
+					value="#{bundle.need_details_date}:" />
+
+				<h:inputText id="x1" styleClass="form-control" h5:type="date"
+					value="#{needDetailsCardController.needDetails.date}">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+				</h:inputText>
+
+				<h:message styleClass="error-message" for="x1" />
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<h:outputLabel value="#{bundle.person_needs_finished}"
+					style="margin-top: 15px;" for="finishedId" />
+				<div class="skin">
+					<h:selectBooleanCheckbox label="#{bundle.person_needs_finished}"
+						style="height:20px;width:25px" id="finishedId"
+						value="#{needDetailsCardController.needDetails.finished}">
+					</h:selectBooleanCheckbox>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group">
+				<p:outputLabel class="control-label" for="receivedCostId"
+					value="#{bundle.need_details_received_cost}:" />
+
+				<p:inputNumber id="receivedCostId" decimalPlaces="2"
+					label="#{bundle.need_details_received_cost}"
+					inputStyleClass="form-control" style="border-color: aliceblue;"
+					value="#{needDetailsCardController.needDetails.receivedCost}">
+					<f:ajax></f:ajax>
+				</p:inputNumber>
+
+				<h:message styleClass="error-message" for="receivedCostId" />
+			</div>
+		</div>
+		<div class="col-md-4 row">
+			<div class="col-md-4">
+				<h:commandLink style="margin-top: 30px;min-width: 10rem;"
+					onclick="$('.fileProjectUploadVar input').click();" id="addFile"
+					value="#{bundle.add_file_for_worker}" styleClass="btn btn-primary"
+					title="#{bundle.add_file_for_worker}">
+					<i class="ti-file"></i>
+					<f:ajax render=" :messageScript" />
+				</h:commandLink>
+				<p:fileUpload widgetVar="fileProjectUploadVar" multiple="true"
+					auto="true" styleClass="fileProjectUploadVar"
+					style="visibility: hidden;"
+					fileUploadListener="#{needDetailsCardController.handleOtherFileUpload}"
+					process="@this" update=":messageScript" />
+				<h:message for="relatedfileId" styleClass="error-message" />
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-8">
+			<p:outputLabel value="#{bundle.need_details_note}" for="notesId" />
+			<h:inputTextarea id="notesId" rows="5"
+				label="#{bundle.need_details_note}" styleClass="form-control"
+				value="#{needDetailsCardController.needDetails.notes}">
+				<f:ajax></f:ajax>
+			</h:inputTextarea>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 mt-3">
+			<h:commandLink styleClass="btn btn-secondary cancel-crud"
+				style="float:left;margin-left: 20px;" value="#{bundle.cancel}"
+				action="#{needDetailsCardController.cancelDialog()}">
+				<f:ajax render="form-need-details">
+				</f:ajax>
+				<f:actionListener
+					type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+			</h:commandLink>
+			<h:commandLink
+				styleClass=" btn #{needDetailsCardController.editMode? 'btn-primary' : 'btn-success'}"
+				action="#{needDetailsCardController.saveDialog()}"
+				style="float:left;margin-left:20px  !important"
+				value="#{needDetailsCardController.editMode?  bundle.edit : bundle.add}">
+				<f:ajax execute="form-need-details-crud"
+					render="form-need-details :messageScript" />
+			</h:commandLink>
+		</div>
+	</div>
+</ui:component>
+</html>

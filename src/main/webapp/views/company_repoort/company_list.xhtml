@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/views/template/template.xhtml">
+	<ui:param name="title" value='#{bundle.deserved_list}' />
+	<ui:param name="subtitle" value='#{bundle.deserved_list}' />
+
+	<ui:define name="customStyleSheet">
+		<h:outputStylesheet name="template/general.css" library="css" />
+	</ui:define>
+	<ui:define name="breadcrumb">
+
+		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.reports}</li>
+		<li class="breadcrumb-item active">#{bundle.list_company }</li>
+
+
+		<!--end col-->
+	</ui:define>
+
+
+	<ui:define name="customFormContent">
+		<o:importConstants type="enums.PersonGenre" var="personGenre" />
+
+		<div class="card" style="margin-top: 10px;">
+			<div class="card-body">
+				<div class="row">
+					<h:panelGroup id="conter-top" class="col-md-4 col-sm-6">
+						<div id="conter-top" class="col-md-12">
+							<span style="font-size: 16px;"><p:spacer width="5" />
+								#{bundle.company_cfg_list} :</span>
+							<div class="avatar-box thumb-sm align-self-center mr-2">
+								<span id="countId" class="avatar-title rounded-circle"
+									style="color: white !important; background-color: #0069d9 !important;">
+									#{companyCfgController.countItems} </span>
+							</div>
+						</div>
+
+					</h:panelGroup>
+
+				</div>
+
+				<h:panelGroup id="tablePanelId">
+					<div class="row" style="margin-left: 8px; margin-top: 10px;">
+						<p:dataTable
+							currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+							emptyMessage="#{bundle.no_records}" editable="true"
+							id="companyCfgTableId" paginator="true"
+							paginatorPosition="bottom"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+							rowKey="#{item.id}" rows="10" style="margin-top:15px;"
+							rowsPerPageTemplate="10,20,30,#{companyCfgController.pageItems.size()}"
+							rowStyleClass="#{item.error ? 'error-record' :'' }   #{item.forDelete ? 'removed':''}"
+							tableStyleClass="removed-row-table" rowIndexVar="index"
+							styleClass="table table-striped table-hover"
+							value="#{companyCfgController.pageItems}" var="item"
+							widgetVar="pageItemsTableWgVar">
+							<p:ajax event="rowEdit" update=":messageScript" />
+							<p:column styleClass="no-header table-actions-column" width="80">
+								<span> <h:link outcome="company_list_repport"
+										styleClass="btn  btn-success waves-effect waves-light   btn-xs">
+										<f:param name="id" value="#{item.id}" />
+										<span class="   mdi mdi-chevron-right-circle  "
+											style="font-size: 16px; color: white;" />
+										<f:ajax></f:ajax>
+									</h:link>
+								</span>
+							</p:column>
+							<p:column filterBy="#{item.name}" filterMatchMode="#{item.name}"
+								headerText="#{bundle.company_company_name}" sortBy="#{item.name}"
+								width="150">
+								<f:facet name="filter">
+									<p:inputText onkeyup="PF('pageItemsTableWgVar').filter()"
+										placeholder="#{bundle.company_company_name}"
+										styleClass="inputtext-filter" />
+								</f:facet>
+								<h:outputText id="fullNameId" styleClass="text-ellipsis"
+									title="#{item.name}" value="#{item.name}" />
+							</p:column>
+
+
+						</p:dataTable>
+					</div>
+				</h:panelGroup>
+
+			</div>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>

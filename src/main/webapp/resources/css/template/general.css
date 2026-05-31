@@ -1,0 +1,449 @@
+@font-face {
+	font-family: 'droidkufi';
+	src: url('../fonts/droidkufi/DroidKufi-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal
+}
+
+@media only screen and (max-width: 800px) {
+	.logo-sm {
+		font-size: 16px !important;
+		color: white !important;
+	}
+}
+
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button
+	{
+	font-family: 'droidkufi' !important;
+}
+
+.ui-state-default, .ui-sortable-column {
+	font-size: 14px;
+	!
+	important;
+}
+
+.text-ellipsis {
+	font-family: 'droidkufi' !important;
+}
+
+body {
+	font-family: 'droidkufi' !important;
+}
+
+label {
+	font-weight: normal !important;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+	font-family: 'droidkufi' !important;
+}
+
+label {
+	font-family: 'droidkufi' !important;
+}
+
+.menu-title {
+	font-family: 'droidkufi' !important;
+}
+
+.main-menu-inner .menu-body .nav-link {
+	font-family: 'droidkufi' !important;
+}
+
+.ui-datatable.ui-widget.table.table-striped.table-hover table thead tr {
+	border-left: 1px solid #ddd !important;
+	border-right: 1px solid #ddd !important;
+}
+
+.ui-datatable.ui-widget.table.table-striped.table-hover table thead tr td input
+	{
+	color: #676a6c !important;
+	font-family: 'droidkufi' !important;
+}
+
+.ui-datatable table thead tr th, .ui-datatable table tfoot tr td,
+	.ui-datatable table thead tr th {
+	background-color: #ebedf0 ;
+	background-image: none !important;
+	border: 1px solid #c1d5df;
+	color: #546e7a;
+	font-size: 0.8rem !important;
+	outline: medium none;
+	padding: 10px;
+}
+
+ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td,
+	.ui-datatable tfoot th {
+	padding-top: 4px !important;
+	padding-right: 10px !important;
+	padding-bottom: 4px !important;
+	padding-left: 10px !important;
+}
+
+.ui-datatable {
+	position: relative;
+}
+
+.ui-datatable thead th {
+	border-left: medium none !important;
+	border-right: medium none !important;
+	font-family: 'droidkufi' !important;
+	font-weight: normal !important;
+}
+
+.ui-datatable tbody td, .ui-datatable tfoot td {
+	border-style: none !important;
+	text-align: center !important;
+	/* padding: 0 !important; */
+}
+
+.ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-footer {
+	padding: inherit !important;
+}
+
+.ui-datatable-empty-message>td {
+	font-size: 12px !important;
+	padding-right: 20px !important;
+	text-align: right !important;
+}
+
+/**jquery.datatable attributes overwrite**/
+table.dataTable.no-footer {
+	border-bottom: 2px solid hsl(0, 0%, 87%) !important;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+	border-bottom: 1px solid hsl(0, 0%, 87%) !important;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+	font-size: 0.8rem !important;
+	padding: 8px 7px !important;
+}
+
+.table-responsive {
+	display: inline-block;
+	width: 100%;
+}
+
+.ui-dialog-content.ui-widget-content .ui-confirm-dialog-severity {
+	display: none;
+}
+
+.dialog-position {
+	top: 50%;
+	left: 40%;
+}
+
+.confirm-dialog.ui-confirm-dialog .ui-widget-header {
+	display: none !important;
+}
+
+.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-confirmdialog-yes.ui-state-hover,
+	.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-confirmdialog-yes.ui-state-focus,
+	.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-confirmdialog-yes.ui-state-active,
+	.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-confirmdialog-no.ui-state-hover,
+	.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-confirmdialog-no.ui-state-focus,
+	.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-confirmdialog-no.ui-state-active
+	{
+	background-color: #d2d2d2 !important;
+}
+
+.ui-confirmdialog-yes {
+	border-color: #53a93f !important;
+}
+
+.ui-confirmdialog-yes .ui-button-text.ui-c {
+	background-color: #53a93f !important;
+	color: white !important
+}
+
+.ui-confirmdialog-no {
+	border-color: #d73d32 !important;
+}
+
+.ui-confirmdialog-no .ui-button-text.ui-c {
+	background-color: #d73d32 !important;
+	color: white !important
+}
+
+.text-ellipsis {
+	display: list-item;
+	list-style: outside none none;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: pre;
+}
+
+.ui-tooltip .ui-tooltip-text {
+	background-color: #0062cc !important;
+}
+
+.ui-tooltip-right .ui-tooltip-arrow {
+	border-right-color: #0062cc !important;
+}
+
+.ui-tooltip-right .ui-tooltip-arrow .btn-cancel {
+	border-right-color: #f1646c !important;
+}
+
+.ui-tooltip .ui-tooltip-text .btn-cancel {
+	background-color: #f1646c !important;
+}
+
+.ui-dialog-title {
+	font-family: 'droidkufi' !important;
+	float: right !important;
+}
+
+.ui-dialog-titlebar-icon.ui-dialog-titlebar-close.ui-corner-all {
+	float: left !important
+}
+
+.ui-dialog.ui-widget.ui-widget.delete-dialog {
+	width: 20% !important;;
+}
+
+.ui-dialog.ui-widget-content .ui-dialog-titlebar, .ui-dialog .ui-dialog-buttonpane
+	{
+	background: #f5f5f5 !important;
+	border: #ddd;
+}
+
+.ui-confirm-dialog.ui-dialog.ui-widget {
+	width: 30% !important;
+}
+
+.ui-dialog-content.ui-widget-content .ui-confirm-dialog-severity {
+	float: right;
+	margin-left: 10px;
+	display: inline-block;
+	margin-top: 3px;
+}
+
+.ui-confirm-dialog-message {
+	font-family: 'droidkufi' !important;
+}
+
+.ui-inputnumber.ui-widget.form-control {
+	padding: 0 !important;
+}
+
+.ui-inputfield.ui-inputtext.ui-widget.ui-state-default.ui-corner-all {
+	width: 100%;
+	background-color: #fff !important;
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	box-shadow: none !important;
+	height: 100%;
+}
+
+.skin .ui-chkbox .ui-chkbox-box.ui-state-active {
+	background: #1b7e5a !important;
+}
+
+.skin .ui-chkbox {
+	border-color: #1b7e5a !important;
+}
+
+.skin .ui-chkbox .ui-chkbox-box {
+	width: 25px;
+	height: 25px;
+	border-radius: 1px;
+}
+
+.custom-select {
+	height: calc(2.3rem + 2px) !important;
+}
+
+.hidden-header .ui-column-title {
+	display: none;
+}
+
+.error-message {
+	background: #c0392b;
+	color: #fff;
+	padding: 4px 8px;
+	width: 100%;
+	margin-top: 5px;
+	font-size: 12px;
+	display: inline-block;
+}
+
+.ui-selectonemenu .ui-selectonemenu-label {
+	text-align: center !important;
+}
+
+.select2-container--default .select2-selection--single {
+	border: 1px solid #e8ebf3 !important;
+	height: calc(2.3rem + 2px) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered
+	{
+	line-height: 36px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow
+	{
+	height: 36px !important;
+}
+
+.btn-danger:not (:disabled ):not (.disabled ).active, .btn-danger:not (:disabled
+	 ):not (.disabled ):active, .show>.btn-danger.dropdown-toggle {
+	background-color: #f1646c !important;
+}
+
+.btn.btn-warning.active.toggle-off {
+	color: white !important;
+	background-color: #f0ad4e !important;
+}
+
+.slow .toggle-group {
+	transition: left 0.7s;
+	-webkit-transition: left 0.7s;
+}
+
+div.fixed {
+	position: fixed;
+	bottom: 0;
+	margin-left: 10px;
+	left: 0;
+	margin-bottom: 10px;
+	width: 300px;
+	left: 0;
+	left: 0;
+	width: 300px;
+}
+
+.datepicker {
+	font-family: sans-serif !important;
+}
+
+.hideOutputColumn {
+	visibility: hidden;
+}
+
+.btn-warning:hover {
+	color: white !important;
+}
+
+/*input text filter class inputtext-filter*/
+.inputtext-filter.ui-selectonemenu {
+	text-align: right !important;
+	padding-right: 6px !important;
+}
+
+.inputtext-filter.ui-inputfield.ui-inputtext.ui-widget.ui-state-default.ui-corner-all
+	{
+	height: 29px;
+	margin-bottom: 5px !important;
+}
+
+.radioBtn label {
+	margin-right: 10px;
+    font-weight: 600!important;
+    background-color: gold;
+    padding: 8px;
+    border-radius: 20px;
+    color: blue;
+    font-size: 15px;
+}
+.radioBtn input {
+	margin-right: 10px;
+    width: 20px;
+    font-weight: 800;
+}
+
+.checkBoxClass .ui-chkbox .ui-chkbox-box{
+	width: 28px;
+    height: 28px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+.checkBoxClass .ui-chkbox-icon.ui-icon{
+	padding: 10px;
+    margin-top: 4px;
+} 
+.checkBoxClass .ui-state-active{
+	background-color: #1a8fe2;
+	
+}
+
+
+.btn-danger:not (:disabled ):not (.disabled ).active, .btn-danger:not (:disabled
+	):not (.disabled ):active, .show>.btn-danger.dropdown-toggle {
+	background-color: #f1646c;
+}
+
+.modalClass{
+	position: absolute;
+}
+
+.width50{
+    max-width: 70%;
+}
+
+.width25{
+    max-width: 50%;
+}
+
+
+
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+	border: 1px solid #FFf;
+	color: #f5f7fa;
+	text-shadow: 1px 1px 1px #37bc9b;
+	background: #4fc1e9  !important;
+	opacity: 0.8;
+}
+
+.btn-purple{
+	background: #8b67ff !important ;
+	
+}
+.btn-purple:hover{
+	
+	color:white;
+	
+	background: #7551e9 !important ;
+
+}
+
+
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active
+	{
+	background: #7ea7b5 none repeat scroll 0 0 !important;
+	color: hsl(0, 0%, 100%) !important;
+	font-weight: normal !important;
+}
+
+.ui-datatable.manycolumn table {
+	display: block;
+}
+.white {
+	color: white;
+}
+
+.form-section {
+ 	border-bottom: 1px solid #37bc9b;
+    color: #37bc9b;
+    font-size: 1rem;
+    line-height: 2rem;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.myTableWidth {
+	width: calc(100% - 300px);
+}
+
+.myTableWidth2 {
+	width: calc(100% - 17%);
+}
+

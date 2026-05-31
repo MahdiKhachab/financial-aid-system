@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html dir="rtl" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+<ui:composition template="/views/template/template.xhtml">
+	<ui:param name="title" value='#{bundle.deserved_list}' />
+	<ui:param name="subtitle" value='#{bundle.deserved_list}' />
+
+
+	<ui:define name="breadcrumb">
+		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.cards}</li>
+
+
+		<li class="breadcrumb-item "><h:link outcome="submissionCfg-list"> #{bundle.submission_cfg_list} </h:link></li>
+
+		<li class="breadcrumb-item active">#{bundle.deserved_add_new}</li>
+
+		<!--end col-->
+	</ui:define>
+	<ui:define name="customFormContent">
+		<o:onloadScript>
+	select2me();
+     
+       </o:onloadScript>
+		<o:importConstants type="enums.PersonGenre" var="personGenre" />
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="page-title-box">
+					<h4 class="page-title">
+						<span><p:spacer width="5" /> #{bundle.deserved_add_new}</span>
+					</h4>
+				</div>
+				<!--end page-title-box-->
+			</div>
+			<!--end col-->
+		</div>
+		<div class="panel-body">
+
+
+			<div class="card" style="margin-top: 10px;">
+				<div class="card-body">
+					<h:panelGroup id="form-save">
+
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<p:outputLabel class="control-label" for="fullNameId"
+										value="#{bundle.deserved_full_name}">
+
+									</p:outputLabel>
+									<h:inputText id="fullNameId"
+										label="#{bundle.deserved_full_name}" required="true"
+										styleClass="form-control"
+										value="#{deservedController.deserved.fullName}">
+
+									</h:inputText>
+									<h:message for="fullNameId" styleClass="error-message" />
+
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<h:outputLabel class="control-label" for="individualsId"
+										value="#{bundle.deserved_nb_of_individuals}">
+									</h:outputLabel>
+									<p:inputNumber decimalPlaces="0" id="individualsId" maxValue="20"
+										minValue="0" label="#{bundle.deserved_nb_of_individuals}"
+										required="true"
+										value="#{deservedController.deserved.nbOfIndividuals}"
+										styleClass="form-control">
+										<f:ajax></f:ajax>
+									</p:inputNumber>
+									<h:message for="individualsId" styleClass="error-message" />
+
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<h:outputLabel class="control-label" for="ExpatiateChildrenId"
+										value="#{bundle.deserved_nb_of_expatiate_children}">
+									</h:outputLabel> 
+									<p:inputNumber decimalPlaces="0" id="ExpatiateChildrenId" minValue="0" maxValue="20"
+										value="#{deservedController.deserved.nbOfExpatiateChildren}">
+										<f:ajax></f:ajax>
+									</p:inputNumber>
+									<h:message for="ExpatiateChildrenId" styleClass="error-message" />
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<h:outputLabel class="control-label" for="livingAreaId"
+										value="#{bundle.deserved_living_are}">
+									</h:outputLabel>
+									<h:inputText id="livingAreaId"
+										label="#{bundle.deserved_living_are}" required="true"
+										styleClass="form-control"
+										value="#{deservedController.deserved.livingArea}">
+										<f:ajax></f:ajax>
+									</h:inputText>
+									<h:message for="livingAreaId" styleClass="error-message" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<h:outputLabel class="control-label" for="salaryId"
+										value="#{bundle.deserved_salary}">
+									</h:outputLabel>
+									<p:inputNumber decimalPlaces="3" id="salaryId" minValue="0"
+										styleClass="form-control"
+										value="#{deservedController.deserved.salary}">
+										<f:ajax></f:ajax>
+									</p:inputNumber>
+									<h:message for="salaryId" styleClass="error-message" />
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<h:outputLabel class="control-label" for="phoneId"
+										value="#{bundle.deserved_phone_no}">
+									</h:outputLabel>
+									<h:inputText decimalPlaces="0" id="phoneId"
+										onkeypress="return isNumberKey(event)"
+										styleClass="form-control"
+										value="#{deservedController.deserved.phoneNo}">
+										<f:ajax></f:ajax>
+									</h:inputText>
+									<h:message for="phoneId" styleClass="error-message" />
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="healthyId">#{bundle.deserved_healthy_status}</label>
+									<h:selectOneMenu required="true" id="healthyId"
+										converter="omnifaces.SelectItemsConverter"
+										style="width: 100%;" label="#{bundle.select_healthy_status}"
+										styleClass="select2 select2me form-control custom-select"
+										value="#{deservedController.deserved.healthyStatusCfg}">
+										<f:selectItem itemLabel="لا يوجد" itemValue="" />
+										<f:selectItems value="#{deservedController.healthyStatusList}"
+											var="healthy" itemLabel="#{healthy.status}"
+											itemValue="#{healthy}" />
+										<f:ajax></f:ajax>
+									</h:selectOneMenu>
+									<h:message for="healthyId" styleClass="error-message" />
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<label for="religionId">#{bundle.deserved_religion_reference}</label>
+								<h:selectOneMenu required="true" style="width: 100%;"
+									styleClass="select2  select2me form-control  custom-select"
+									converter="omnifaces.SelectItemsConverter" id="religionId"
+									label="#{bundle.deserved_religion_reference}"
+									placeHolder="#{bundle.deserved_religion_reference}"
+									value="#{deservedController.deserved.religionReferenceCfg}">
+									<f:selectItem itemLabel="لا يوجد" itemValue="" />
+									<f:selectItems
+										value="#{deservedController.religionReferenceCfgList}"
+										var="re" itemLabel="#{re.name}" itemValue="#{re}" />
+									<f:ajax></f:ajax>
+								</h:selectOneMenu>
+								<h:message for="religionId" styleClass="error-message" />
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3">
+								<label for="InssuranceId">#{bundle.deserved_inssurance}</label>
+								<h:selectOneMenu style="width: 100%;"
+									styleClass="select2  select2me form-control  custom-select"
+									converter="omnifaces.SelectItemsConverter" id="InssuranceId"
+									label="#{bundle.deserved_religion_reference}"
+									placeHolder="#{bundle.deserved_religion_reference}"
+									value="#{deservedController.deserved.inssuranceCfg}">
+									<f:selectItem itemLabel="لا يوجد" itemValue="" />
+									<f:selectItems value="#{deservedController.inssuranceCfgList}"
+										var="in" itemLabel="#{in.name}" itemValue="#{in}" />
+									<f:ajax></f:ajax>
+								</h:selectOneMenu>
+								<h:message for="InssuranceId" styleClass="error-message" />
+							</div>
+							<div class="col-md-3">
+								<label for="poorId">#{bundle.deserved_poor_percentage}</label>
+								<h:selectOneMenu required="true" style="width: 100%;"
+									styleClass="select2  select2me form-control  custom-select"
+									converter="omnifaces.SelectItemsConverter" id="poorId"
+									label="#{bundle.deserved_poor_percentage}"
+									placeHolder="#{bundle.deserved_religion_reference}"
+									value="#{deservedController.deserved.poorPercentageCfg}">
+									<f:selectItem itemLabel="لا يوجد" itemValue="" />
+									<f:selectItems
+										value="#{deservedController.poorPercentageCfgList}" var="poor"
+										itemLabel="#{poor.description}" itemValue="#{poor}" />
+									<f:ajax></f:ajax>
+								</h:selectOneMenu>
+								<h:message for="poorId" styleClass="error-message" />
+							</div>
+
+							<div class="col-md-3">
+
+								<label for="genreId">#{bundle.deserved_person_genre}</label>
+								<h:selectOneMenu required="true" style="width: 100%;"
+									styleClass="select2  select2me form-control  custom-select"
+									converter="omnifaces.SelectItemsConverter" id="genreId"
+									label="#{bundle.deserved_person_genre}"
+									placeHolder="#{bundle.deserved_person_genre}"
+									value="#{deservedController.deserved.personGenre}">
+									<f:selectItem itemLabel="لا يوجد" itemValue="" />
+									<f:selectItems value="#{personGenre.values()}" var="genre"
+										itemLabel="#{genre.type}" itemValue="#{genre}" />
+									<f:ajax></f:ajax>
+								</h:selectOneMenu>
+								<h:message for="genreId" styleClass="error-message" />
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<h:outputLabel class="control-label" for="knwonById"
+										value="#{bundle.deserved_known_by}">
+									</h:outputLabel>
+									<h:inputText id="knwonById" label="#{bundle.deserved_known_by}"
+										required="true" styleClass="form-control"
+										value="#{deservedController.deserved.knownBy}">
+										<f:ajax></f:ajax>
+									</h:inputText>
+									<h:message for="knwonById" styleClass="error-message" />
+								</div>
+							</div>
+
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<h:outputLabel value="#{bundle.deserved_has_car}"
+										style="margin-top: 15px;" />
+									<div class="skin">
+										<h:selectBooleanCheckbox style="height:20px;width:25px"
+											label="#{bundle.deserved_has_car}" id="hasCarId"
+											value="#{deservedController.deserved.hasCar}">
+											<f:ajax></f:ajax>
+										</h:selectBooleanCheckbox>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<h:outputLabel value="#{bundle.deserved_working}"
+										style="margin-top: 15px;" />
+
+									<div class="skin">
+										<h:selectBooleanCheckbox label="#{bundle.deserved_working}"
+											style="height:20px;width:25px" id="workingId"
+											value="#{deservedController.deserved.working}">
+											<f:ajax></f:ajax>
+										</h:selectBooleanCheckbox>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<h:outputLabel value="#{bundle.deserved_rich_logical}"
+										for="richLogicalId" style="margin-top: 15px;" />
+
+									<div class="skin">
+										<h:selectBooleanCheckbox
+											label="#{bundle.deserved_rich_logical }"
+											style="height:20px;width:25px" id="richLogicalId"
+											value="#{deservedController.deserved.richLogical}">
+											<f:ajax></f:ajax>
+										</h:selectBooleanCheckbox>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<h:outputLabel class="control-label" for="notesId"
+										value="#{bundle.deserved_notes}" style="margin-top: 15px;">
+
+									</h:outputLabel>
+									<h:inputTextarea id="notesId" rows="5"
+										label="#{bundle.deserved_notes}" styleClass="form-control"
+										value="#{deservedController.deserved.notes}">
+										<f:ajax></f:ajax>
+									</h:inputTextarea>
+									<h:message for="notesId" styleClass="error-message" />
+								</div>
+							</div>
+
+						</div>
+					</h:panelGroup>
+				</div>
+			</div>
+
+			<div class="float-right">
+
+				<h:commandLink action="deserved-list" id="cancelButton"
+					style="margin-left:6px;" styleClass="btn btn-danger btn-cancel">
+					<span>#{bundle.back}</span>
+					<i class="fas fa-caret-square-left"></i>
+
+					<f:ajax></f:ajax>
+				</h:commandLink>
+				<p:tooltip id="toolTipGrow" for="cancelButton"
+					atPosition="right center" value="#{bundle.ctrl_d}"
+					hideEvent="mouseleave click" showEffect="slide" hideEffect="slide"
+					position="right" />
+				<h:commandLink value='#{bundle.save}' id="save_btn"
+					action='#{deservedController.save()}'
+					styleClass="btn btn-primary btn-save">
+					<f:ajax render=":messageScript :formTemplate" execute="form-save" />
+					<i class="fa fa-save" />
+					<p:tooltip id="toolTipGrow2" for="save_btn"
+						hideEvent="mouseleave click" atPosition="right center"
+						value="#{bundle.ctrl_s}" styleClass="btn-cancel"
+						showEffect="slide" hideEffect="slide" position="right" />
+				</h:commandLink>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>
+</html>

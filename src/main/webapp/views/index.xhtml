@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+
+<ui:decorate template="/views/template/template.xhtml">
+<ui:define name="customStyleSheet">
+	<h:outputStylesheet name="pages/provide_aid.css" library="css" />
+</ui:define>
+	<ui:param name="title" value="#{bundle.main_page}" />
+	<ui:param name="subtitle" value="#{bundle.main_page}" />
+
+	<ui:define name="customFormContent">
+		<div class="row">
+			<marquee direction="right"
+				style="background-color: floralwhite;
+    height: 40px;
+    font-weight: 800;
+    font-size: 17px;
+    padding-top: 10px;">#{bundle.quoran_title}</marquee>
+		</div>
+		<div class="row">
+			<ui:remove>
+				<h:graphicImage style="margin-right: 18%;width: 60%;height: 33rem;"
+					value="/resources/images/FB_IMG_1499417660461.jpg">
+				</h:graphicImage>
+			</ui:remove>
+
+			<div class="col-xl-6 col-sm-12 " style="margin-top:2%" >
+				<div class="card bg-success box-aid ">
+					<div class="card-content">
+						<div class="card-body">
+							<div class="media d-flex">
+								<div class="media-body white text-left">
+									<h3>#{bundle.deserved_list}</h3>
+									<h3>#{indexController.nbOfDeserved}</h3>
+									
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xl-6 col-sm-12 " style="margin-top:2%" >
+				<div class="card bg-danger box-aid ">
+					<div class="card-content">
+						<div class="card-body">
+							<div class="media d-flex">
+								<div class="media-body white text-left">
+									<h3>#{bundle.sponsor}</h3>
+									<h3>#{indexController.nbOfSponsors}</h3>
+									
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xl-6 col-sm-12 " style="margin-top:2%" >
+				<div class="card bg-warning box-aid">
+					<div class="card-content">
+						<div class="card-body">
+							<div class="media d-flex">
+								<div class="media-body white text-left">
+									<h3> رصيد #{bundle.lira} ل.ل</h3>
+									<h3>
+										<h:outputText value="#{indexController.totalMoneyInLira}">
+											<f:convertNumber pattern="###,###,###" />
+										</h:outputText>
+									</h3>
+									
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-xl-6 col-sm-12 " style="margin-top:2%"  >
+				<div class="card bg-primary box-aid">
+					<div class="card-content">
+						<div class="card-body">
+							<div class="media d-flex">
+								<div class="media-body white text-left">
+										<h3>رصيد #{bundle.dollar} USD</h3>
+									<h3>
+										<h:outputText
+											value="#{indexController.totalMoneyInDollars} ">
+											<f:convertNumber pattern="###,###,###.##" />
+										</h:outputText>
+									</h3>
+								
+								</div>
+								<div class="align-self-center">
+									<i class="icon-user white font-large-2 float-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+	</ui:define>
+
+</ui:decorate>
+
+</html>

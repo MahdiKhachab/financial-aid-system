@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html dir="rtl" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:attach="http://java.sun.com/jsf/composite/components/attachment"
+	xmlns:i="http://itunitfaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough">
+<ui:component>
+
+	<div id="uploadFileId" class="modal fade text-xs-left in modalClass"
+		aria-labelledby="myModalLabel10" role="dialog" tabindex="-1"
+		style="display: none;" aria-hidden="true" data-toggle="modal">
+		<div class="modal-dialog width25">
+			<h:panelGroup id="panelSelectionNeedId">
+				<div class="modal-content">
+					<div class="modal-header white" style="background-color: #4d79f6">
+						<button class="close white" aria-label="Close"
+							data-dismiss="modal" type="button" id="uploadFileBtnhideId"
+							style="display: none;">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 id="myModalLabel10" class="modal-title">#{bundle.dead_needs}</h4>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<h:commandLink styleClass="btn btn-outline-success"
+							style="margin-right: 0.2rem !important;">#{bundle.add}
+							<p:ajax update=":messageScript" process="panelSelectionNeedId" />
+						</h:commandLink>
+						<button class="btn btn-outline-secondary" data-dismiss="modal"
+							type="button">#{bundle.cancel}</button>
+					</div>
+				</div>
+
+			</h:panelGroup>
+		</div>
+	</div>
+
+	<button
+		class="btn btn-outline-danger block btn-lg open-confirmation-dlg"
+		id="uploadFileBtnId" style="display: none;"
+		data-target="#uploadFileId" data-backdrop="false"
+		data-keyboard="false" data-toggle="modal" type="button">Launch
+		Modal</button>
+
+</ui:component>
+
+</html>
+

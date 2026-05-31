@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+
+<ui:composition template="/views/template/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
+		<li class="breadcrumb-item active">#{bundle.reports}</li>
+		<li class="breadcrumb-item active">#{bundle.dead_need_report}</li>
+		<!--end col-->
+	</ui:define>
+
+	<ui:define name="customStyleSheet">
+		<h:outputStylesheet name="toggle/bootstrap-toggle.min.css"
+			library="plugins" />
+	</ui:define>
+	<ui:define name="customFormContent">
+		<o:onloadScript>
+	select2me();
+	($('.toogle')).bootstrapToggle();
+     initDatePicker();
+       </o:onloadScript>
+
+		<o:importConstants type="enums.CurrencyEnum" />
+		<o:importConstants type="enums.NeedTypeEnum" />
+		<div class="panel-body">
+			<div class="card" style="margin-top: 10px;">
+				<div class="card-body">
+					<h:panelGroup id="form-conditions">
+
+						<h4 class="form-section">
+							<h:outputText value="#{bundle.conditions} " />
+						</h4>
+
+
+						<div class="row">
+
+							<div class="col-md-3">
+								<p:outputLabel for="deadPersonId" class="control-label">#{bundle.dead_person_fullName}</p:outputLabel>
+								<h:selectOneMenu required="true" style="width: 100%;"
+									styleClass="select2  select2me form-control  custom-select"
+									converter="omnifaces.SelectItemsConverter" id="deadPersonId"
+									label="#{bundle.dead_person_fullName}"
+									placeHolder="#{bundle.dead_person_fullName}"
+									value="#{reportDeadNeedController.person}">
+									<f:selectItem itemLabel="#{bundle.select_dead_person}"
+										itemValue="#{null}" />
+									<f:selectItems
+										value="#{reportDeadNeedController.deadPersonList}" var="p"
+										itemLabel="#{p.deadName}" itemValue="#{p}" />
+									<f:ajax execute="@this" render="deadNeedId"></f:ajax>
+								</h:selectOneMenu>
+								<h:message for="deadPersonId" styleClass="error-message" />
+							</div>
+
+
+							<div class="col-md-3">
+								<p:outputLabel for="deadNeedId" class="control-label">#{bundle.dead_needs}</p:outputLabel>
+								<h:selectOneMenu required="true" style="width: 100%;"
+									styleClass="select2  select2me form-control  custom-select"
+									converter="omnifaces.SelectItemsConverter" id="deadNeedId"
+									label="#{bundle.dead_needs}" placeHolder="#{bundle.dead_needs}"
+									value="#{reportDeadNeedController.deadNeed}">
+									<f:selectItems
+										value="#{reportDeadNeedController.person.deadNeedList}"
+										var="need" itemLabel="#{need.service.name}"
+										itemValue="#{need}" />
+									<f:ajax execute="@this" render="form-conditions"></f:ajax>
+								</h:selectOneMenu>
+								<h:message for="deadNeedId" styleClass="error-message" />
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<h:outputLabel value="#{bundle.person_needs_finished}"
+										style="margin-top: 15px;" />
+									<div class="skin">
+										<h:selectBooleanCheckbox disabled="false"
+											label="#{bundle.person_needs_finished}"
+											style="height:20px;width:25px" id="finishId"
+											value="#{reportDeadNeedController.finished}">
+										</h:selectBooleanCheckbox>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<h:commandLink value='#{bundle.search}' id="btn-save"
+									style="float:left;margin-left:10px;"
+									action="#{reportDeadNeedController.search()}"
+									styleClass="btn btn-primary  waves-effect waves-light btn-new">
+									<f:ajax execute="form-conditions"
+										render="form-result :messageScript" />
+									<span class="fas fa-search"></span>
+								</h:commandLink>
+
+							</div>
+						</div>
+					</h:panelGroup>
+				</div>
+			</div>
+
+
+			<div class="card" style="margin-top: 10px;">
+				<div class="card-body">
+					<h:panelGroup id="form-result">
+						<h4 class="form-section">
+							<h:outputText value="#{bundle.result} " />
+						</h4>
+						<div class="row">
+							<div class="form-group col-md-3">
+								<h:outputText styleClass="btn btn-success waves-effect waves-light"
+									style="min-width:30%"
+									value="#{bundle.total_amount }  :  #{ reportDeadNeedController.deadNeed.amount}   #{reportDeadNeedController.deadNeed.currency.type}" />
+							</div>
+							<div class="form-group col-md-3">
+								<h:panelGroup id="restAmountId"
+									rendered="#{reportDeadNeedController.needDetailsList.size()>0}">
+									<h:outputText styleClass="btn btn-success waves-effect waves-light"
+										style="min-width:30%;" 
+										value="#{bundle.report_mediator_not_delivered }  :  #{ reportDeadNeedController.restAmount}  #{reportDeadNeedController.deadNeed.currency.type}" />
+								</h:panelGroup>
+							</div>
+						</div>
+						<div class="row">
+							<p:dataTable
+								currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
+								emptyMessage="#{bundle.no_records}" id="tableId"
+								paginator="true" paginatorPosition="bottom"
+								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+								rowKey="#{item.id}" rows="10" rowIndexVar="index"
+								rowsPerPageTemplate="10,20,30,#{reportDeadNeedController.needDetailsList.size()}"
+								styleClass="table table-striped table-hover"
+								value="#{reportDeadNeedController.needDetailsList}" var="item"
+								widgetVar="reportDeadNeedListTableWgVar">
+
+								<p:ajax event="rowToggle"
+									listener="#{reportDeadNeedController.select(item)}" />
+
+								<p:column styleClass="toggler" id="relatedFileToggler"
+									width="30" exportable="false">
+									<p:rowToggler />
+								</p:column>
+
+								<p:column headerText="#{bundle.dead_Need_report_worker_name}"
+									sortBy="#{item.worker.name}" width="150">
+									<h:outputText styleClass="text-ellipsis"
+										value="#{item.worker.name}" />
+								</p:column>
+
+								<p:column headerText="#{bundle.need_details_count}"
+									sortBy="#{item.count}" width="150">
+									<h:outputText styleClass="text-ellipsis" value="#{item.count}" />
+								</p:column>
+
+								<p:column headerText="#{bundle.person_needs_need_type}"
+									sortBy="#{item.needType.type}" width="150">
+									<h:outputText styleClass="text-ellipsis"
+										value="#{item.needType.type}" />
+								</p:column>
+
+								<p:column headerText="#{bundle.need_details_cost}:"
+									sortBy="#{item.cost}" width="150">
+									<h:outputText styleClass="text-ellipsis" value="#{item.cost}" />
+								</p:column>
+
+								<p:column headerText="#{bundle.need_details_date} "
+									sortBy="#{item.date}" width="150">
+									<h:outputText styleClass="text-ellipsis" value="#{item.date}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+								</p:column>
+
+								<p:column headerText="#{bundle.need_details_received_cost}"
+									sortBy="#{item.receivedCost}" width="150">
+									<h:outputText styleClass="text-ellipsis"
+										value="#{item.receivedCost}" />
+								</p:column>
+
+
+								<p:column headerText="#{bundle.report_mediator_not_delivered}"
+									sortBy="#{item.cost - item.receivedCost}" width="180">
+									<h:outputText styleClass="text-ellipsis"
+										value="#{item.cost - item.receivedCost}" />
+								</p:column>
+
+								<p:rowExpansion>
+									<div class="card" style="margin-top: 10px;">
+										<div class="card-body">
+											<div class="row">
+												<ul class="nav nav-pills mb-1 nav-justified" id="pills-tab"
+													role="tablist" style="min-width: 25%;">
+													<li class="nav-item"><a class="nav-link active"
+														id="general_chat_tab" data-toggle="pill"
+														href="#general_chat_#{index}">#{bundle.related_files}</a></li>
+
+													<li class="nav-item"><a class="nav-link	"
+														id="notes_tab" data-toggle="pill" href="#notes_#{index}">#{bundle.need_details_note}</a></li>
+												</ul>
+											</div>
+											<div class="row">
+												<div class="col-12">
+													<div class="tab-content detail-list" id="pills-tabContent">
+														<div class="tab-pane fade active show"
+															id="general_chat_#{index}">
+															<p:dataTable id="attachmentsProjectDataTable"
+																widgetVar="attachmentProjectVar" rows="5"
+																paginator="true" rowsPerPageTemplate="5,10"
+																paginatorAlwaysVisible="false"
+																paginatorPosition="bottom"
+																value="#{reportDeadNeedController.needDetails.attachmentList}"
+																var="attachment" rowKey="#{attachment.id}"
+																rowIndexVar="subIndex" editable="true" editMode="cell">
+
+																<p:column headerText="Name" id="attachmentName" width="">
+																	<h:outputText styleClass="badge badge-soft-purple"
+																		value="#{attachment.fileName}"
+																		title="#{attachment.fileName}" />
+																</p:column>
+
+																<p:column id="attachmentSize" headerText="Size"
+																	style="text-align: center">
+																	<h:outputText styleClass="badge badge-primary mb-2"
+																		value="#{attachment.sizeInMegaByte}"
+																		title="#{attachment.sizeInMegaByte}" />
+																</p:column>
+
+																<p:column width="50">
+																	<h:commandLink
+																		action="#{reportDeadNeedController.download(attachment)}"
+																		styleClass="btn btn-sm btn-warning">
+																		<i class="fa fa-download white" />
+																	</h:commandLink>
+																</p:column>
+															</p:dataTable>
+														</div>
+														<div class="tab-pane fade" id="notes_#{index}">
+															<br></br>
+															<h:inputTextarea disabled="true" style="max-width:70%"
+																rows="4" class="form-control"></h:inputTextarea>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</p:rowExpansion>
+							</p:dataTable>
+
+						</div>
+					</h:panelGroup>
+				</div>
+			</div>
+
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
