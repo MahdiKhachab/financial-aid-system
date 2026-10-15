@@ -49,8 +49,8 @@ Exact patch versions are pinned in Task 5 (spike).
 | 0 | Create migration branch | Done |
 | 1 | Commit 44 pre-migration changes on `master`, align branch | Done |
 | 2 | Create MIGRATION_PLAN.md / MIGRATION_STATUS.md | Done |
-| 3 | Repeatable baseline build on current stack (pin Maven plugins, JDK 8) | Next |
-| 4 | Test DB `ShariaFunds_migration` (user restores copy) + reference snapshot | Pending |
+| 3 | Repeatable baseline build on current stack (pin Maven plugins, JDK 8) | Done |
+| 4 | Test DB `ShariaFunds_migration` (user restores copy) + reference snapshot | Next |
 | 5 | Spike: Boot 4.1 + JoinFaces 6.1 + PF 15 + OmniFaces 5 + EclipseLink 5 (go/no-go) | Pending |
 | 6 | Platform switch in small commits (pom, jakarta, descriptors, persistence, services, scopes, PF/OF APIs); remove WildFly | Pending |
 | 7 | Full UI regression against checklist on test DB | Pending |
