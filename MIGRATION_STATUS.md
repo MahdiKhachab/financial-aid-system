@@ -20,10 +20,28 @@ Last updated: 2026-10-16
 | 2 Notes | MIGRATION_PLAN.md, MIGRATION_STATUS.md created | Committed `50b408a` |
 | 3 Repeatable build | `pom.xml`: pinned clean 2.5, resources 2.6, compiler 3.1, surefire 2.12.4, war 2.2, install 2.4, deploy 2.7 (the previous defaults); enforcer 3.4.1 requires JDK [1.8,1.9) and Maven ≥3.8 | See builds below |
 
+| 4 Test DB + snapshot | `ShariaFunds_migration` created on PG 10.3 (UTF8, `Arabic_Saudi Arabia.1256`) from `pg_dump -Fc` of `ShariaFunds`; schema saved to `migration/schema-baseline.sql` (no data) | Schema dumps of live and copy identical; row counts identical in all 27 tables |
+
+## Database reference snapshot (2026-10-16, `ShariaFunds_migration`)
+
+- 27 tables in `public`, 228 columns, 27 PKs, 32 FKs, 27 indexes; no views, functions or triggers; no unique/check constraints.
+- One shared sequence `seq_gen_sequence` (start 50, increment 50, last_value 600) feeds **all** entity IDs
+  (EclipseLink default `SEQUENCE` with preallocation 50). Highest existing id = 503 (`service`).
+  **Target config must keep sequence name `SEQ_GEN_SEQUENCE` and allocationSize 50.**
+- Row counts: attachment 2, cfg_company 2, cfg_healthystatus 1, cfg_inssurance 1, cfg_poorpercentage 1,
+  cfg_religionreference 2, cfg_submission 3, cfg_submissiondetails 6, deadneed 0, deadperson 0, deserved 3,
+  mediator 2, needdetails 0, provideaid 0, provideaidcompany 1, provideaiddesrvedperson 0, provideaidrabet 0,
+  purchase_voucher 3, purchase_voucher_coupon 5, purchase_voucher_desrved 5, receive_money 5, service 2,
+  sponser 2, stores 1, subbmission_exchnage 1, worker 1, worker_service 1.
+- The dump file (contains personal data) was deleted after restore; only the schema is kept.
+
 ## Environment facts
 
 - JDKs: 1.8.0_191, 17.0.1, 21.0.12 (default). Maven 3.8.6.
-- PostgreSQL 10.3 (port 5432, used by app) and 9.6.1 (port 5433, not used by app).
+- PostgreSQL 10.3 (port 5432, used by app; confirmed via `select version()`) and 9.6.1 (port 5433, not used by app).
+- Databases on 5432: live `ShariaFunds` (8.9 MB, never used for migration work) and test copy `ShariaFunds_migration`.
+- DB credentials are never stored in the repo; the `postgres` superuser password is weak and should be changed
+  once the app has its own least-privilege DB user (security stage).
 - WildFly 8.2.1.Final at `C:\wildfly-8.2.1.Final` (shared with RealEstate.war — do not touch).
 
 ## Builds and tests run
@@ -51,8 +69,10 @@ Last updated: 2026-10-16
 
 ## Blockers / waiting on user
 
-- Task 4 needs the user to create the `ShariaFunds_migration` copy (commands will be provided).
+- Approval to untrack `target/` in Git.
+- Approval of Task 5 (spike).
 
 ## Next task
 
-Task 4 — Test database copy and reference snapshot.
+Task 5 — Spike: Spring Boot 4.1 + JoinFaces 6.1 + PrimeFaces 15 + OmniFaces 5 + EclipseLink 5 against
+`ShariaFunds_migration` (go/no-go). Isolated in `spike/`, application code untouched.
