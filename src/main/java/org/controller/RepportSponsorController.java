@@ -22,7 +22,6 @@ import org.omnifaces.util.Faces;
 import cfg.model.SubmissionDetailsCfg;
 import enums.CurrencyEnum;
 import interfaces.ICRUDOperations;
-import utils.CommonUtility;
 import utils.Utility;
 
 @ViewScoped

@@ -17,7 +17,6 @@ import org.facade.DeservedFacade;
 import org.facade.ProvideAidFacade;
 import org.model.Deserved;
 import org.model.ProvideAidDesrvedPerson;
-import org.model.ReceiveMoney;
 import org.omnifaces.util.Faces;
 
 import cfg.model.SubmissionDetailsCfg;

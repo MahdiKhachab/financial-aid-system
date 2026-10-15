@@ -1,8 +1,6 @@
 package org.facade;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -10,9 +8,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.TypedQuery;
-import javax.xml.registry.infomodel.EmailAddress;
 
-import org.model.ProvideAidRabet;
 import org.model.SubbmissionExchnage;
 
 import cfg.facade.SubmissionDetailsCfgFacade;

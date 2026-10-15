@@ -1,7 +1,6 @@
 package cfg.facade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import org.facade.AbstractFacade;
-import org.model.PurchaseVoucherCoupon;
 
 import cfg.model.SubmissionCfg;
 

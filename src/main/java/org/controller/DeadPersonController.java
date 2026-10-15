@@ -14,7 +14,6 @@ import org.facade.NeedDetailsFacade;
 import org.model.DeadNeed;
 import org.model.DeadPerson;
 import org.model.NeedDetails;
-import org.omnifaces.util.Ajax;
 
 import interfaces.ICRUDOperations;
 import utils.Utility;

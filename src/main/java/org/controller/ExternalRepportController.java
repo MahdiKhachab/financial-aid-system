@@ -12,7 +12,6 @@ import javax.inject.Named;
 import org.facade.ExternalRepportFacade;
 
 import cfg.model.SubmissionDetailsCfg;
-import enums.CurrencyEnum;
 
 @ViewScoped
 @Named

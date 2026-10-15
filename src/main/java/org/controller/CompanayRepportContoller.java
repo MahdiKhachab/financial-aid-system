@@ -16,7 +16,6 @@ import javax.inject.Named;
 
 import org.facade.ProvideAidFacade;
 import org.model.ProvideAidCompany;
-import org.model.ProvideAidRabet;
 import org.omnifaces.util.Faces;
 
 import cfg.facade.CompanyCfgFacade;

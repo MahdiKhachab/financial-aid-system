@@ -40,6 +40,7 @@ public class Sponsor extends MainEntity implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("unused")
 	private Sponsor(long id, String fullName, String phoneNo, ReligionReferenceCfg religionReferenceCfg,
 			String livingArea) {
 		super();

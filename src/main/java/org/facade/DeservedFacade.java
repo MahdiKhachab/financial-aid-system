@@ -8,7 +8,6 @@ import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 
 import org.model.Deserved;
-import org.model.ReceiveMoney;
 
 import cfg.model.HealthyStatusCfg;
 import cfg.model.InssuranceCfg;

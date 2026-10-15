@@ -12,8 +12,6 @@ import javax.inject.Named;
 
 import org.facade.DeservedFacade;
 import org.facade.ProvideAidFacade;
-import org.model.Deserved;
-import org.model.ProvideAidDesrvedPerson;
 import org.model.ProvideAidRabet;
 
 import cfg.model.SubmissionDetailsCfg;
@@ -31,7 +29,7 @@ public class SubbmissionAidRabitController implements Serializable {
 	@Inject
 	private ProvideAidFacade provideAidFacade;
 
-	private final String REQUEST_PARAM = "id";
+//	private final String REQUEST_PARAM = "id";
 
 	private List<SubmissionDetailsCfg> listSubmissionDetailsCfg = new ArrayList<>();
 	private boolean showDate;

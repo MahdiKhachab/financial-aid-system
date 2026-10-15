@@ -19,8 +19,6 @@ import org.model.ReceiveMoney;
 import org.model.Sponsor;
 import org.omnifaces.util.Faces;
 
-import cfg.facade.SubmissionDetailsCfgFacade;
-import cfg.model.CompanyCfg;
 import cfg.model.SubmissionDetailsCfg;
 import interfaces.ICRUDOperations;
 import utils.Utility;

@@ -16,17 +16,11 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.facade.DeservedFacade;
 import org.facade.ProvideAidFacade;
@@ -610,7 +604,7 @@ public class PurchaseVoucherCardController implements Serializable {
 
 		sCellTittle.setCellValue("مجموع التقديم :");
 		sCellTittle.setCellStyle(headerCellStyle);
-		int counterRow = 1;
+//		int counterRow = 1;
 		// add el tokdimet + ade imeta
 
 		/**

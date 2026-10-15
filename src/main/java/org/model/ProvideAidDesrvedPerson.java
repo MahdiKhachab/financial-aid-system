@@ -3,7 +3,6 @@ package org.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 

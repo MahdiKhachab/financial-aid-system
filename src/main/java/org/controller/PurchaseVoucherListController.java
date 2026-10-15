@@ -13,7 +13,6 @@ import javax.inject.Named;
 
 import org.facade.PurchaseVoucherFacade;
 import org.model.Attachment;
-import org.model.Deserved;
 import org.model.PurchaseVoucher;
 import org.omnifaces.util.Faces;
 

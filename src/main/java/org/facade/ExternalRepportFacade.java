@@ -6,7 +6,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 import cfg.facade.SubmissionCfgFacade;
 import cfg.model.SubmissionCfg;

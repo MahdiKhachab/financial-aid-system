@@ -20,7 +20,6 @@ import org.facade.ProvideAidFacade;
 import org.facade.PurchaseVoucherFacade;
 import org.facade.ReceiveMoneyFacade;
 import org.facade.SubbmissionExchnageFacade;
-import org.model.ProvideAid;
 import org.model.ProvideAidCompany;
 import org.model.ProvideAidDesrvedPerson;
 import org.model.ProvideAidRabet;

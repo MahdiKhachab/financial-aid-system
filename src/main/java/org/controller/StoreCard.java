@@ -13,7 +13,6 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
 import org.facade.StoresFacade;
-import org.model.Sponsor;
 import org.model.Stores;
 import org.omnifaces.util.Faces;
 

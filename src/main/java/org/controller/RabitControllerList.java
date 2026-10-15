@@ -2,7 +2,6 @@ package org.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,7 +11,6 @@ import javax.inject.Named;
 
 import org.dtos.StanderDto;
 import org.facade.ProvideAidFacade;
-import org.model.Deserved;
 
 @ViewScoped
 @Named

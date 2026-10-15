@@ -16,11 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.facade.SponsorFacade;
-import org.model.Deserved;
 import org.model.Sponsor;
-import org.omnifaces.util.Ajax;
 import org.omnifaces.util.Faces;
-import org.primefaces.context.PrimeFacesContext;
 
 import cfg.facade.ReligionReferenceCfgFacade;
 import cfg.model.ReligionReferenceCfg;

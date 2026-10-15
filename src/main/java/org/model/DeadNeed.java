@@ -1,13 +1,8 @@
 package org.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.ejb.TransactionAttributeType;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,19 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-
-import org.eclipse.persistence.jpa.rs.util.HrefHelper;
 
 import cfg.model.Service;
 import enums.CurrencyEnum;
 import enums.NeedTypeEnum;
-import utils.Utility;
 
 @Entity
 @Table(name = "deadneed")

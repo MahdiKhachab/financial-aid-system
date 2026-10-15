@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.facade.DeservedFacade;
-import org.facade.ProvideAidFacade;
 import org.model.Deserved;
 
 import cfg.facade.HealthyStatusCfgFacade;

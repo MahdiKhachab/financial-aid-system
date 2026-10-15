@@ -7,10 +7,8 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import org.model.Mediator;
 import org.model.ReceiveMoney;
 import org.model.Sponsor;
 

@@ -8,15 +8,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import cfg.model.SubmissionDetailsCfg;
-import utils.CommonUtility;
-import utils.Utility;
-
-import org.model.SubbmissionExchnage;
 
 import org.facade.SubbmissionExchnageFacade;
+import org.model.SubbmissionExchnage;
 
 import cfg.facade.SubmissionDetailsCfgFacade;
+import cfg.model.SubmissionDetailsCfg;
+import utils.CommonUtility;
 
 @Named
 @ViewScoped
@@ -94,7 +92,7 @@ public class SubbmissionExchnageController implements Serializable {
 	}
 
 	public void setSubbmissionExchnage(SubbmissionExchnage subbmissionExchnage) {
-		subbmissionExchnage = subbmissionExchnage;
+		this.subbmissionExchnage = subbmissionExchnage;
 	}
 
 }

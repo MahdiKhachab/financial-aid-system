@@ -31,9 +31,7 @@ public class TemplateController implements Serializable {
 		List<MenuItem> menu = new ArrayList<>();
 		MenuItem m1 = null;
 		MenuItem m2 = null;
-		MenuItem m3 = null;
-		MenuItem m4 = null;
-		MenuItem m5 = null;
+		
 
 		// --- index ---//
 

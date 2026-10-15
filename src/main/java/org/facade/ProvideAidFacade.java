@@ -11,7 +11,6 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.model.Deserved;
-import org.model.Mediator;
 import org.model.ProvideAid;
 import org.model.ProvideAidCompany;
 import org.model.ProvideAidDesrvedPerson;
@@ -41,6 +40,7 @@ public class ProvideAidFacade extends AbstractFacade<ProvideAid> implements Seri
 	/*
 	 * Rabit Repport
 	 */
+	@SuppressWarnings("unchecked")
 	public List<String> getAllNamesRabit() {
 
 		try {

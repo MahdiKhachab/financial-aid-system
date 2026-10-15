@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.facade.StoresFacade;
-import org.model.Sponsor;
 import org.model.Stores;
 
 import interfaces.ICRUDOperations;

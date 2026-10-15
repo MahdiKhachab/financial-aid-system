@@ -10,13 +10,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.facade.SponsorFacade;
-import org.model.Deserved;
 import org.model.Sponsor;
 
 import cfg.facade.ReligionReferenceCfgFacade;
 import cfg.model.ReligionReferenceCfg;
 import interfaces.ICRUDOperations;
-import utils.CommonUtility;
 import utils.Utility;
 
 @ViewScoped
@@ -77,7 +75,7 @@ public class SponsorList extends AbstractController<Sponsor> implements Serializ
 	}
 
 	public void setSponsor(Sponsor sponsor) {
-		this.sponser = sponser;
+		this.sponser = sponsor;
 	}
 
 	@Override

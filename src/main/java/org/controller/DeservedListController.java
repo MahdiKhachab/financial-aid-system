@@ -24,7 +24,6 @@ import cfg.model.PoorPercentageCfg;
 import cfg.model.ReligionReferenceCfg;
 import enums.PersonGenre;
 import interfaces.ICRUDOperations;
-import utils.CommonUtility;
 import utils.Utility;
 
 @ViewScoped

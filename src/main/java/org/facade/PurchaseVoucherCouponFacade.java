@@ -3,7 +3,6 @@ package org.facade;
 import java.io.Serializable;
 
 import org.model.PurchaseVoucherCoupon;
-import org.model.Sponsor;
 
 public class PurchaseVoucherCouponFacade extends AbstractFacade<PurchaseVoucherCoupon> implements Serializable {
 

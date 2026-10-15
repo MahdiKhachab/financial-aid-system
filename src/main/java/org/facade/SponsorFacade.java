@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import org.model.Deserved;
 import org.model.Sponsor;
 
 @Stateless
