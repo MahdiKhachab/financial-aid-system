@@ -2,11 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core" dir="rtl"
+	xmlns:f="http://java.sun.com/jsf/core" dir="rtl" lang="ar"
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<h:outputStylesheet name="template/toastr-rtl.min.css" library="css" />
 
 	<h:outputStylesheet name="bootstrap-datetimepicker.min.css"
@@ -21,6 +23,11 @@
 	<h:outputStylesheet name="template/style.css" library="css" />
 	<h:outputStylesheet name="select2/select2.min.css" library="plugins" />
 
+	<!-- Design system: loaded after the theme so it can restyle it; page styles below still win -->
+	<h:outputStylesheet name="design-system/tokens.css" library="css" />
+	<h:outputStylesheet name="design-system/shell.css" library="css" />
+	<h:outputStylesheet name="design-system/components.css" library="css" />
+
 	<f:facet name="first">
 		<h:outputScript library="primefaces" name="jquery/jquery.js" />
 		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js"></h:outputScript>
@@ -34,9 +41,8 @@
 
 <h:body>
 
+	<a class="sf-skip-link" href="#sf-main">تخطَّ إلى المحتوى</a>
 
-
-	<h:outputScript name="jquery.min.js" library="js" />
 	<h:outputScript name="bootstrap.bundle.min.js" library="js" />
 
 
@@ -45,10 +51,9 @@
 
 
 	<ui:insert name="customAjaxStatus">
-		<p:ajaxStatus
-			style="position: fixed; left:5px;  top: 60px; z-index: 100000">
+		<p:ajaxStatus styleClass="sf-ajax-status">
 			<f:facet name="start">
-				<h:graphicImage value="/resources/images/ajax-loader.gif" />
+				<div class="sf-progress" aria-hidden="true"></div>
 			</f:facet>
 			<f:facet name="complete">
 				<h:outputText value="" />
@@ -58,31 +63,33 @@
 	<div class="topbar">
 
 
-		<!-- LOGO -->
+		<!-- Brand -->
 		<div class="topbar-left">
-			<div style="margin-top: 8%;">
-
-
-				<span class="logo-sm" style="font-size: 22px ; color:white;">
-					#{bundle.project_name} </span>
-			</div>
+			<h:link outcome="home" styleClass="sf-brand" title="#{bundle.project_name}">
+				<span class="sf-brand__mark" aria-hidden="true"><i class="mdi mdi-charity"></i></span>
+				<span class="sf-brand__name">#{bundle.project_name}</span>
+			</h:link>
 		</div>
 
-		<!-- LOGO -->
-
-		<!--end logo-->
-		<!-- Navbar -->
-		<nav class="navbar-custom"> <!--end topbar-nav-->
+		<!-- Navbar: menu toggle and the page breadcrumb (its last item is the current page) -->
+		<nav class="navbar-custom">
 
 		<ul class="list-unstyled topbar-nav mb-0">
 			<li><h:form prependId="false">
-					<button id="btnHideId" onclick="widthCorrection()"
+					<button id="btnHideId" type="button" aria-label="القائمة"
+						aria-controls="sf-sidebar"
 						class="button-menu-mobile nav-link waves-effect waves-light hide-aside">
-						<i class="dripicons-menu nav-icon"></i>
+						<i class="dripicons-menu nav-icon" aria-hidden="true"></i>
 					</button>
 				</h:form></li>
 
 		</ul>
+		<div class="sf-topbar-breadcrumb">
+			<ol class="breadcrumb">
+				<ui:insert name="breadcrumb">
+				</ui:insert>
+			</ol>
+		</div>
 		</nav>
 		<!-- end navbar-->
 	</div>
@@ -97,15 +104,16 @@
 
 		<div class="page-wrapper">
 			<!-- Left Sidenav -->
-			<div class="left-sidenav">
+			<div class="left-sidenav" id="sf-sidebar">
 				<div class="main-icon-menu">
-					<nav class="nav"> <ui:repeat var="menu"
+					<nav class="nav" aria-label="#{bundle.project_name}"> <ui:repeat var="menu"
 						value="#{templateController.menu}">
 
 						<a href="##{menu.href}" class="nav-link "
-							data-toggle="tooltip-custom" data-placement="top"
-							title="#{menu.itemLabel}" data-original-title="#{menu.itemLabel}">
-							<g> <span class="#{menu.iconName}" /> </g>
+							data-toggle="tooltip-custom" data-placement="left"
+							title="#{menu.itemLabel}" data-original-title="#{menu.itemLabel}"
+							aria-label="#{menu.itemLabel}">
+							<span class="#{menu.iconName}" aria-hidden="true" />
 						</a>
 					</ui:repeat> </nav>
 				</div>
@@ -139,38 +147,12 @@
 					</div>
 				</div>
 			</div>
-			<div class="page-content">
-				<div class="container-fluid">
-
-
-
-					<!-- Page-Title -->
-
-
-
-
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="page-title-box">
-								<div class="float-left">
-									<ol class="breadcrumb">
-
-										<ui:insert name="breadcrumb">
-										</ui:insert>
-									</ol>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-					<!--end col-->
-				</div>
-
+			<main class="page-content" id="sf-main" tabindex="-1">
 				<ui:insert name="customFormContent" />
-			</div>
+			</main>
 
 		</div>
+		<div class="sf-backdrop" aria-hidden="true"></div>
 
 
 	</h:form>
@@ -191,6 +173,7 @@
 	<h:outputScript name="app.js" library="js" />
 
 	<h:outputScript name="template.js" library="js" />
+	<h:outputScript name="design-system/shell.js" library="js" />
 
 	<h:outputScript name="bootstrap-datepicker.js" library="js" />
 	<h:outputScript name="locales/bootstrap-datepicker.ar.js" library="js" />

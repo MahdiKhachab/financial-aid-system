@@ -14,7 +14,7 @@
 
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button
 	{
-	font-family: 'droidkufi' !important;
+	font-family: var(--sf-font) !important;
 }
 
 .ui-state-default, .ui-sortable-column {
@@ -24,11 +24,11 @@
 }
 
 .text-ellipsis {
-	font-family: 'droidkufi' !important;
+	font-family: var(--sf-font) !important;
 }
 
 body {
-	font-family: 'droidkufi' !important;
+	font-family: var(--sf-font) !important;
 }
 
 label {
@@ -36,19 +36,19 @@ label {
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-	font-family: 'droidkufi' !important;
+	font-family: var(--sf-font) !important;
 }
 
 label {
-	font-family: 'droidkufi' !important;
+	font-family: var(--sf-font) !important;
 }
 
 .menu-title {
-	font-family: 'droidkufi' !important;
+	font-family: var(--sf-font) !important;
 }
 
 .main-menu-inner .menu-body .nav-link {
-	font-family: 'droidkufi' !important;
+	font-family: var(--sf-font) !important;
 }
 
 .ui-datatable.ui-widget.table.table-striped.table-hover table thead tr {
@@ -59,7 +59,7 @@ label {
 .ui-datatable.ui-widget.table.table-striped.table-hover table thead tr td input
 	{
 	color: #676a6c !important;
-	font-family: 'droidkufi' !important;
+	font-family: var(--sf-font) !important;
 }
 
 .ui-datatable table thead tr th, .ui-datatable table tfoot tr td,
@@ -88,7 +88,7 @@ ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td,
 .ui-datatable thead th {
 	border-left: medium none !important;
 	border-right: medium none !important;
-	font-family: 'droidkufi' !important;
+	font-family: var(--sf-font) !important;
 	font-weight: normal !important;
 }
 
@@ -193,7 +193,7 @@ table.dataTable tbody th, table.dataTable tbody td {
 }
 
 .ui-dialog-title {
-	font-family: 'droidkufi' !important;
+	font-family: var(--sf-font) !important;
 	float: right !important;
 }
 
@@ -223,7 +223,7 @@ table.dataTable tbody th, table.dataTable tbody td {
 }
 
 .ui-confirm-dialog-message {
-	font-family: 'droidkufi' !important;
+	font-family: var(--sf-font) !important;
 }
 
 .ui-inputnumber.ui-widget.form-control {
