@@ -7,111 +7,112 @@
 
 
 <ui:decorate template="/views/template/template.xhtml">
-<ui:define name="customStyleSheet">
-	<h:outputStylesheet name="pages/provide_aid.css" library="css" />
-</ui:define>
 	<ui:param name="title" value="#{bundle.main_page}" />
 	<ui:param name="subtitle" value="#{bundle.main_page}" />
 
+	<ui:define name="breadcrumb">
+		<li class="breadcrumb-item active">#{bundle.home}</li>
+	</ui:define>
+
 	<ui:define name="customFormContent">
-		<div class="row">
-			<marquee direction="right"
-				style="background-color: floralwhite;
-    height: 40px;
-    font-weight: 800;
-    font-size: 17px;
-    padding-top: 10px;">#{bundle.quoran_title}</marquee>
-		</div>
-		<div class="row">
-			<ui:remove>
-				<h:graphicImage style="margin-right: 18%;width: 60%;height: 33rem;"
-					value="/resources/images/FB_IMG_1499417660461.jpg">
-				</h:graphicImage>
-			</ui:remove>
+		<header class="sf-page-header">
+			<h1 class="sf-page-header__title">#{bundle.project_name}</h1>
+		</header>
 
-			<div class="col-xl-6 col-sm-12 " style="margin-top:2%" >
-				<div class="card bg-success box-aid ">
-					<div class="card-content">
-						<div class="card-body">
-							<div class="media d-flex">
-								<div class="media-body white text-left">
-									<h3>#{bundle.deserved_list}</h3>
-									<h3>#{indexController.nbOfDeserved}</h3>
-									
-								</div>
-								
-							</div>
-						</div>
-					</div>
-				</div>
+		<p class="sf-banner">
+			<i class="sf-banner__icon mdi mdi-book-open-page-variant" aria-hidden="true"></i>
+			<span>#{bundle.quoran_title}</span>
+		</p>
+
+		<!-- Key figures (same values as before, from IndexController) -->
+		<section class="sf-kpi-grid" aria-label="#{bundle.home}">
+			<h:link outcome="deserved-list" styleClass="sf-kpi">
+				<span class="sf-kpi__icon sf-kpi__icon--teal" aria-hidden="true"><i class="mdi mdi-account-child"></i></span>
+				<span class="sf-kpi__body">
+					<span class="sf-kpi__label d-block">#{bundle.deserved_list}</span>
+					<span class="sf-kpi__value sf-num">
+						<h:outputText value="#{indexController.nbOfDeserved}">
+							<f:convertNumber locale="en-US" pattern="#,##0" />
+						</h:outputText>
+					</span>
+				</span>
+			</h:link>
+
+			<h:link outcome="sponsor-list" styleClass="sf-kpi">
+				<span class="sf-kpi__icon sf-kpi__icon--navy" aria-hidden="true"><i class="mdi mdi-account-card-details"></i></span>
+				<span class="sf-kpi__body">
+					<span class="sf-kpi__label d-block">#{bundle.sponsor}</span>
+					<span class="sf-kpi__value sf-num">
+						<h:outputText value="#{indexController.nbOfSponsors}">
+							<f:convertNumber locale="en-US" pattern="#,##0" />
+						</h:outputText>
+					</span>
+				</span>
+			</h:link>
+
+			<h:link outcome="submissionCfg-list" styleClass="sf-kpi">
+				<span class="sf-kpi__icon sf-kpi__icon--green" aria-hidden="true"><i class="mdi mdi-cash-multiple"></i></span>
+				<span class="sf-kpi__body">
+					<span class="sf-kpi__label d-block">رصيد #{bundle.lira}</span>
+					<span class="sf-kpi__value">
+						<span class="sf-num">
+							<h:outputText value="#{indexController.totalMoneyInLira}">
+								<f:convertNumber locale="en-US" pattern="#,##0" />
+							</h:outputText>
+						</span>
+						<span class="sf-kpi__unit">ل.ل</span>
+					</span>
+				</span>
+			</h:link>
+
+			<h:link outcome="submissionCfg-list" styleClass="sf-kpi">
+				<span class="sf-kpi__icon sf-kpi__icon--blue" aria-hidden="true"><i class="mdi mdi-currency-usd"></i></span>
+				<span class="sf-kpi__body">
+					<span class="sf-kpi__label d-block">رصيد #{bundle.dollar}</span>
+					<span class="sf-kpi__value">
+						<span class="sf-num">
+							<h:outputText value="#{indexController.totalMoneyInDollars}">
+								<f:convertNumber locale="en-US" pattern="#,##0.##" />
+							</h:outputText>
+						</span>
+						<span class="sf-kpi__unit">USD</span>
+					</span>
+				</span>
+			</h:link>
+		</section>
+
+		<!-- Shortcuts to existing daily-work pages (same targets as the sidebar) -->
+		<section class="card" aria-labelledby="sf-quick-title">
+			<div class="card-body">
+				<h2 class="sf-section-title" id="sf-quick-title">#{bundle.services}</h2>
+				<nav class="sf-quick-links">
+					<h:link outcome="provide-aid-basic" styleClass="sf-quick-link">
+						<i class="dripicons-forward" aria-hidden="true"></i>
+						<span>#{bundle.provide_aid}</span>
+					</h:link>
+					<h:link outcome="mediator-list" styleClass="sf-quick-link">
+						<i class="mdi mdi-account-supervisor" aria-hidden="true"></i>
+						<span>#{bundle.mediator_list}</span>
+					</h:link>
+					<h:link outcome="purchase-voucher" styleClass="sf-quick-link">
+						<i class="mdi mdi-shopping" aria-hidden="true"></i>
+						<span>#{bundle.add_purchase_voucher}</span>
+					</h:link>
+					<h:link outcome="currency-exchange-select-submission" styleClass="sf-quick-link">
+						<i class="mdi mdi-swap-horizontal" aria-hidden="true"></i>
+						<span>#{bundle.currency_exchange}</span>
+					</h:link>
+					<h:link outcome="deserved-list" styleClass="sf-quick-link">
+						<i class="mdi mdi-account-child" aria-hidden="true"></i>
+						<span>#{bundle['deserved-list']}</span>
+					</h:link>
+					<h:link outcome="sponsor-list" styleClass="sf-quick-link">
+						<i class="mdi mdi-account-card-details" aria-hidden="true"></i>
+						<span>#{bundle.sponsor}</span>
+					</h:link>
+				</nav>
 			</div>
-
-			<div class="col-xl-6 col-sm-12 " style="margin-top:2%" >
-				<div class="card bg-danger box-aid ">
-					<div class="card-content">
-						<div class="card-body">
-							<div class="media d-flex">
-								<div class="media-body white text-left">
-									<h3>#{bundle.sponsor}</h3>
-									<h3>#{indexController.nbOfSponsors}</h3>
-									
-								</div>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-xl-6 col-sm-12 " style="margin-top:2%" >
-				<div class="card bg-warning box-aid">
-					<div class="card-content">
-						<div class="card-body">
-							<div class="media d-flex">
-								<div class="media-body white text-left">
-									<h3> رصيد #{bundle.lira} ل.ل</h3>
-									<h3>
-										<h:outputText value="#{indexController.totalMoneyInLira}">
-											<f:convertNumber pattern="###,###,###" />
-										</h:outputText>
-									</h3>
-									
-								</div>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="col-xl-6 col-sm-12 " style="margin-top:2%"  >
-				<div class="card bg-primary box-aid">
-					<div class="card-content">
-						<div class="card-body">
-							<div class="media d-flex">
-								<div class="media-body white text-left">
-										<h3>رصيد #{bundle.dollar} USD</h3>
-									<h3>
-										<h:outputText
-											value="#{indexController.totalMoneyInDollars} ">
-											<f:convertNumber pattern="###,###,###.##" />
-										</h:outputText>
-									</h3>
-								
-								</div>
-								<div class="align-self-center">
-									<i class="icon-user white font-large-2 float-right"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-
-		</div>
+		</section>
 	</ui:define>
 
 </ui:decorate>
