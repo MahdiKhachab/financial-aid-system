@@ -24,6 +24,8 @@
 	<f:facet name="first">
 		<h:outputScript library="primefaces" name="jquery/jquery.js" />
 		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js"></h:outputScript>
+		<!-- PrimeFaces 15 ships jQuery 4; Migrate restores APIs the jQuery 3 era plugins use ($.trim, $.isArray, ...) -->
+		<h:outputScript library="js" name="jquery-migrate-4.0.2.min.js" />
 	</f:facet>
 	<ui:insert name="customStyleSheet"></ui:insert>
 <title>#{bundle.project_name}</title>  
@@ -191,15 +193,15 @@
 	<h:outputScript name="template.js" library="js" />
 
 	<h:outputScript name="bootstrap-datepicker.js" library="js" />
-	<h:outputScript name="bootstrap-datepicker.ar.js" library="js/locales" />
+	<h:outputScript name="locales/bootstrap-datepicker.ar.js" library="js" />
 	<h:outputScript name="bootstrap-datetimepicker.min.js" library="js" />
-	<h:outputScript name="bootstrap-datetimepicker.ar.js"
-		library="js/locales" />
+	<h:outputScript name="locales/bootstrap-datetimepicker.ar.js"
+		library="js" />
 	<h:outputScript name="toastr.min.js" library="js" />
 	<h:outputScript name="hot_key.js" library="js" />
 
-	<h:outputScript name="bootstrap-input-spinner.js"
-		library="plugins/input-spinner/js" />
+	<h:outputScript name="input-spinner/js/bootstrap-input-spinner.js"
+		library="plugins" />
 	<h:outputScript name="select2/select2.min.js" library="plugins" />
 	<ui:insert name="customOutputScript"></ui:insert>
 

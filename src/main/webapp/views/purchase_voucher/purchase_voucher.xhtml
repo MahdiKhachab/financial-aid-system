@@ -486,7 +486,7 @@
 								emptyMessage="#{bundle.no_records}"
 								filteredValue="#{purchaseVoucherCardController.desrvedListFilter}"
 								id="tableId" paginator="true" paginatorPosition="bottom"
-								selection="#{purchaseVoucherCardController.selectedListDeserved}"
+								selection="#{purchaseVoucherCardController.selectedListDeserved}" selectionMode="multiple"
 								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
 								rowKey="#{item.id}" rows="10" scrollable="true"
 								rowsPerPageTemplate="10,20,30,#{purchaseVoucherCardController.desrvedList.size()}"
@@ -502,7 +502,7 @@
 								<p:ajax event="rowUnselect"
 									update="form-purchase-voucher-coupon" />
 								<p:ajax event="rowEdit" update=":messageScript" />
-								<p:column width="30px;" selectionMode="multiple"
+								<p:column width="30px;" selectionBox="true"
 									style="width:50px;text-align:center">
 
 								</p:column>
@@ -595,7 +595,7 @@
 									sortBy="#{item.working}" width="180">
 									<f:facet name="filter">
 										<p:selectOneMenu onchange="PF('pageItemsTableWgVar').filter()"
-											converter="javax.faces.Boolean" style="width:100% ;   "
+											converter="jakarta.faces.Boolean" style="width:100% ;   "
 											styleClass="inputtext-filter">
 											<f:selectItem itemLabel="الجميع" itemValue="#{null}"
 												noSelectionOption="true" />
@@ -620,7 +620,7 @@
 									sortBy="#{item.working}" width="180">
 									<f:facet name="filter">
 										<p:selectOneMenu onchange="PF('pageItemsTableWgVar').filter()"
-											converter="javax.faces.Boolean" style="width:100% ;   "
+											converter="jakarta.faces.Boolean" style="width:100% ;   "
 											styleClass="inputtext-filter">
 											<f:selectItem itemLabel="الجميع" itemValue="#{null}"
 												noSelectionOption="true" />
@@ -801,7 +801,7 @@
 									<f:facet name="filter">
 										<p:selectOneMenu
 											onchange="PF('pageItemsTableWgVarShow').filter()"
-											converter="javax.faces.Boolean" style="width:100% ;   "
+											converter="jakarta.faces.Boolean" style="width:100% ;   "
 											styleClass="inputtext-filter">
 											<f:selectItem itemLabel="الجميع" itemValue="#{null}"
 												noSelectionOption="true" />
@@ -826,7 +826,7 @@
 									sortBy="#{item.working}" width="180">
 									<f:facet name="filter">
 										<p:selectOneMenu onchange="PF('pageItemsTableWgVar').filter()"
-											converter="javax.faces.Boolean" style="width:100% ;   "
+											converter="jakarta.faces.Boolean" style="width:100% ;   "
 											styleClass="inputtext-filter">
 											<f:selectItem itemLabel="الجميع" itemValue="#{null}"
 												noSelectionOption="true" />
@@ -915,7 +915,7 @@
 									<p:fileUpload widgetVar="fileProjectUploadVar" multiple="true"
 										auto="true" styleClass="fileProjectUploadVar"
 										style="visibility: hidden;"
-										fileUploadListener="#{purchaseVoucherCardController.handleOtherFileUpload}"
+										listener="#{purchaseVoucherCardController.handleOtherFileUpload}"
 										process="@this" update=":messageScript" />
 									<h:message for="relatedfileId" styleClass="error-message" />
 

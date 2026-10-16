@@ -145,7 +145,7 @@
 				<p:fileUpload widgetVar="fileProjectUploadVar" multiple="true"
 					auto="true" styleClass="fileProjectUploadVar"
 					style="visibility: hidden;"
-					fileUploadListener="#{needDetailsCardController.handleOtherFileUpload}"
+					listener="#{needDetailsCardController.handleOtherFileUpload}"
 					process="@this" update=":messageScript" />
 				<h:message for="relatedfileId" styleClass="error-message" />
 			</div>

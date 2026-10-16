@@ -26,8 +26,8 @@
 					actionListener="#{submissionCfgCardController.addChild()}"
 					styleClass="btn btn-primary   waves-effect waves-light btn-xs   btn-new ">
 					<i class=" dripicons-plus " style="color: white;"></i>
-					<p:ajax update=":#{p:component('submissionDetailsTableId')}"
-						process=":#{p:component('submissionDetailsTableId')}"
+					<p:ajax update="@root:@id(submissionDetailsTableId)"
+						process="@root:@id(submissionDetailsTableId)"
 						oncomplete="PF('submissionDetailsWgVar').filter();" />
 
 					<p:tooltip id="toolTipGrow" for="btn-new" atPosition="right center"
@@ -39,8 +39,8 @@
 				actionListener="#{submissionCfgCardController.deleteSubmissionDetailsCfg(subItem)}"
 				styleClass="btn btn-danger actions-btn">
 				<i class="dripicons-trash" style="color: white; font-size: 11px;" />
-				<p:ajax update=":#{p:component('submissionDetailsTableId')}"
-					process=":#{p:component('submissionDetailsTableId')}"
+				<p:ajax update="@root:@id(submissionDetailsTableId)"
+					process="@root:@id(submissionDetailsTableId)"
 					oncomplete="PF('submissionDetailsWgVar').filter();" />
 			</p:commandLink>
 

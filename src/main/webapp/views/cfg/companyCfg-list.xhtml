@@ -27,7 +27,7 @@
 		<ui:remove>
 			<p:remoteCommand name="goTolastPage"
 				action="#{companyCfgController.getFirstRowInLastPage('companyCfgTableId')}"
-				update=":#{p:component('companyCfgTableId')}" />
+				update="@root:@id(companyCfgTableId)" />
 		</ui:remove>
 
 		<div class="card" style="margin-top: 10px;">
@@ -93,7 +93,7 @@
 							styleClass="btn btn-primary   waves-effect waves-light btn-xs   btn-new ">
 							<i class=" dripicons-plus " style="color: white;"></i>
 
-							<p:ajax update="#{p:component('companyCfgTableId')}"></p:ajax>
+							<p:ajax update="@root:@id(companyCfgTableId)"></p:ajax>
 						</h:commandLink>
 						<p:tooltip id="toolTipGrow" for="btn-new"
 							atPosition="right center" value="#{bundle.ctrl_z}"

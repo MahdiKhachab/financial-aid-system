@@ -68,7 +68,7 @@
 							styleClass="btn btn-primary   waves-effect waves-light btn-xs  btn-new  ">
 							<i class=" dripicons-plus " style="color: white;"></i>
 
-							<p:ajax update="#{p:component('serviceTableId')}"></p:ajax>
+							<p:ajax update="@root:@id(serviceTableId)"></p:ajax>
 						</h:commandLink>
 						<p:tooltip id="toolTipGrow" for="btn-new"
 							atPosition="right center" value="#{bundle.ctrl_z}"

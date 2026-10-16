@@ -100,7 +100,7 @@
 								<p:selectManyCheckbox id="serviceId"  
 									styleClass="  radioBtn checkBoxClass"
 									converter="omnifaces.SelectItemsConverter"
-									value="#{workerCardController.worker.services}" layout="grid"
+									value="#{workerCardController.worker.services}" layout="responsive"
 									columns="3">
 									<f:selectItems value="#{workerCardController.services}"
 										var="city" itemLabel="#{city.name}" itemValue="#{city}" />
