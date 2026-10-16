@@ -987,3 +987,575 @@ a.sf-kpi:hover {
 	font-size: var(--sf-text-lg);
 	font-weight: 600;
 }
+
+/* =====================================================================
+ * Page patterns used across the XHTML pages
+ * ===================================================================== */
+
+/* Page and section titles (div.sf-title > span.sf-title__icon + .sf-title__text) */
+.sf-title {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--sf-space-3);
+	margin: 0 0 var(--sf-space-5);
+	padding: 0;
+}
+
+.card .sf-title {
+	margin-bottom: var(--sf-space-4);
+}
+
+.sf-title__icon {
+	flex: 0 0 auto;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: var(--sf-radius);
+	background: var(--sf-teal-50);
+	color: var(--sf-teal-700);
+	font-size: 20px;
+	line-height: 1;
+}
+
+.sf-title__icon--section {
+	width: 32px;
+	height: 32px;
+	background: #e8edf5;
+	color: var(--sf-navy-800);
+	font-size: 15px;
+}
+
+.sf-title__text {
+	color: var(--sf-navy-900);
+	font-size: var(--sf-text-xl);
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.sf-title:has(.sf-title__icon--section) .sf-title__text,
+.card .sf-title__text {
+	font-size: var(--sf-text-lg);
+}
+
+/* List page header: title + count on one side, primary actions on the other */
+#conter-top {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--sf-space-3);
+	margin-bottom: var(--sf-space-4);
+}
+
+#save-form {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-end;
+	gap: var(--sf-space-2);
+	margin-bottom: var(--sf-space-4);
+}
+
+#save-form > .btn, #save-form > a.btn {
+	float: none !important;
+	margin: 0 !important;
+}
+
+.sf-list-title {
+	color: var(--sf-navy-900);
+	font-size: var(--sf-text-lg);
+	font-weight: 600;
+}
+
+/* Record count next to list titles */
+.avatar-box.thumb-sm {
+	width: auto;
+	height: auto;
+	margin: 0 !important;
+}
+
+.avatar-box .avatar-title.rounded-circle {
+	position: static;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 32px;
+	height: 26px;
+	padding: 0 10px;
+	border-radius: var(--sf-radius-pill) !important;
+	background: var(--sf-teal-50);
+	color: var(--sf-teal-800);
+	font-size: var(--sf-text-sm);
+	font-weight: 600;
+	font-variant-numeric: tabular-nums;
+}
+
+/* Form action bar (Back + Save in the card footer): primary action at the end */
+.card-body .float-right:has(.btn-save), .card-body .float-left:has(.btn-save) {
+	float: none !important;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-items: center;
+	gap: var(--sf-space-2);
+	margin-top: var(--sf-space-3);
+	padding-top: var(--sf-space-4);
+	border-top: 1px solid var(--sf-border);
+}
+
+.card-body .float-right:has(.btn-save) > .btn, .card-body .float-left:has(.btn-save) > .btn {
+	margin: 0 !important;
+}
+
+/* "Back" is styled btn-danger in many pages; it is a neutral secondary action */
+.btn-cancel.btn-danger, .btn-cancel.btn-danger:hover, .btn-cancel.btn-danger:focus,
+.btn-cancel.btn-danger:not(:disabled):not(.disabled):active {
+	border-color: var(--sf-border-strong);
+	background-color: var(--sf-surface) !important;
+	color: var(--sf-text) !important;
+}
+
+.btn-cancel.btn-danger:hover {
+	background-color: var(--sf-surface-muted) !important;
+}
+
+.btn-save {
+	min-width: 112px;
+}
+
+/* Soft information blocks used in reports and aid screens */
+.bg-soft-blue {
+	background-color: var(--sf-info-bg) !important;
+	color: var(--sf-info) !important;
+}
+
+.bg-soft-dark {
+	background-color: #e8edf5 !important;
+	color: var(--sf-navy-800) !important;
+}
+
+.bg-soft-success.rounded, .bg-soft-danger.rounded, .bg-soft-blue.rounded, .bg-soft-primary.rounded,
+.bg-soft-dark.rounded {
+	border-radius: var(--sf-radius) !important;
+}
+
+.bg-primary {
+	background-color: var(--sf-navy-800) !important;
+}
+
+.badge-soft-purple {
+	background-color: #ede9fe;
+	color: #5b21b6;
+}
+
+.badge-secondary {
+	background-color: #e8edf5;
+	color: var(--sf-navy-800);
+}
+
+.badge-success {
+	background-color: var(--sf-success-bg);
+	color: var(--sf-success);
+}
+
+.btn-outline-secondary, .btn-outline-danger, .btn-outline-success {
+	background: var(--sf-surface);
+}
+
+.btn-outline-danger {
+	border-color: #fca5a5;
+	color: var(--sf-danger);
+}
+
+.btn-outline-danger:hover {
+	background: var(--sf-danger-bg);
+	color: var(--sf-danger-hover);
+}
+
+/* Inline table editing (row edit / cell inputs inside data tables) */
+.ui-datatable tbody .form-control, .ui-datatable tbody .ui-inputfield {
+	min-height: var(--sf-control-h-sm);
+}
+
+/* Truncated cell text keeps its tooltip (title attribute) */
+.text-ellipsis {
+	max-width: 100%;
+}
+
+/* Full-page state (error / not found) */
+.sf-state {
+	max-width: 640px;
+	margin: var(--sf-space-6) auto;
+	text-align: center;
+}
+
+.sf-state .card-body {
+	padding: var(--sf-space-6) var(--sf-space-5);
+}
+
+.sf-state__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 64px;
+	height: 64px;
+	margin-bottom: var(--sf-space-4);
+	border-radius: var(--sf-radius-pill);
+	font-size: 32px;
+}
+
+.sf-state__icon--info { background: var(--sf-info-bg); color: var(--sf-info); }
+.sf-state__icon--danger { background: var(--sf-danger-bg); color: var(--sf-danger); }
+
+.sf-state__title {
+	margin: 0 0 var(--sf-space-2);
+	font-size: var(--sf-text-2xl);
+}
+
+.sf-state__text {
+	max-width: 480px;
+	margin: 0 auto var(--sf-space-5);
+	color: var(--sf-text-secondary);
+}
+
+.sf-state__actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--sf-space-2);
+}
+
+.sf-state__code {
+	margin: var(--sf-space-5) 0 0;
+	color: var(--sf-text-faint);
+	font-size: var(--sf-text-sm);
+}
+
+/* Choice grid (e.g. the aid distribution hub): large, calm, keyboard friendly link cards */
+.sf-choice-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: var(--sf-space-4);
+}
+
+.sf-choice {
+	display: flex;
+	align-items: center;
+	gap: var(--sf-space-4);
+	min-height: 96px;
+	padding: var(--sf-space-5);
+	border: 1px solid var(--sf-border);
+	border-radius: var(--sf-radius-lg);
+	background: var(--sf-surface);
+	box-shadow: var(--sf-shadow-sm);
+	color: var(--sf-navy-900);
+	text-decoration: none;
+	transition: border-color var(--sf-fast) var(--sf-ease), box-shadow var(--sf-normal) var(--sf-ease),
+		transform var(--sf-normal) var(--sf-ease);
+}
+
+.sf-choice:hover, .sf-choice:focus-visible {
+	border-color: var(--sf-teal-600);
+	box-shadow: var(--sf-shadow-md);
+	color: var(--sf-navy-900);
+	text-decoration: none;
+	transform: translateY(-2px);
+}
+
+.sf-choice__icon {
+	flex: 0 0 48px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	border-radius: var(--sf-radius);
+	background: var(--sf-teal-50);
+	color: var(--sf-teal-700);
+	font-size: 24px;
+	transition: background-color var(--sf-fast) var(--sf-ease), color var(--sf-fast) var(--sf-ease);
+}
+
+.sf-choice:hover .sf-choice__icon {
+	background: var(--sf-teal-700);
+	color: var(--sf-on-dark);
+}
+
+.sf-choice__label {
+	flex: 1 1 auto;
+	font-size: var(--sf-text-lg);
+	font-weight: 600;
+}
+
+.sf-choice__arrow {
+	color: var(--sf-text-faint);
+	font-size: 22px;
+	transition: transform var(--sf-fast) var(--sf-ease), color var(--sf-fast) var(--sf-ease);
+}
+
+.sf-choice:hover .sf-choice__arrow {
+	color: var(--sf-teal-700);
+	transform: translateX(-4px);
+}
+
+/* select2 text matches the other fields */
+.select2-container .select2-selection__rendered {
+	font-size: var(--sf-text-md);
+}
+
+/* Context chip: "Sponsor: name", "Deceased: name" shown at the top of an operation */
+.sf-context-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--sf-space-2);
+	max-width: 100%;
+	margin-bottom: var(--sf-space-4);
+	padding: var(--sf-space-2) var(--sf-space-4);
+	border: 1px solid #bfdbfe;
+	border-radius: var(--sf-radius-pill);
+	background: var(--sf-info-bg);
+	color: var(--sf-navy-900);
+	font-size: var(--sf-text-md);
+	font-weight: 600;
+	white-space: normal;
+}
+
+/* Long forms: the legacy fixed corner bar (div.fixed) becomes a sticky action bar along the bottom */
+div.fixed {
+	position: sticky;
+	bottom: 0;
+	left: auto;
+	z-index: 20;
+	width: auto;
+	margin: var(--sf-space-5) calc(-1 * var(--sf-space-5)) calc(-1 * var(--sf-space-5));
+	padding: var(--sf-space-3) var(--sf-space-5);
+	border-top: 1px solid var(--sf-border);
+	border-radius: 0 0 var(--sf-radius-lg) var(--sf-radius-lg);
+	background: rgba(255, 255, 255, 0.96);
+	box-shadow: 0 -4px 12px rgba(15, 30, 54, 0.06);
+	backdrop-filter: blur(4px);
+}
+
+div.fixed .row {
+	margin: 0;
+}
+
+div.fixed [class*="col-"] {
+	padding: 0;
+}
+
+div.fixed .float-right, div.fixed .float-left {
+	float: none !important;
+	display: flex;
+	justify-content: flex-end;
+	gap: var(--sf-space-2);
+	margin: 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+}
+
+div.fixed .btn {
+	margin: 0 !important;
+}
+
+/* Action row above repeated sub-forms (e.g. "add submission" on the voucher screen) */
+#add-new-voucher-item {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	max-width: none;
+	margin: 0 0 var(--sf-space-4);
+	padding: 0;
+}
+
+#add-new-voucher-item > .btn {
+	float: none !important;
+	margin: 0 !important;
+}
+
+/* Numbered step / item label inside repeated sub-forms ("Submission no. 1") */
+.badge.sf-step-badge {
+	padding: var(--sf-space-1) var(--sf-space-3);
+	background: #e8edf5;
+	color: var(--sf-navy-800);
+	font-size: var(--sf-text-md);
+	font-weight: 600;
+}
+
+/* Amounts colour-coded by currency (pages used soft red for LBP, soft green for USD) */
+.sf-amount {
+	display: inline-block;
+	border-radius: var(--sf-radius) !important;
+	font-variant-numeric: tabular-nums;
+	font-weight: 600;
+}
+
+.sf-amount--lbp {
+	background-color: var(--sf-info-bg) !important;
+	color: #1e3a8a !important;
+}
+
+.sf-amount--usd {
+	background-color: var(--sf-success-bg) !important;
+	color: #14532d !important;
+}
+
+/* Bootstrap modals with a branded header (class "modal-header white") */
+.modal-header.white {
+	background: var(--sf-navy-900);
+	color: var(--sf-on-dark);
+	border-radius: var(--sf-radius-lg) var(--sf-radius-lg) 0 0;
+}
+
+.modal-header.white .modal-title, .modal-header.white h4, .modal-header.white h5 {
+	color: var(--sf-on-dark);
+}
+
+/* Scrollable tables keep an invisible header clone in the body for column sizing: keep it collapsed */
+.ui-datatable .ui-datatable-scrollable-theadclone th,
+.ui-datatable .ui-datatable-scrollable-body thead th {
+	height: 0 !important;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	border: 0 !important;
+	line-height: 0 !important;
+	overflow: hidden;
+}
+
+.ui-datatable .ui-datatable-scrollable-theadclone th *,
+.ui-datatable .ui-datatable-scrollable-body thead th * {
+	display: none !important;
+}
+
+/* Amber is reserved for warnings: page actions styled btn-warning (search, toggles) read as accent actions */
+.btn-warning:not(.btn-xs) {
+	border-color: var(--sf-teal-600);
+	background-color: var(--sf-teal-50);
+	color: var(--sf-teal-800);
+}
+
+.btn-warning:not(.btn-xs):hover, .btn-warning:not(.btn-xs):focus {
+	border-color: var(--sf-teal-700);
+	background-color: var(--sf-teal-100);
+	color: var(--sf-teal-800) !important;
+}
+
+/* bootstrap-toggle switches (yes / no filters): calm "off" state */
+.toggle .toggle-on.btn {
+	border-color: var(--sf-primary);
+	background: var(--sf-primary);
+	color: var(--sf-on-dark);
+}
+
+.toggle .toggle-off.btn, .btn.btn-warning.active.toggle-off {
+	border-color: var(--sf-border-strong);
+	background: var(--sf-surface-muted) !important;
+	color: var(--sf-text) !important;
+}
+
+.toggle .toggle-handle.btn {
+	border-color: var(--sf-border-strong);
+	background: var(--sf-surface);
+}
+
+.toggle.btn {
+	border-radius: var(--sf-radius);
+	overflow: hidden;
+}
+
+.toggle.btn.off, .toggle.btn-danger {
+	border-color: var(--sf-border-strong) !important;
+	background: var(--sf-surface-muted) !important;
+}
+
+/* Body cells are centred (general.css); align the headings with them */
+.ui-datatable thead th, .ui-datatable thead th .ui-column-title {
+	text-align: center;
+}
+
+/* Icons hard-coded white (class "white" / inline color) inside light buttons take the button colour */
+.btn-warning:not(.btn-xs) i, .btn-warning:not(.btn-xs) .white,
+.btn-cancel i, .btn-cancel .white, .btn-secondary i, .btn-light i {
+	color: inherit !important;
+}
+
+/* Checkbox tick: drawn with PrimeIcons (pi-check), centred in the box */
+.ui-chkbox .ui-chkbox-box {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ui-chkbox .ui-chkbox-box .ui-chkbox-icon.ui-icon,
+.checkBoxClass .ui-chkbox-icon.ui-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	background: none;
+	color: var(--sf-on-dark);
+	font-size: 14px;
+	line-height: 1;
+}
+
+.ui-chkbox .ui-chkbox-box.ui-state-active .ui-chkbox-icon.ui-icon-check::before {
+	content: "\e909";
+	font-family: "primeicons";
+	font-style: normal;
+	font-weight: normal;
+}
+
+.ui-chkbox .ui-chkbox-box .ui-chkbox-icon {
+	position: static !important;
+	transform: none;
+}
+
+/* Multi-select checkbox lists (styleClass "checkBoxClass"): box next to its label */
+.checkBoxClass .ui-chkbox .ui-chkbox-box {
+	width: 22px;
+	height: 22px;
+	margin: 0 var(--sf-space-2) !important;
+}
+
+.checkBoxClass td, .checkBoxClass .ui-grid-row > div {
+	padding: var(--sf-space-1) var(--sf-space-2);
+}
+
+/* Tables sit in a Bootstrap .row (negative margins, inline offsets): keep them inside their card */
+.card .row:has(> .ui-datatable) {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.card .row > .ui-datatable {
+	width: 100%;
+	max-width: 100%;
+}
+
+@media (max-width: 575.98px) {
+	/* Phones: the top bar shows only the current page; the trail stays for larger screens */
+	.sf-topbar-breadcrumb .breadcrumb-item:not(:last-child) {
+		display: none;
+	}
+
+	.sf-topbar-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+		display: none;
+	}
+
+	.card-body {
+		padding: var(--sf-space-4);
+	}
+
+	#save-form {
+		justify-content: stretch;
+	}
+
+	#save-form > .btn {
+		flex: 1 1 auto;
+	}
+}

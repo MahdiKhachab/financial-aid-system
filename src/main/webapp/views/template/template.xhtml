@@ -180,12 +180,17 @@
 	<h:outputScript name="bootstrap-datetimepicker.min.js" library="js" />
 	<h:outputScript name="locales/bootstrap-datetimepicker.ar.js"
 		library="js" />
+	<!-- template.js initDatePicker() also initialises .timepicker fields; its CSS was loaded, the script was not -->
+	<h:outputScript name="bootstrap-timepicker.js" library="js" />
 	<h:outputScript name="toastr.min.js" library="js" />
 	<h:outputScript name="hot_key.js" library="js" />
 
 	<h:outputScript name="input-spinner/js/bootstrap-input-spinner.js"
 		library="plugins" />
 	<h:outputScript name="select2/select2.min.js" library="plugins" />
+	<!-- Yes/no switches: several pages initialise bootstrapToggle without including it (JSF renders it once) -->
+	<h:outputStylesheet name="toggle/bootstrap-toggle.min.css" library="plugins" />
+	<h:outputScript name="toggle/bootstrap-toggle.min.js" library="plugins" />
 	<ui:insert name="customOutputScript"></ui:insert>
 
 

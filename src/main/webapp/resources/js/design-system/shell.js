@@ -35,6 +35,38 @@
 		syncToggleState();
 	}
 
+	function pathOf(href) {
+		return (href || '').split(/[?#;]/)[0];
+	}
+
+	/* app.js compares full URLs; also match on the path alone (query strings, session ids ignored) */
+	function matchCurrentPage() {
+		if ($('.main-menu-inner .nav-link.active').length) {
+			return;
+		}
+		var current = pathOf(window.location.href);
+		var $links = $('.main-menu-inner .nav-link');
+		var $link = $links.filter(function () {
+			return pathOf(this.href) === current;
+		}).first();
+		if (!$link.length) {
+			// pages without their own menu entry (e.g. worker-card): the visible entry of the same folder
+			var folder = current.replace(/[^/]*$/, '');
+			$link = $links.filter(function () {
+				return $(this).css('visibility') !== 'hidden' && pathOf(this.href).replace(/[^/]*$/, '') === folder;
+			}).first();
+		}
+		if (!$link.length) {
+			return;
+		}
+		$link.addClass('active');
+		var $pane = $link.closest('.main-icon-menu-pane').addClass('active');
+		$pane.siblings().removeClass('active');
+		$('.main-menu-inner').addClass('active');
+		$('.main-icon-menu .nav-link').removeClass('active')
+			.filter('[href="#' + $pane.attr('id') + '"]').addClass('active');
+	}
+
 	function ensureActivePane() {
 		if ($('.main-icon-menu-pane.active').length) {
 			return;
@@ -47,7 +79,36 @@
 		$('.main-menu-inner').addClass('active');
 	}
 
+	/*
+	 * Detail pages (e.g. deserved-card) match an invisible placeholder entry of the menu, kept there so the
+	 * right group opens. Also mark the visible entry of the same section (same folder) as the current page.
+	 */
+	function highlightSectionOfDetailPage() {
+		var $hidden = $('.main-menu-inner .nav-link.active').filter(function () {
+			return $(this).css('visibility') === 'hidden';
+		});
+		if (!$hidden.length) {
+			return;
+		}
+		var folder = function (href) {
+			return pathOf(href).replace(/[^/]*$/, '');
+		};
+		var target = folder($hidden[0].href);
+		$hidden.closest('.main-icon-menu-pane').find('.nav-link').filter(function () {
+			return $(this).css('visibility') !== 'hidden' && folder(this.href) === target;
+		}).first().addClass('active').attr('aria-current', 'page');
+	}
+
+	function markCurrentPage() {
+		$('.main-menu-inner .nav-link.active').filter(function () {
+			return $(this).css('visibility') !== 'hidden';
+		}).attr('aria-current', 'page');
+	}
+
 	$(function () {
+		matchCurrentPage();
+		highlightSectionOfDetailPage();
+		markCurrentPage();
 		if (DESKTOP.matches && readCollapsed()) {
 			$('body').addClass('enlarge-menu');
 		}

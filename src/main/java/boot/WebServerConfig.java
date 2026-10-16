@@ -4,6 +4,9 @@ import jakarta.servlet.MultipartConfigElement;
 
 import org.apache.catalina.servlets.DefaultServlet;
 import org.springframework.boot.tomcat.servlet.TomcatServletWebServerFactory;
+import org.springframework.boot.web.error.ErrorPage;
+import org.springframework.boot.web.error.ErrorPageRegistrar;
+import org.springframework.http.HttpStatus;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +25,15 @@ public class WebServerConfig {
 			context.addWelcomeFile(WELCOME_FILE);
 			context.addMimeMapping("ico", "image/x-icon");
 		});
+	}
+
+	/** Friendly page for unknown URLs and server errors instead of Tomcat's default error page. */
+	static final String ERROR_VIEW = "/faces/views/error.xhtml";
+
+	@Bean
+	public ErrorPageRegistrar errorPages() {
+		return registry -> registry.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, ERROR_VIEW),
+				new ErrorPage(ERROR_VIEW));
 	}
 
 	/** WildFly's default request limit (Undertow max-post-size), applied to PrimeFaces file uploads. */

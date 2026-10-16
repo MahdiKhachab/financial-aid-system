@@ -1,27 +1,46 @@
-<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/resources/scaffold/pageTemplate.xhtml">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-	<ui:param name="pageTitle" value="Server error" />
+<!-- Shown by Tomcat for 404 and server errors (see boot.WebServerConfig) -->
+<ui:composition template="/views/template/template.xhtml">
+	<ui:param name="notFound" value="#{requestScope['jakarta.servlet.error.status_code'] == 404}" />
 
-	<ui:define name="header">
-		Oops
+	<ui:define name="breadcrumb">
+		<li class="breadcrumb-item"><h:link outcome="home">#{bundle.home}</h:link></li>
+		<li class="breadcrumb-item active">#{notFound ? 'الصفحة غير موجودة' : 'حدث خطأ'}</li>
 	</ui:define>
 
-	<ui:define name="subheader">
-		That's going to leave a mark!
+	<ui:define name="customFormContent">
+		<section class="sf-state card" aria-labelledby="sf-error-title">
+			<div class="card-body">
+				<span class="sf-state__icon #{notFound ? 'sf-state__icon--info' : 'sf-state__icon--danger'}" aria-hidden="true">
+					<i class="mdi #{notFound ? 'mdi-file-question' : 'mdi-alert-circle-outline'}"></i>
+				</span>
+				<h1 class="sf-state__title" id="sf-error-title">
+					#{notFound ? 'الصفحة المطلوبة غير موجودة' : 'تعذّر إكمال العملية'}
+				</h1>
+				<p class="sf-state__text">
+					#{notFound
+						? 'ربما تم حذف السجل أو تغيّر الرابط. يمكنك العودة إلى الصفحة السابقة أو الانتقال إلى الصفحة الرئيسية.'
+						: 'حدث خطأ غير متوقع أثناء معالجة الطلب. حاول مرة أخرى، وإن تكرر الخطأ فتواصل مع مسؤول النظام.'}
+				</p>
+				<div class="sf-state__actions">
+					<h:link outcome="home" styleClass="btn btn-primary">
+						<i class="mdi mdi-home-outline" aria-hidden="true"></i>
+						<span>#{bundle.home}</span>
+					</h:link>
+					<button type="button" class="btn btn-secondary" onclick="history.back()">
+						<i class="mdi mdi-arrow-right" aria-hidden="true"></i>
+						<span>#{bundle.back}</span>
+					</button>
+				</div>
+				<p class="sf-state__code sf-num">#{requestScope['jakarta.servlet.error.status_code']}</p>
+			</div>
+		</section>
 	</ui:define>
-
-	<ui:define name="main">
-		<p style="text-align: right; padding-top: 150px">
-			<a target="_blank" href="http://jboss.org">
-				<h:graphicImage value='#{resource["jboss-community.png"]}' alt="JBoss and JBoss Community" width="254" height="31" border="0" />
-			</a> <br /> To replace this page edit 'src/main/webapp/error.xhtml', or
-			keep Forging!
-		</p>
-	</ui:define>
-
 </ui:composition>
+
+</html>
