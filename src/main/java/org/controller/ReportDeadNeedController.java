@@ -1,14 +1,16 @@
 package org.controller;
 
+import java.io.UncheckedIOException;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import org.facade.DeadPersonFacade;
 import org.facade.NeedDetailsFacade;
@@ -135,7 +137,7 @@ public class ReportDeadNeedController implements Serializable {
 	public void download(Attachment attachment) {
 		try {
 			Faces.sendFile(attachment.getData(), attachment.getFileName(), true);
-		} catch (IOException e) {
+		} catch (UncheckedIOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

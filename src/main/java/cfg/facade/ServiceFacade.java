@@ -2,15 +2,14 @@ package cfg.facade;
 
 import java.io.Serializable;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.facade.AbstractFacade;
 
 import cfg.model.Service;
 
-@Stateless
-@LocalBean
+@org.springframework.stereotype.Service
+@Transactional
 public class ServiceFacade extends AbstractFacade<Service> implements Serializable {
 
 	/**

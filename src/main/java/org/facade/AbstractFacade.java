@@ -3,12 +3,12 @@ package org.facade;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import org.springframework.transaction.annotation.Transactional;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 import org.eclipse.persistence.internal.jpa.EJBQueryImpl;
 import org.eclipse.persistence.jpa.JpaEntityManager;
@@ -18,7 +18,7 @@ import org.eclipse.persistence.sessions.Session;
 
 import interfaces.ICRUDOperations;
 
-@Stateless
+@Transactional
 public abstract class AbstractFacade<T> implements Serializable, ICRUDOperations<T> {
 
 	private static final long serialVersionUID = -1L;

@@ -1,12 +1,12 @@
 package org.facade;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.model.Attachment;
 
-@Stateless
-@LocalBean
+@Service
+@Transactional
 public class AttachmentFacade extends AbstractFacade<Attachment> {
 
 	/**

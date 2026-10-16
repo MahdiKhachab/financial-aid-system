@@ -3,9 +3,9 @@ package org.facade;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.persistence.TypedQuery;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import jakarta.persistence.TypedQuery;
 
 import org.model.Deserved;
 
@@ -14,8 +14,8 @@ import cfg.model.InssuranceCfg;
 import cfg.model.PoorPercentageCfg;
 import cfg.model.ReligionReferenceCfg;
 
-@Stateless
-@LocalBean
+@Service
+@Transactional
 public class DeservedFacade extends AbstractFacade<Deserved> implements Serializable {
 
 	/**

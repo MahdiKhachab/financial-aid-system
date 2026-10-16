@@ -2,14 +2,14 @@ package org.controller;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.view.ViewScoped;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 
 import utils.CommonUtility;
 
 
-@ManagedBean
-@ViewScoped
+@Named("test")
+@RequestScoped
 public class test implements Serializable {
 	private static final long serialVersionUID = -1L;
 	

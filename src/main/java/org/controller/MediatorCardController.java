@@ -1,18 +1,20 @@
 package org.controller;
 
+import java.io.UncheckedIOException;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.Flash;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.facade.MediatorFacade;
@@ -22,7 +24,7 @@ import org.model.Mediator;
 import org.model.Sponsor;
 import org.omnifaces.util.Faces;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
+import org.primefaces.model.file.UploadedFile;
 
 import cfg.facade.CompanyCfgFacade;
 import cfg.model.CompanyCfg;
@@ -66,7 +68,7 @@ public class MediatorCardController extends AbstractController<Mediator> impleme
 				if (mediator == null) {
 					try {
 						Faces.redirect("exception");
-					} catch (IOException e) {
+					} catch (UncheckedIOException e) {
 						e.printStackTrace();
 					}
 				} else {
@@ -91,7 +93,7 @@ public class MediatorCardController extends AbstractController<Mediator> impleme
 			attachment.setFileName(uploadedFile.getFileName());
 			attachment.setSize(uploadedFile.getSize());
 			attachment.setContentType(uploadedFile.getContentType());
-			attachment.setData(uploadedFile.getContents());
+			attachment.setData(uploadedFile.getContent());
 			this.mediator.addToAttachment(attachment);
 			Utility.addSuccessMessage("related_file_added");
 		} catch (Exception e) {
@@ -185,7 +187,7 @@ public class MediatorCardController extends AbstractController<Mediator> impleme
 		try {
 			Faces.redirect(url + "?" + REQUEST_PARAM + "=%s", getItem().getId() + "");
 
-		} catch (IOException e) {
+		} catch (UncheckedIOException e) {
 			e.printStackTrace();
 		}
 	}

@@ -1,17 +1,19 @@
 package org.controller;
 
+import java.io.UncheckedIOException;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import org.facade.DeadNeedFacade;
 import org.facade.NeedDetailsFacade;
@@ -22,7 +24,7 @@ import org.model.NeedDetails;
 import org.model.Worker;
 import org.omnifaces.util.Faces;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
+import org.primefaces.model.file.UploadedFile;
 
 import enums.NeedTypeEnum;
 import utils.Utility;
@@ -75,7 +77,7 @@ public class NeedDetailsCardController implements Serializable {
 				if (deadNeed == null) {
 					try {
 						Faces.redirect("exception");
-					} catch (IOException e) {
+					} catch (UncheckedIOException e) {
 						e.printStackTrace();
 					}
 				} else {
@@ -291,7 +293,7 @@ public class NeedDetailsCardController implements Serializable {
 			attachment.setFileName(uploadedFile.getFileName());
 			attachment.setSize(uploadedFile.getSize());
 			attachment.setContentType(uploadedFile.getContentType());
-			attachment.setData(uploadedFile.getContents());
+			attachment.setData(uploadedFile.getContent());
 			this.needDetails.addToAttachment(attachment);
 			Utility.addSuccessMessage("related_file_added");
 		} catch (Exception e) {
@@ -303,7 +305,7 @@ public class NeedDetailsCardController implements Serializable {
 	public void download(Attachment attachment) {
 		try {
 			Faces.sendFile(attachment.getData(), attachment.getFileName(), true);
-		} catch (IOException e) {
+		} catch (UncheckedIOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

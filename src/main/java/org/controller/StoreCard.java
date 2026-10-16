@@ -1,16 +1,18 @@
 package org.controller;
 
+import java.io.UncheckedIOException;
+
 import java.io.IOException;
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.Flash;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.facade.StoresFacade;
 import org.model.Stores;
@@ -43,7 +45,7 @@ public class StoreCard extends AbstractController<Stores> implements Serializabl
 				if (stores == null) {
 					try {
 						Faces.redirect("exception");
-					} catch (IOException e) {
+					} catch (UncheckedIOException e) {
 						e.printStackTrace();
 					}
 				}
@@ -65,7 +67,7 @@ public class StoreCard extends AbstractController<Stores> implements Serializabl
 		try {
 			Faces.redirect(url + "?" + REQUEST_PARAM + "=%s", getItem().getId() + "");
 
-		} catch (IOException e) {
+		} catch (UncheckedIOException e) {
 			e.printStackTrace();
 		}
 	}

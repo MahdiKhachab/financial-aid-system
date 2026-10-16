@@ -1,19 +1,21 @@
 package org.controller;
 
+import java.io.UncheckedIOException;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.Flash;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -35,7 +37,7 @@ import org.omnifaces.util.Faces;
 import org.primefaces.component.export.ExcelOptions;
 import org.primefaces.component.export.PDFOptions;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
+import org.primefaces.model.file.UploadedFile;
 
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.Chunk;
@@ -171,7 +173,7 @@ public class PurchaseVoucherCardController implements Serializable {
 					if (purchaseVoucher == null) {
 						try {
 							Faces.redirect("exception");
-						} catch (IOException e) {
+						} catch (UncheckedIOException e) {
 							e.printStackTrace();
 						}
 					}
@@ -272,7 +274,7 @@ public class PurchaseVoucherCardController implements Serializable {
 		try {
 			Faces.redirect(url + "?" + REQUEST_PARAM + "=%s", purchaseVoucher.getId() + "");
 
-		} catch (IOException e) {
+		} catch (UncheckedIOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -708,7 +710,7 @@ public class PurchaseVoucherCardController implements Serializable {
 			attachment.setFileName(uploadedFile.getFileName());
 			attachment.setSize(uploadedFile.getSize());
 			attachment.setContentType(uploadedFile.getContentType());
-			attachment.setData(uploadedFile.getContents());
+			attachment.setData(uploadedFile.getContent());
 			this.purchaseVoucher.addToAttachment(attachment);
 			Utility.addSuccessMessage("related_file_added");
 			attachFileReady = true;

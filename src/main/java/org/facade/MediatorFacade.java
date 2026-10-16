@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.persistence.TemporalType;
-import javax.persistence.TypedQuery;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.TypedQuery;
 
 import org.dtos.CompanyDetailsDto;
 import org.model.Mediator;
@@ -17,8 +17,8 @@ import org.model.Sponsor;
 import cfg.model.CompanyCfg;
 import enums.CurrencyEnum;
 
-@Stateless
-@LocalBean
+@Service
+@Transactional
 public class MediatorFacade extends AbstractFacade<Mediator> implements Serializable {
 
 	/**

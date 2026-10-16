@@ -1,14 +1,14 @@
 package cfg.facade;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.facade.AbstractFacade;
 
 import cfg.model.PoorPercentageCfg;
 
-@Stateless
-@LocalBean
+@Service
+@Transactional
 public class PoorPercenatageCfgFacade extends AbstractFacade<PoorPercentageCfg> {
 
 	/**

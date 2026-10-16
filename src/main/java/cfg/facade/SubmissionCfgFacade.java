@@ -4,15 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.facade.AbstractFacade;
 
 import cfg.model.SubmissionCfg;
 
-@Stateless
-@LocalBean
+@Service
+@Transactional
 public class SubmissionCfgFacade extends AbstractFacade<SubmissionCfg> implements Serializable {
 
 	/**

@@ -1,5 +1,7 @@
 package org.controller;
 
+import java.io.UncheckedIOException;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
@@ -8,13 +10,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 import org.facade.ProvideAidFacade;
 import org.facade.PurchaseVoucherFacade;
@@ -44,11 +45,11 @@ public class RepportDetailsController implements Serializable {
 
 	private SubmissionDetailsCfg submissionDetailsCfg;
 
-	@EJB
+	@Inject
 	private SubmissionDetailsCfgFacade submissionDetailsCfgFacade;
 	@Inject
 	private ProvideAidFacade provideAidFacade;
-	@EJB
+	@Inject
 	private PurchaseVoucherFacade purchaseVoucherFacade;
 
 	private final String REQUEST_PARAM = "id";
@@ -116,7 +117,7 @@ public class RepportDetailsController implements Serializable {
 	private double totalValueLLExchnage;
 	private double totalvalueDDExchnage;
 
-	@EJB
+	@Inject
 	private SubbmissionExchnageFacade subbmissionExchnageFacade;
 
 	@PostConstruct
@@ -131,7 +132,7 @@ public class RepportDetailsController implements Serializable {
 				if (submissionDetailsCfg == null) {
 					try {
 						Faces.redirect("exception");
-					} catch (IOException e) {
+					} catch (UncheckedIOException e) {
 						e.printStackTrace();
 					}
 				}

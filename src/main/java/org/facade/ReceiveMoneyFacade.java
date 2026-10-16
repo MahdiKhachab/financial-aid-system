@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.TypedQuery;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import jakarta.inject.Inject;
+import jakarta.persistence.TypedQuery;
 
 import org.model.ReceiveMoney;
 import org.model.Sponsor;
@@ -16,8 +16,8 @@ import cfg.facade.SubmissionDetailsCfgFacade;
 import cfg.model.SubmissionDetailsCfg;
 import enums.CurrencyEnum;
 
-@Stateless
-@LocalBean
+@Service
+@Transactional
 
 public class ReceiveMoneyFacade extends AbstractFacade<ReceiveMoney> implements Serializable {
 

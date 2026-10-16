@@ -2,13 +2,13 @@ package org.facade;
 
 import java.io.Serializable;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.model.DeadPerson;
 
-@Stateless
-@LocalBean
+@Service
+@Transactional
 public class DeadPersonFacade extends AbstractFacade<DeadPerson> implements Serializable {
 	/**
 	 * 

@@ -2,14 +2,13 @@ package org.facade;
 
 import java.util.List;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.persistence.TypedQuery;
+import org.springframework.transaction.annotation.Transactional;
+import jakarta.persistence.TypedQuery;
 import org.model.Worker;
 import cfg.model.Service;
 
-@Stateless
-@LocalBean
+@org.springframework.stereotype.Service
+@Transactional
 public class WorkerFacade extends AbstractFacade<Worker> {
 
 	/**

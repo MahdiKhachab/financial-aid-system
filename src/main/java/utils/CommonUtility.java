@@ -3,9 +3,9 @@ package utils;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 
 public class CommonUtility {
 	public static void addMessageToFacesContextFromBundle(String message, String bundle, String severity) {

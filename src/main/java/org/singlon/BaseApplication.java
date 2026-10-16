@@ -1,18 +1,16 @@
 package org.singlon;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
+import org.springframework.stereotype.Component;
 
 import cfg.facade.SubmissionCfgFacade;
 
-@Singleton
-@Startup
+@Component
 public class BaseApplication {
 
 	
-	@EJB
+	@Inject
 	private SubmissionCfgFacade submissionCfgFacade;
 	
 	
