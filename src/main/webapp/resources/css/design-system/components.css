@@ -1559,3 +1559,12 @@ div.fixed .btn {
 		flex: 1 1 auto;
 	}
 }
+
+/* Icons on solid buttons are always white (table headers and theme link colours used to tint them blue).
+ * Soft row buttons (btn-xs edit/delete) and neutral buttons keep their own icon colour. */
+.btn:is(.btn-primary, .btn-success, .btn-info, .btn-danger):not(.btn-xs):not(.btn-cancel),
+.btn:is(.btn-primary, .btn-success, .btn-info, .btn-danger):not(.btn-xs):not(.btn-cancel) :is(i, em, span, .fa, .fas, .far, .fab, [class*="mdi"], [class*="dripicons-"], [class*="ti-"]),
+.ui-datatable .btn-xs.btn-success, .ui-datatable .btn-xs.btn-success :is(i, em, span),
+.ui-widget-header .btn:is(.btn-primary, .btn-success, .btn-info), .ui-widget-header .btn:is(.btn-primary, .btn-success, .btn-info) * {
+	color: var(--sf-on-dark) !important;
+}

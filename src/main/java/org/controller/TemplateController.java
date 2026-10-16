@@ -35,41 +35,41 @@ public class TemplateController implements Serializable {
 
 		// --- index ---//
 
-		m1 = new MenuItem("1", getValue("home"), " fas fa-home ", "", getValue("home"), true);
+		m1 = new MenuItem("1", getValue("home"), "mdi mdi-home-outline", "", getValue("home"), true);
 
-		m2 = new MenuItem(getValue("home"), "  dripicons-home  ", "home", true, "addButton");
+		m2 = new MenuItem(getValue("home"), "mdi mdi-home-outline", "home", true, "addButton");
 		m1.addChild(m2);
 
 		menu.add(m1);
 
 		// --- Configuration ---//
 
-		m1 = new MenuItem("2", getValue("configurations"), "fa fa-wrench", "configuration", getValue("configurations"),
+		m1 = new MenuItem("2", getValue("configurations"), "mdi mdi-settings-outline", "configuration", getValue("configurations"),
 				true);
 
-		m2 = new MenuItem(getValue("company_cfg_list"), " mdi mdi-office-building ", "company-cfg-list", true,
+		m2 = new MenuItem(getValue("company_cfg_list"), "mdi mdi-domain", "company-cfg-list", true,
 				"addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("healthy_status_cfg"), "   mdi mdi-hotel  ", "healthy-status-cfg", true,
+		m2 = new MenuItem(getValue("healthy_status_cfg"), "mdi mdi-heart-pulse", "healthy-status-cfg", true,
 				"addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("insurance_party_list"), "   mdi mdi-hospital-building  ", "inssurance-cfg-list",
+		m2 = new MenuItem(getValue("insurance_party_list"), "mdi mdi-shield-account", "inssurance-cfg-list",
 				true, "addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("religion_reference_cfg_list"), "  mdi mdi-human-male-boy  ",
+		m2 = new MenuItem(getValue("religion_reference_cfg_list"), "mdi mdi-book-open-page-variant",
 				"religion-reference-cfg-list", true, "addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("poor_percentage"), " dripicons-meter", "poorPercentageCfg-list", true, "addButton");
+		m2 = new MenuItem(getValue("poor_percentage"), "mdi mdi-percent", "poorPercentageCfg-list", true, "addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("submissionCfg-list"), "  mdi mdi-currency-usd  ", "submissionCfg-list", true,
+		m2 = new MenuItem(getValue("submissionCfg-list"), "mdi mdi-cash-multiple", "submissionCfg-list", true,
 				"addButton");
 		m1.addChild(m2);
-		m2 = new MenuItem(getValue("service_list"), "  mdi mdi-currency-usd  ", "service-list", true, "addButton");
+		m2 = new MenuItem(getValue("service_list"), "mdi mdi-calendar-heart", "service-list", true, "addButton");
 		m1.addChild(m2);
 
 		// when click tokdimet details yeftah el navbar
@@ -81,21 +81,21 @@ public class TemplateController implements Serializable {
 
 		// --- Card ---//
 
-		m1 = new MenuItem("3", getValue("cards"), "fas fa-id-card", "", getValue("cards"), true);
+		m1 = new MenuItem("3", getValue("cards"), "mdi mdi-folder-account", "", getValue("cards"), true);
 
-		m2 = new MenuItem(getValue("deserved-list"), "   mdi mdi-account-child  ", "deserved-list", true, "addButton");
+		m2 = new MenuItem(getValue("deserved-list"), "mdi mdi-account-heart", "deserved-list", true, "addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("sponsor"), "    mdi mdi-account-card-details ", "sponsor-list", true, "addButton");
+		m2 = new MenuItem(getValue("sponsor"), "mdi mdi-account-card-details", "sponsor-list", true, "addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("worker_list"), "  mdi mdi-worker ", "worker-list", true, "addButton");
+		m2 = new MenuItem(getValue("worker_list"), "mdi mdi-worker", "worker-list", true, "addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("dead_person"), "  mdi mdi-account-box-outline", "dead-list", true, "addButton");
+		m2 = new MenuItem(getValue("dead_person"), "mdi mdi-account-box-outline", "dead-list", true, "addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("stores"), "    mdi mdi-store  ", "stores-list", true, "addButton");
+		m2 = new MenuItem(getValue("stores"), "mdi mdi-store", "stores-list", true, "addButton");
 		m1.addChild(m2);
 
 		// when click tokdimet details yeftah el navbar
@@ -118,28 +118,28 @@ public class TemplateController implements Serializable {
 
 		// --- Services ---//
 
-		m1 = new MenuItem("4", getValue("services"), "far fa-list-alt ", "", getValue("cards"), true);
+		m1 = new MenuItem("4", getValue("services"), "mdi mdi-charity", "", getValue("cards"), true);
 
-		m2 = new MenuItem(getValue("recieve_money"), " mdi mdi-account-supervisor  ", "receive_money", true,
+		m2 = new MenuItem(getValue("recieve_money"), "mdi mdi-inbox-arrow-down", "receive_money", true,
 				"addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("mediator_list"), "  mdi mdi-account-supervisor   ", "mediator-list", true,
+		m2 = new MenuItem(getValue("mediator_list"), "mdi mdi-swap-horizontal", "mediator-list", true,
 				"addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("provide_aid"), "   dripicons-forward    ", "provide-aid-basic", true, "addButton");
+		m2 = new MenuItem(getValue("provide_aid"), "mdi mdi-send", "provide-aid-basic", true, "addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("currency_exchange"), "   mdi mdi-google-drive   ",
+		m2 = new MenuItem(getValue("currency_exchange"), "mdi mdi-bank-transfer",
 				"currency-exchange-select-submission", true, "addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("add_purchase_voucher"), "    mdi mdi-shopping    ", "purchase-voucher", true,
+		m2 = new MenuItem(getValue("add_purchase_voucher"), "mdi mdi-ticket-confirmation", "purchase-voucher", true,
 				"addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("distribution_dead_need"), "    mdi mdi-shopping    ", "needDeadDetails-list", true,
+		m2 = new MenuItem(getValue("distribution_dead_need"), "mdi mdi-package-variant-closed", "needDeadDetails-list", true,
 				"addButton");
 		m1.addChild(m2);
 
@@ -199,40 +199,40 @@ public class TemplateController implements Serializable {
 		menu.add(m1);
 		// --- reports ---//
 
-		m1 = new MenuItem("5", getValue("reports"), " fas fa-chart-line  ", "", getValue("reports"), true);
+		m1 = new MenuItem("5", getValue("reports"), "mdi mdi-chart-bar", "", getValue("reports"), true);
 
-		m2 = new MenuItem(getValue("sponsor_repport"), "  dripicons-graph-line   ", "sponsor_repport", true,
+		m2 = new MenuItem(getValue("sponsor_repport"), "mdi mdi-file-account", "sponsor_repport", true,
 				"addButton");
 		m1.addChild(m2);
 
 		
-		m2 = new MenuItem(getValue("dead_need_report"), "  dripicons-graph-line   ", "deadNeed-report", true,
+		m2 = new MenuItem(getValue("dead_need_report"), "mdi mdi-file-document-box-outline", "deadNeed-report", true,
 				"addButton");
 		m1.addChild(m2);
 		
-		m2 = new MenuItem(getValue("remaining_needs_report"), "  dripicons-graph-line   ", "remainingNeeds-report", true,
+		m2 = new MenuItem(getValue("remaining_needs_report"), "mdi mdi-clipboard-text-outline", "remainingNeeds-report", true,
 				"addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("repport_rabit"), "  dripicons-graph-line   ", "rabit_list", true, "addButton");
+		m2 = new MenuItem(getValue("repport_rabit"), "mdi mdi-account-group", "rabit_list", true, "addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("repport_company"), "  dripicons-graph-line   ", "company_list", true, "addButton");
+		m2 = new MenuItem(getValue("repport_company"), "mdi mdi-briefcase-outline", "company_list", true, "addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("purchase_voucher_repport"), "   mdi mdi-shopify   ", "purchase-voucher-repport",
+		m2 = new MenuItem(getValue("purchase_voucher_repport"), "mdi mdi-ticket-outline", "purchase-voucher-repport",
 				true, "addButton");
 		m1.addChild(m2);
 
-		m2 = new MenuItem(getValue("stores_repport"), "    mdi mdi-store    ", "stores_repport", true, "addButton");
+		m2 = new MenuItem(getValue("stores_repport"), "mdi mdi-store", "stores_repport", true, "addButton");
 		m1.addChild(m2);
 		
-		m2 = new MenuItem(getValue("mediator_report"), "  dripicons-graph-line   ", "mediator-report", true,
+		m2 = new MenuItem(getValue("mediator_report"), "mdi mdi-swap-horizontal", "mediator-report", true,
 				"addButton");
 		m1.addChild(m2);
 		
 
-		m2 = new MenuItem(getValue("general_repport"), "  dripicons-view-list-large   ", "external-repport", true,
+		m2 = new MenuItem(getValue("general_repport"), "mdi mdi-view-dashboard-outline", "external-repport", true,
 					"addButton");
 			m1.addChild(m2);
 		

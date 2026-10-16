@@ -558,3 +558,13 @@ body .main-menu-inner {
 		padding: 0;
 	}
 }
+
+/* Material Design Icons glyphs are drawn smaller than the old icon fonts: size them for the rail and panel */
+.left-sidenav .main-icon-menu .nav-link .mdi {
+	font-size: 22px;
+	line-height: 1;
+}
+
+.main-menu-inner .menu-body .nav-link i.mdi {
+	font-size: 20px;
+}
