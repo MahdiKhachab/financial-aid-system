@@ -35,19 +35,18 @@
 
 
 
-			<div class="col-md-12" style="margin-top: 10px;">
+			<div class="sf-title">
 
-				<span class="  fas fa-chart-line  "
-					style="font-size: 28px; margin-right: 5px;"></span>
+				<span class="fas fa-chart-line sf-title__icon" aria-hidden="true"></span>
 
-				<h:outputText style="font-size: 22px;"
+				<h:outputText styleClass="sf-title__text"
 					value=" #{bundle.general_repport}" />
 
 
 			</div>
 
 			<h:panelGroup id="value-panel">
-				<div class="row" style="margin-top: 1.5%">
+				<div class="row">
 					<div class="col-lg-6">
 						<div class="card">
 							<div class="card-body">
@@ -56,9 +55,9 @@
 										<div class="col-9 align-self-center">
 											<h5 style="margin-bottom: 20px;">#{bundle.total_cost_ll}</h5>
 
-											<h:outputText styleClass="mb-0 p-2 bg-soft-danger rounded"
+											<h:outputText styleClass="mb-0 p-2 sf-amount sf-amount--lbp rounded"
 												style="font-size: 16px;font-weight: bold; margin-top:5px; "
-												value= "  #{of:formatCurrency(externalRepportController.totalValueLL, '')} LBP"  
+												value= "  #{of:formatCurrencyForLocale(externalRepportController.totalValueLL, '', 'en-US')} LBP"  
 												>
 												
 												
@@ -94,9 +93,9 @@
 										<div class="col-9 align-self-center">
 											<h5 style="margin-bottom: 20px;">#{bundle.total_cost_dd}</h5>
 
-											<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+											<h:outputText styleClass="mb-0 p-2 sf-amount sf-amount--usd rounded"
 												style="font-size: 16px;font-weight: bold; margin-top:5px; "
-												value="  #{of:formatCurrency(externalRepportController.totalValueDD, '')} USD"></h:outputText>
+												value="  #{of:formatCurrencyForLocale(externalRepportController.totalValueDD, '', 'en-US')} USD"></h:outputText>
 
 
 
@@ -122,7 +121,7 @@
 			</h:panelGroup>
 
 
-			<div class="card" style="margin-top: 1%;">
+			<div class="card">
 				<div class="card-body">
 					<span
 						style="font-size: 16px; margin-top: 10px; margin-bottom: 10px;"><p:spacer
@@ -144,7 +143,7 @@
 
 
 						<p:column styleClass="no-header table-actions-column" width="80">
-							<span> <h:link outcome="repport-deatils"
+							<span> <h:link title="فتح" outcome="repport-deatils"
 									styleClass="btn  btn-success waves-effect waves-light   btn-xs">
 									<f:param name="id" value="#{item.id}" />
 									<span class="   mdi mdi-chevron-right-circle  "
@@ -182,7 +181,7 @@
 
 							<h:outputText styleClass="text-ellipsis"
 								title="#{item.balance_ll}" 
-							value = 	" #{of:formatCurrency(item.balance_ll, '')}  "	
+							value = 	" #{of:formatCurrencyForLocale(item.balance_ll, '', 'en-US')}  "	
 								
 								 />
 
@@ -197,7 +196,7 @@
 
 							<h:outputText styleClass="text-ellipsis"
 							
-						 value= " #{of:formatCurrency(item.balance_dd, '')}  "	
+						 value= " #{of:formatCurrencyForLocale(item.balance_dd, '', 'en-US')}  "	
 							
 								title="#{item.balance_dd}" />
 

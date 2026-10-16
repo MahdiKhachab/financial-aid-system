@@ -27,11 +27,11 @@
 		<!--end col-->
 	</ui:define>
 	<ui:define name="customFormContent">
-		<div class="card" style="margin-top: 10px;">
+		<div class="card">
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-2">
-						<span style="font-size: 16px;"><p:spacer width="5" />
+						<span class="sf-list-title">
 							#{bundle.submission_cfg_list} :</span> <span style="font-size: 16px;"
 							class="label label-warning countClass" id="countId">#{submissionCfgListController.countItems}
 						</span>
@@ -76,7 +76,7 @@
 				<p:ajax event="rowEdit" update=":messageScript" />
 
 				<p:column styleClass="no-header table-actions-column" width="32">
-					<span> <p:commandLink
+					<span> <p:commandLink title="#{bundle.delete}"
 							actionListener="#{submissionCfgListController.delete(item)}"
 							style="margin-left:5px;"
 							styleClass="btn btn-danger waves-effect waves-light btn-xs "
@@ -88,7 +88,7 @@
 							</p:confirm>
 							<p:ajax oncomplete="PF('pageItemsTableWgVar').filter()">
 							</p:ajax>
-						</p:commandLink> <h:link outcome="/views/cfg/submissions/submissionCfg-card.xhtml"
+						</p:commandLink> <h:link title="#{bundle.edit}" outcome="/views/cfg/submissions/submissionCfg-card.xhtml"
 							styleClass="btn btn-warning  waves-effect waves-light   btn-xs">
 							<f:param name="id" value="#{item.id}" />
 							<span class=" dripicons-document-edit  " style="color: white;" />
@@ -141,17 +141,17 @@
 												<p:column
 													headerText="#{bundle.submission_details_cfg_dollar}"
 													sortBy="#{itemDetails.balance_dd}" width="150">
-													<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+													<h:outputText styleClass="mb-0 p-2 sf-amount sf-amount--usd rounded"
 														style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
-														value="#{of:formatCurrency(itemDetails.balance_dd, '')}" />
+														value="#{of:formatCurrencyForLocale(itemDetails.balance_dd, '', 'en-US')}" />
 												</p:column>
 
 												<p:column headerText="#{bundle.submission_details_cfg_ll}"
 													sortBy="#{itemDetails.balance_ll}" width="150">
 													<h:outputText
 														style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
-														styleClass="mb-0 p-2 bg-soft-danger rounded "
-														value="#{of:formatCurrency(itemDetails.balance_ll, '')}" />
+														styleClass="mb-0 p-2 sf-amount sf-amount--lbp rounded "
+														value="#{of:formatCurrencyForLocale(itemDetails.balance_ll, '', 'en-US')}" />
 												</p:column>
 
 

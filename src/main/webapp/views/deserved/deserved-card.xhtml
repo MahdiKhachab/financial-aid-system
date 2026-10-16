@@ -19,7 +19,7 @@
 		<li class="breadcrumb-item active">#{bundle.cards}</li>
 
 
-		<li class="breadcrumb-item "><h:link outcome="submissionCfg-list"> #{bundle.submission_cfg_list} </h:link></li>
+		<li class="breadcrumb-item "><h:link outcome="deserved-list"> #{bundle.deserved_list} </h:link></li>
 
 		<li class="breadcrumb-item active">#{bundle.deserved_add_new}</li>
 
@@ -45,7 +45,7 @@
 		<div class="panel-body">
 
 
-			<div class="card" style="margin-top: 10px;">
+			<div class="card">
 				<div class="card-body">
 					<h:panelGroup id="form-save">
 
@@ -71,7 +71,7 @@
 									<h:outputLabel class="control-label" for="individualsId"
 										value="#{bundle.deserved_nb_of_individuals}">
 									</h:outputLabel>
-									<p:inputNumber decimalPlaces="0" id="individualsId" maxValue="20"
+									<p:inputNumber decimalSeparator="." thousandSeparator="," decimalPlaces="0" id="individualsId" maxValue="20"
 										minValue="0" label="#{bundle.deserved_nb_of_individuals}"
 										required="true"
 										value="#{deservedController.deserved.nbOfIndividuals}"
@@ -87,7 +87,7 @@
 									<h:outputLabel class="control-label" for="ExpatiateChildrenId"
 										value="#{bundle.deserved_nb_of_expatiate_children}">
 									</h:outputLabel> 
-									<p:inputNumber decimalPlaces="0" id="ExpatiateChildrenId" minValue="0" maxValue="20"
+									<p:inputNumber decimalSeparator="." thousandSeparator="," decimalPlaces="0" id="ExpatiateChildrenId" minValue="0" maxValue="20"
 										value="#{deservedController.deserved.nbOfExpatiateChildren}">
 										<f:ajax></f:ajax>
 									</p:inputNumber>
@@ -116,7 +116,7 @@
 									<h:outputLabel class="control-label" for="salaryId"
 										value="#{bundle.deserved_salary}">
 									</h:outputLabel>
-									<p:inputNumber decimalPlaces="3" id="salaryId" minValue="0"
+									<p:inputNumber decimalSeparator="." thousandSeparator="," decimalPlaces="3" id="salaryId" minValue="0"
 										styleClass="form-control"
 										value="#{deservedController.deserved.salary}">
 										<f:ajax></f:ajax>

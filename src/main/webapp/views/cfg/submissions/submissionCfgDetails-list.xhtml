@@ -56,14 +56,14 @@
 		<p:column headerText="#{bundle.submission_details_cfg_dollar}"
 			sortBy="#{subItem.balance_dd}" width="150">
 			<h:outputText styleClass="text-ellipsis"
-				value=" #{of:formatCurrency(subItem.balance_dd, '')}  ">
+				value=" #{of:formatCurrencyForLocale(subItem.balance_dd, '', 'en-US')}  ">
 			</h:outputText>
 		</p:column>
 
 		<p:column headerText="#{bundle.submission_details_cfg_ll}"
 			sortBy="#{subItem.balance_ll}" width="150">
 			<h:outputText styleClass="text-ellipsis"
-				value=" #{of:formatCurrency(subItem.balance_ll, '')}  "
+				value=" #{of:formatCurrencyForLocale(subItem.balance_ll, '', 'en-US')}  "
 				label="#{subItem.balance_ll}">
 			</h:outputText>
 		</p:column>

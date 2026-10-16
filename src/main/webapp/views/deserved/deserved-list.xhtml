@@ -17,7 +17,7 @@
 	<ui:define name="breadcrumb">
 
 		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
-		<li class="breadcrumb-item active">#{bundle.configurations}</li>
+		<li class="breadcrumb-item active">#{bundle.cards}</li>
 		<li class="breadcrumb-item active">#{bundle.deserved_list}</li>
 		<!--end col-->
 	</ui:define>
@@ -25,16 +25,15 @@
 	<ui:define name="customFormContent">
 		<o:importConstants type="enums.PersonGenre" var="personGenre" />
 
-		<div class="card" style="margin-top: 10px;" id="myDIV">
+		<div class="card" id="myDIV">
 			<div class="card-body">
 				<div class="row">
 
 					<div id="conter-top" class="col-md-4">
-						<span style="font-size: 16px;"><p:spacer width="5" />
+						<span class="sf-list-title">
 							#{bundle.deserved_list} :</span>
 						<div class="avatar-box thumb-sm align-self-center mr-2">
-							<span id="countId" class="avatar-title rounded-circle"
-								style="color: white !important; background-color: #0069d9 !important;">
+							<span id="countId" class="avatar-title rounded-circle">
 								#{deservedListController.countItems} </span>
 						</div>
 					</div>
@@ -69,7 +68,7 @@
 						widgetVar="pageItemsTableWgVar">
 
 						<p:column styleClass="no-header table-actions-column" width="150">
-							<p:commandLink
+							<p:commandLink title="#{bundle.delete}"
 								actionListener="#{deservedListController.delete(item)}"
 								style="margin-left:5px;" update=":messageScript"
 								styleClass="btn btn-danger waves-effect waves-light btn-xs">
@@ -82,7 +81,7 @@
 									update=":messageScript">
 								</p:ajax>
 							</p:commandLink>
-							<h:link outcome="/views/deserved/deserved-card.xhtml"
+							<h:link title="#{bundle.edit}" outcome="/views/deserved/deserved-card.xhtml"
 								styleClass="btn btn-warning  waves-effect waves-light  btn-xs">
 								<f:param name="id" value="#{item.id}" />
 								<span class=" dripicons-document-edit  " style="color: white;" />

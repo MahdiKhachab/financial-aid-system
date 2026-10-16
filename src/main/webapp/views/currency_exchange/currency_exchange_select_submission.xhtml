@@ -29,7 +29,7 @@
 	<ui:define name="customFormContent">
 
 		<h:panelGroup id="value-panel">
-			<div class="row" style="margin-top: 2%;">
+			<div class="row">
 				
 				<div class="col-lg-6">
 					<div class="card">
@@ -39,9 +39,9 @@
 									<div class="col-9 align-self-center">
 										<h5 style="margin-bottom: 20px;">#{bundle.total_cost_ll}</h5>
 
-										<h:outputText styleClass="mb-0 p-2 bg-soft-danger rounded"
+										<h:outputText styleClass="mb-0 p-2 sf-amount sf-amount--lbp rounded"
 											style="font-size: 16px;font-weight: bold; margin-top:5px; "
-											value="#{of:formatCurrency(submissionCfgListController.totalValueLL, '')} LBP "></h:outputText>
+											value="#{of:formatCurrencyForLocale(submissionCfgListController.totalValueLL, '', 'en-US')} LBP "></h:outputText>
 									</div>
 
 
@@ -65,9 +65,9 @@
 									<div class="col-9 align-self-center">
 										<h5 style="margin-bottom: 20px;">#{bundle.total_cost_dd}</h5>
 
-										<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+										<h:outputText styleClass="mb-0 p-2 sf-amount sf-amount--usd rounded"
 											style="font-size: 16px;font-weight: bold; margin-top:5px; "
-											value="#{of:formatCurrency(submissionCfgListController.totalValueDD , '')} USD "></h:outputText>
+											value="#{of:formatCurrencyForLocale(submissionCfgListController.totalValueDD , '', 'en-US')} USD "></h:outputText>
 
 
 
@@ -98,7 +98,7 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-2">
-						<span style="font-size: 16px;"><p:spacer width="5" />
+						<span class="sf-list-title">
 							#{bundle.submission_cfg_list} :</span> <span style="font-size: 16px;"
 							class="label label-warning countClass" id="countId">#{submissionCfgListController.countItems}
 						</span>
@@ -168,7 +168,7 @@
 
 												<p:column styleClass="no-header table-actions-column"
 													width="80">
-													<span> <h:link outcome="currency-exchange-action"
+													<span> <h:link title="فتح" outcome="currency-exchange-action"
 															styleClass="btn  btn-success waves-effect waves-light   btn-xs">
 															<f:param name="id" value="#{itemDetails.id}" />
 															<span class="   mdi mdi-chevron-right-circle  "
@@ -186,17 +186,17 @@
 												<p:column
 													headerText="#{bundle.submission_details_cfg_dollar}"
 													sortBy="#{itemDetails.balance_dd}" width="150">
-													<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+													<h:outputText styleClass="mb-0 p-2 sf-amount sf-amount--usd rounded"
 														style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
-														value="#{of:formatCurrency(itemDetails.balance_dd, '')}" />
+														value="#{of:formatCurrencyForLocale(itemDetails.balance_dd, '', 'en-US')}" />
 												</p:column>
 
 												<p:column headerText="#{bundle.submission_details_cfg_ll}"
 													sortBy="#{itemDetails.balance_ll}" width="150">
 													<h:outputText
 														style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
-														styleClass="mb-0 p-2 bg-soft-danger rounded "
-														value="#{of:formatCurrency(itemDetails.balance_ll, '')}" />
+														styleClass="mb-0 p-2 sf-amount sf-amount--lbp rounded "
+														value="#{of:formatCurrencyForLocale(itemDetails.balance_ll, '', 'en-US')}" />
 												</p:column>
 
 

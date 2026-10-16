@@ -62,7 +62,7 @@
 			<p:column headerText="#{bundle.person_needs_amount}"
 				sortBy="#{needs.amount}" width="150">
 				<h:outputText styleClass="text-ellipsis" value="#{needs.amount}">
-					<f:convertNumber pattern="###,###,###" />
+					<f:convertNumber locale="en-US" pattern="###,###,###" />
 				</h:outputText>
 			</p:column>
 
@@ -70,7 +70,7 @@
 				sortBy="#{needs.currency.type}" width="150">
 				<h:outputText
 					style="font-size: 16px;font-weight: bold; padding: 4px !important; "
-					styleClass="#{needs.currency eq 'DD' ? 'mb-0 p-2 bg-soft-success rounded':'mb-0 p-2 bg-soft-danger rounded '} "
+					styleClass="#{needs.currency eq 'DD' ? 'mb-0 p-2 sf-amount sf-amount--usd rounded':'mb-0 p-2 sf-amount sf-amount--lbp rounded '} "
 					value="#{needs.currency.type}" />
 			</p:column>
 		</p:dataTable>

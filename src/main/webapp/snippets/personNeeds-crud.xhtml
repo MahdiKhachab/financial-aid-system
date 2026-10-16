@@ -65,7 +65,7 @@
 				<p:outputLabel class="control-label" for="needs_amount"
 					value="#{bundle.person_needs_amount}">
 				</p:outputLabel>
-				<p:inputNumber id="needs_amount" decimalPlaces="2"
+				<p:inputNumber decimalSeparator="." thousandSeparator="," id="needs_amount" decimalPlaces="2"
 					label="#{bundle.person_needs_amount}" required="true"
 					styleClass="form-control"
 					value="#{deadPersonCardController.deadNeed.amount}">

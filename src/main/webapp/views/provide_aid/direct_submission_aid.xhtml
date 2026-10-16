@@ -19,7 +19,7 @@
 
 		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
 		<li class="breadcrumb-item active">#{bundle.services}</li>
-		<li class="breadcrumb-item ">><h:link outcome="provide-aid-basic">#{bundle.provide_aid} </h:link></li>
+		<li class="breadcrumb-item"><h:link outcome="provide-aid-basic">#{bundle.provide_aid} </h:link></li>
 		<li class="breadcrumb-item active">#{bundle.direct_submission }</li>
 
 
@@ -30,16 +30,15 @@
 	<ui:define name="customFormContent">
 		<o:importConstants type="enums.PersonGenre" var="personGenre" />
 
-		<div class="card" style="margin-top: 10px;">
+		<div class="card">
 			<div class="card-body">
 				<div class="row">
 					<h:panelGroup id="conter-top" class="col-md-4 col-sm-6">
 						<div id="conter-top" class="col-md-12">
-							<span style="font-size: 16px;"><p:spacer width="5" />
+							<span class="sf-list-title">
 								#{bundle.deserved_list} :</span>
 							<div class="avatar-box thumb-sm align-self-center mr-2">
-								<span id="countId" class="avatar-title rounded-circle"
-									style="color: white !important; background-color: #0069d9 !important;">
+								<span id="countId" class="avatar-title rounded-circle">
 									#{deservedListController.countItems} </span>
 							</div>
 						</div>
@@ -63,7 +62,7 @@
 							widgetVar="pageItemsTableWgVar">
 							<p:ajax event="rowEdit" update=":messageScript" />
 							<p:column styleClass="no-header table-actions-column" width="80">
-								<span> <h:link outcome="direct-submission-aid-give"
+								<span> <h:link title="فتح" outcome="direct-submission-aid-give"
 										styleClass="btn  btn-success waves-effect waves-light   btn-xs">
 										<f:param name="id" value="#{item.id}" />
 										<span class="   mdi mdi-chevron-right-circle  "

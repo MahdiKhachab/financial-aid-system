@@ -17,7 +17,7 @@
 		<div class="modal-dialog width50">
 			<h:panelGroup id="panelSelectionNeedId">
 				<div class="modal-content">
-					<div class="modal-header white" style="background-color: #4d79f6">
+					<div class="modal-header white">
 						<button class="close white" aria-label="Close"
 							data-dismiss="modal" type="button" id="selectionNeedBtnhideId"
 							style="display: none;">
@@ -34,7 +34,7 @@
 								value="#{needDetailsListController.deadNeedList}" var="needs">
 
 								<p:column styleClass="no-header table-actions-column" width="80">
-									<span><h:link
+									<span><h:link title="#{bundle.edit}"
 											outcome="/views/deadNeedDetails/needDetailsCard/needDeadDetails-card.xhtml"
 											styleClass="btn btn-warning  waves-effect waves-light   btn-xs">
 											<f:param name="id" value="#{needs.id}" />
@@ -71,7 +71,7 @@
 									sortBy="#{needs.currency.type}" width="150">
 									<h:outputText
 										style="font-size: 16px;font-weight: bold; padding: 4px !important; "
-										styleClass="#{needs.currency eq 'DD' ? 'mb-0 p-2 bg-soft-success rounded':'mb-0 p-2 bg-soft-danger rounded '} "
+										styleClass="#{needs.currency eq 'DD' ? 'mb-0 p-2 sf-amount sf-amount--usd rounded':'mb-0 p-2 sf-amount sf-amount--lbp rounded '} "
 										value="#{needs.currency.type}" />
 								</p:column>
 							</p:dataTable>

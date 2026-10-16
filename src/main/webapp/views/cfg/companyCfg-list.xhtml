@@ -30,7 +30,7 @@
 				update="@root:@id(companyCfgTableId)" />
 		</ui:remove>
 
-		<div class="card" style="margin-top: 10px;">
+		<div class="card">
 
 
 
@@ -44,7 +44,7 @@
 				<div class="row">
 
 					<div class="col-md-2">
-						<span style="font-size: 16px;"><p:spacer width="5" />
+						<span class="sf-list-title">
 							#{bundle.company_cfg_list} :</span> <span style="font-size: 16px;"
 							class="label label-warning countClass" id="countId">#{companyCfgController.countItems}
 						</span>
@@ -100,7 +100,7 @@
 							showEffect="slide" hideEffect="slide" position="right" />
 					</f:facet>
 
-					<h:commandLink immediate="true" onclick="toggleRemove(#{index})"
+					<h:commandLink title="#{bundle.delete}" immediate="true" onclick="toggleRemove(#{index})"
 						actionListener="#{companyCfgController.delete(item)}"
 						style="margin-top:1%; margin-bottom:1%;margin-left:1%"
 						styleClass="btn btn-danger waves-effect waves-light btn-xs ">
@@ -108,7 +108,7 @@
 						<i class=" dripicons-trash " style="color: white;" />
 					</h:commandLink>
 
-					<h:commandLink
+					<h:commandLink title="#{bundle.edit}"
 						styleClass="btn btn-warning  waves-effect waves-light  btn-xs"
 						actionListener="#{companyCfgController.editRow(item)}">
 						<span class=" dripicons-document-edit  " style="color: white;" />

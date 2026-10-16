@@ -9,7 +9,7 @@
 
 <ui:component>
 
-	<div class="card" style="margin-top: 2%;">
+	<div class="card">
 		<div class="card-body">
 			<h4 class="form-section">
 				<h:outputText value="#{bundle.conditions} " />
@@ -18,7 +18,7 @@
 				<h:outputText styleClass="text-muted" style="margin-right:4px;"
 					value="#{bundle.report_mediator_select_date}" />
 			</div>
-			<div class="row" style="margin-top: 1%">
+			<div class="row">
 				<div class="col-md-4">
 					<p:outputLabel class="control-label" for="sposnrId"
 						value="#{bundle.mediator_from_sponsor_name}" />
@@ -62,7 +62,7 @@
 		</div>
 	</div>
 
-	<div class="card" style="margin-top: 1%;">
+	<div class="card">
 		<div class="card-body">
 
 			<h4 class="form-section">
@@ -98,7 +98,7 @@
 				<p:column headerText="#{bundle.mediator_currency}"
 					sortBy="#{itemName.currency.type}" width="150">
 					<h:outputText id="cCurrencyId" style="    padding: 4px;"
-						styleClass="#{itemName.currency eq 'DD' ? 'bg-soft-success rounded' :'bg-soft-danger rounded'}"
+						styleClass="#{itemName.currency eq 'DD' ? 'sf-amount sf-amount--usd rounded' :'sf-amount sf-amount--lbp rounded'}"
 						title="#{itemName.currency.type}"
 						value="#{itemName.currency.type}">
 					</h:outputText>
@@ -137,9 +137,9 @@
 							<div class="col-9 align-self-center">
 								<h5 style="margin-bottom: 20px;">#{bundle.total_cost_ll}</h5>
 
-								<h:outputText styleClass="mb-0 p-2 bg-soft-danger rounded"
+								<h:outputText styleClass="mb-0 p-2 sf-amount sf-amount--lbp rounded"
 									style="font-size: 16px;font-weight: bold; margin-top:5px; "
-									value="#{of:formatCurrency(reportMediatorController.totalLira, '')} LBP "></h:outputText>
+									value="#{of:formatCurrencyForLocale(reportMediatorController.totalLira, '', 'en-US')} LBP "></h:outputText>
 							</div>
 						</div>
 					</div>
@@ -150,9 +150,9 @@
 							<div class="col-9 align-self-center">
 								<h5 style="margin-bottom: 20px;">#{bundle.total_cost_dd}</h5>
 
-								<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+								<h:outputText styleClass="mb-0 p-2 sf-amount sf-amount--usd rounded"
 									style="font-size: 16px;font-weight: bold; margin-top:5px; "
-									value="#{of:formatCurrency(reportMediatorController.totalDollars , '')} USD "></h:outputText>
+									value="#{of:formatCurrencyForLocale(reportMediatorController.totalDollars , '', 'en-US')} USD "></h:outputText>
 							</div>
 						</div>
 					</div>

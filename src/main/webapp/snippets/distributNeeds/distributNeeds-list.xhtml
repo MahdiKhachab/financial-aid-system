@@ -42,7 +42,7 @@
 			<p:ajax event="rowEdit" update=":messageScript" />
 			<p:column styleClass="no-header table-actions-column" width="100">
 
-				<p:commandLink style="margin-left:5px;"
+				<p:commandLink title="#{bundle.delete}" style="margin-left:5px;"
 					action="#{needDetailsCardController.deleteService(item)}"
 					styleClass="btn btn-danger waves-effect waves-light btn-xs ">
 					<p:confirm header="#{bundle.delete}"
@@ -80,7 +80,7 @@
 			<p:column headerText="#{bundle.need_details_cost}:"
 				sortBy="#{item.cost}" width="150">
 				<h:outputText styleClass="text-ellipsis" value="#{item.cost}">
-					<f:convertNumber pattern="###,###,###" />
+					<f:convertNumber locale="en-US" pattern="###,###,###" />
 				</h:outputText>
 			</p:column>
 
@@ -95,7 +95,7 @@
 				sortBy="#{item.receivedCost}" width="150">
 				<h:outputText styleClass="text-ellipsis"
 					value="#{item.receivedCost}">
-					<f:convertNumber pattern="###,###,###" />
+					<f:convertNumber locale="en-US" pattern="###,###,###" />
 				</h:outputText>
 			</p:column>
 
@@ -111,7 +111,7 @@
 				<h:outputText styleClass="text-ellipsis" value="#{item.notes}" />
 			</p:column>
 			<p:rowExpansion>
-				<div class="card" style="margin-top: 10px;">
+				<div class="card">
 					<div class="card-body">
 						<div class="row">
 							<ul class="nav nav-pills mb-3 nav-justified" id="pills-tab"
@@ -129,7 +129,7 @@
 
 									<p:column styleClass="no-header table-actions-column"
 										width="150">
-										<p:commandLink
+										<p:commandLink title="#{bundle.delete}"
 											actionListener="#{needDetailsCardController.deleteAttachment(attachment)}"
 											style="margin-left:5px;padding-top: 5px;"
 											styleClass="btn btn-danger waves-effect waves-light btn-xs">

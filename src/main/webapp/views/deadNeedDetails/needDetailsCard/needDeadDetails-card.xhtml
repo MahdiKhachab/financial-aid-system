@@ -43,18 +43,16 @@
 
 				</span>
 			</div>
-			<div class="card" style="margin-top: 10px;">
+			<div class="card">
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md-3">
 							<h:outputText
-								style="font-size: 15px; margin-right: 10px;  padding:2%; background-color:#0069d9 !important; "
-								styleClass="m-0 btn btn-success waves-effect waves-light"
+								styleClass="sf-context-chip"
 								value=" المتوفي: #{needDetailsCardController.deadNeed.deadPerson.deadName} " />
 							<ui:remove>
 								<h:outputText
-									style="font-size: 15px; margin-right: 10px;  padding:2%; background-color:#f1646c !important; "
-									styleClass="badge  badge-secondary"
+									styleClass="sf-context-chip"
 									value=" المندوب عنه :  #{needDetailsCardController.deadNeed.deadPerson.delegator} " />
 							</ui:remove>
 						</div>
@@ -89,7 +87,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="card" style="margin-top: 2%;">
+			<div class="card">
 				<div class="card-body">
 					<h:panelGroup id="form-need-details" style="width:100%">
 

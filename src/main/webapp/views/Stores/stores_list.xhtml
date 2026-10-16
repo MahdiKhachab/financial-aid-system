@@ -25,17 +25,16 @@
 	<ui:define name="customFormContent">
 		<o:importConstants type="enums.PersonGenre" var="personGenre" />
 
-		<div class="card" style="margin-top: 10px;">
+		<div class="card">
 			<div class="card-body">
 				<div class="row">
 					<h:panelGroup id="conter-top" class="col-md-4 col-sm-6">
-						<span style="font-size: 16px;"><p:spacer width="5" />
+						<span class="sf-list-title">
 							#{bundle.stores} :</span>
 
 
 						<div class="avatar-box thumb-sm align-self-center mr-2">
-							<span id="countId" class="avatar-title rounded-circle"
-								style="color: white !important; background-color: #0069d9 !important;">#{storesListController.countItems}</span>
+							<span id="countId" class="avatar-title rounded-circle">#{storesListController.countItems}</span>
 						</div>
 
 
@@ -68,7 +67,7 @@
 							widgetVar="pageItemsTableWgVar">
 							<p:ajax event="rowEdit" update=":messageScript" />
 							<p:column styleClass="no-header table-actions-column" width="80">
-								<span><p:commandLink
+								<span><p:commandLink title="#{bundle.delete}"
 										actionListener="#{storesListController.delete(item)}"
 										style="margin-left:5px;"
 										styleClass="btn btn-danger waves-effect waves-light btn-xs ">
@@ -80,7 +79,7 @@
 										<p:ajax oncomplete="PF('pageItemsTableWgVar').filter()"
 											update="  :messageScript conter-top">
 										</p:ajax>
-									</p:commandLink> <h:link outcome="stores-card"
+									</p:commandLink> <h:link title="#{bundle.edit}" outcome="stores-card"
 										styleClass="btn btn-warning  waves-effect waves-light   btn-xs">
 										<f:param name="id" value="#{item.id}" />
 										<span class=" dripicons-document-edit  " style="color: white;" />

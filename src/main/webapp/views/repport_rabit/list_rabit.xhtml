@@ -28,16 +28,15 @@
 	<ui:define name="customFormContent">
 		<o:importConstants type="enums.PersonGenre" var="personGenre" />
 
-		<div class="card" style="margin-top: 10px;">
+		<div class="card">
 			<div class="card-body">
 				<div class="row">
 					<h:panelGroup id="conter-top" class="col-md-4 col-sm-6">
 						<div id="conter-top" class="col-md-12">
-							<span style="font-size: 16px;"><p:spacer width="5" />
+							<span class="sf-list-title">
 								#{bundle.count_rabit} :</span>
 							<div class="avatar-box thumb-sm align-self-center mr-2">
-								<span id="countId" class="avatar-title rounded-circle"
-									style="color: white !important; background-color: #0069d9 !important;">
+								<span id="countId" class="avatar-title rounded-circle">
 									#{rabitControllerList.countItems} </span>
 							</div>
 						</div>
@@ -60,7 +59,7 @@
 							value="#{rabitControllerList.pageItems}" var="item"
 							widgetVar="pageItemsTableWgVar">
 							<p:column styleClass="no-header table-actions-column" width="80">
-								<span> <h:link outcome="rabit_list_repport"
+								<span> <h:link title="فتح" outcome="rabit_list_repport"
 										styleClass="btn  btn-success waves-effect waves-light   btn-xs">
 										<f:param name="name" value="#{item.name}" />
 										<span class="   mdi mdi-chevron-right-circle  "

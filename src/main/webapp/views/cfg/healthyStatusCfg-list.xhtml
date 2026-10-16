@@ -25,7 +25,7 @@
 
 
 
-		<div class="card" style="margin-top: 10px;">
+		<div class="card">
 
 			<div class="card-body">
 
@@ -35,7 +35,7 @@
 
 					<h:panelGroup id="conter-top" class="col-md-2">
 
-						<span style="font-size: 16px;"><p:spacer width="5" />
+						<span class="sf-list-title">
 							#{bundle.healthy_status_cfg} :</span>
 						<span style="font-size: 16px;"
 							class="label label-warning countClass" id="countId">#{healthyStatusCfgController.countItems}
@@ -99,7 +99,7 @@
 						</f:facet>
 
 
-						<h:commandLink immediate="true" onclick="toggleRemove(#{index})"
+						<h:commandLink title="#{bundle.delete}" immediate="true" onclick="toggleRemove(#{index})"
 							actionListener="#{healthyStatusCfgController.delete(item)}"
 							style="margin-top:1%; margin-bottom:1%"
 							styleClass="btn btn-danger waves-effect waves-light btn-xs">

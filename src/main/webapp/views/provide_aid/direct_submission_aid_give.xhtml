@@ -16,7 +16,7 @@
 
 			<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
 			<li class="breadcrumb-item active">#{bundle.services}</li>
-			<li class="breadcrumb-item ">><h:link
+			<li class="breadcrumb-item"><h:link
 					outcome="provide-aid-basic">#{bundle.provide_aid} </h:link></li>
 			<li class="breadcrumb-item "><h:link
 					outcome="direct_submission_aid.xhtml">#{bundle.direct_submission} </h:link>
@@ -42,20 +42,19 @@
 			<o:importConstants type="enums.CurrencyEnum" var="currencyEnum" />
 
 
-			<div class="col-md-12" style="margin-top: 10px;">
+			<div class="sf-title">
 
-				<span class=" fas fa-money-check-alt  " style="font-size: 28px;"></span>
+				<span class="fas fa-money-check-alt sf-title__icon" aria-hidden="true"></span>
 
-				<h:outputText style="font-size: 22px;" value=" #{bundle.give_aid}" />
+				<h:outputText styleClass="sf-title__text" value=" #{bundle.give_aid}" />
 
 
 			</div>
 
-			<div class="row" style="margin-top: 2%">
+			<div class="row">
 				<div class="col-md-6">
 					<h:outputText
-						style="font-size: 18px; margin-right: 10px;  padding:2%; background-color:#0069d9 !important; "
-						styleClass="badge  badge-secondary"
+						styleClass="sf-context-chip"
 						value=" #{bundle.beneficiary_name}: #{directSubbmissionAidController.deserved.fullName} " />
 
 				</div>
@@ -82,8 +81,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<h:outputText
-						style="font-size: 18px; margin-right: 10px; margin-top:2%; padding:2%; background-color:#f1646c !important; "
-						styleClass="badge  badge-secondary"
+						styleClass="sf-context-chip"
 						value=" #{bundle.deserved_known_by} :  #{directSubbmissionAidController.deserved.knownBy} " />
 
 				</div>
@@ -95,7 +93,7 @@
 
 
 
-					<div class="card" style="margin-top: 3%;">
+					<div class="card">
 						<div class="card-body">
 							<div class="row">
 
@@ -162,28 +160,25 @@
 					value="#{directSubbmissionAidController.provideAidList}">
 
 
-					<div class="card" style="margin-top: 2%;">
+					<div class="card">
 						<div class="card-body">
 							<div class="row">
 								<div class="repeater-custom-show-hide" style="width: 100%">
 									<div class="row">
 										<div class="col-md-9">
-											<h:outputText style="font-size: 16px; padding : 2.03%"
-												styleClass="badge badge-success"
+											<h:outputText styleClass="badge sf-step-badge"
 												value=" #{bundle.give_number} : #{myVarStatus.index +1 }" />
 
 
 											<h:outputText id="subbmitonInitLL"
 												styleClass="mb-0 p-2 bg-soft-blue  rounded"
 												style="font-size: 16px;font-weight: bold; margin-top:5px; line-height:4 ; margin-right:1%"
-												value=" #{bundle.total_value_exist_init  }  : #{of:formatCurrency(var.submissionDetailsCfg.balance_ll, '')}  LBP "></h:outputText>
+												value=" #{bundle.total_value_exist_init  }  : #{of:formatCurrencyForLocale(var.submissionDetailsCfg.balance_ll, '', 'en-US')}  LBP "></h:outputText>
 
 
 											<h:outputText id="subbmitonInitDD"
-												styleClass="mb-0 p-2   rounded"
-												style="font-size: 16px;font-weight: bold; margin-top:5px; line-height:4 ; margin-right:1%  ;color: #ffffff !important;
-	background-color: #9ba7ca !important;"
-												value=" #{bundle.total_value_exist_init  }  : #{of:formatCurrency(var.submissionDetailsCfg.balance_dd, '')}  USD "></h:outputText>
+												styleClass="mb-0 p-2 rounded sf-amount sf-amount--usd"
+												value=" #{bundle.total_value_exist_init  }  : #{of:formatCurrencyForLocale(var.submissionDetailsCfg.balance_dd, '', 'en-US')}  USD "></h:outputText>
 
 
 										</div>
@@ -196,7 +191,7 @@
 											</h:commandLink>
 										</div>
 									</div>
-									<div class="row" style="margin-top: 2%;">
+									<div class="row">
 										<div class="col-md-4">
 											<p:outputLabel class="control-label"
 												for="submissionDetailsCfgId"
@@ -223,7 +218,7 @@
 											<div class="form-group">
 												<p:outputLabel class="control-label" for="x"
 													value="#{bundle.receive_money_value}:" />
-												<p:inputNumber id="x" required="true"
+												<p:inputNumber decimalSeparator="." thousandSeparator="," id="x" required="true"
 													label="#{bundle.receive_money_value}:" decimalPlaces="0"
 													inputStyleClass="form-control" value="#{var.value}">
 													<f:ajax></f:ajax>
@@ -274,11 +269,10 @@
 
 
 
-				.
 
 				<div class="fixed">
 
-				<div class="row" style="margin-top: 10px;">
+				<div class="row">
 					<div class="col-md-12">
 						<div class="float-right">
 							<h:commandLink action="direct-submission-aid" id="cancelButton"

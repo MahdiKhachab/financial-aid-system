@@ -34,12 +34,11 @@
 	select2me();
        </o:onloadScript>
 
-			<div class="col-md-12" style="margin-top: 10px;">
+			<div class="sf-title">
 
-				<span class="  fas fa-chart-line  "
-					style="font-size: 28px; margin-right: 5px;"></span>
+				<span class="fas fa-chart-line sf-title__icon" aria-hidden="true"></span>
 
-				<h:outputText style="font-size: 22px;"
+				<h:outputText styleClass="sf-title__text"
 					value=" #{bundle.repport_details  } للتقديم: ' #{repportDetailsController.submissionDetailsCfg.type} '" />
 
 
@@ -90,7 +89,7 @@
 
 							</div>
 
-							<div class="row" style="margin-top: 1.5%">
+							<div class="row">
 								<div class="col-md-12">
 									<h:commandLink value='#{bundle.search}' id="btn-save"
 										style="float:left;margin-left:10px;"
@@ -114,7 +113,7 @@
 
 
 			<h:panelGroup id="value-panel">
-				<div class="row" style="margin-top: 1.5%">
+				<div class="row">
 					<div class="col-lg-6">
 						<div class="card">
 							<div class="card-body">
@@ -123,9 +122,9 @@
 										<div class="col-9 align-self-center">
 											<h5 style="margin-bottom: 20px;">#{bundle.total_cost_ll}</h5>
 
-											<h:outputText styleClass="mb-0 p-2 bg-soft-danger rounded"
+											<h:outputText styleClass="mb-0 p-2 sf-amount sf-amount--lbp rounded"
 												style="font-size: 16px;font-weight: bold; margin-top:5px; "
-												value="#{of:formatNumber(repportDetailsController.totalValueLL, '#.00')} LBP"></h:outputText>
+												value="#{of:formatCurrencyForLocale(repportDetailsController.totalValueLL, '', 'en-US')} LBP"></h:outputText>
 
 
 
@@ -156,9 +155,9 @@
 										<div class="col-9 align-self-center">
 											<h5 style="margin-bottom: 20px;">#{bundle.total_cost_dd}</h5>
 
-											<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+											<h:outputText styleClass="mb-0 p-2 sf-amount sf-amount--usd rounded"
 												style="font-size: 16px;font-weight: bold; margin-top:5px; "
-												value=" #{of:formatNumber(repportDetailsController.totalValueDD, '#.00')}  USD"></h:outputText>
+												value=" #{of:formatCurrencyForLocale(repportDetailsController.totalValueDD, '', 'en-US')}  USD"></h:outputText>
 
 
 
@@ -185,12 +184,12 @@
 					<span class=" fas fa-user-tie "
 						style="font-size: 22px; margin-right: 5px;"></span>
 
-					<h:outputText style="font-size: 22px;"
+					<h:outputText styleClass="sf-title__text"
 						value=" #{bundle.sponosr_give } " />
 
 
 				</div>
-				<div class="card" style="margin-top: 1%;">
+				<div class="card">
 					<div class="card-body">
 
 						<p:dataTable
@@ -247,7 +246,7 @@
 										placeholder="#{bundle.receive_money_value}"
 										styleClass="inputtext-filter" />
 								</f:facet>
-								<h:outputText value="#{of:formatNumber(item.value, '#.00')}"
+								<h:outputText value="#{of:formatCurrencyForLocale(item.value, '', 'en-US')}"
 									styleClass="text-ellipsis" title="#{item.value}" />
 
 
@@ -259,7 +258,7 @@
 							<p:column headerText="#{bundle.receive_money_isLira}"
 								sortBy="#{item.currencyEnum.type}" width="150">
 								<h:outputText
-									styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 bg-soft-success rounded ' : ' mb-0 p-2 bg-soft-danger rounded ' } "
+									styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 sf-amount sf-amount--usd rounded ' : ' mb-0 p-2 sf-amount sf-amount--lbp rounded ' } "
 									style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
 									title="#{item.currencyEnum.type}"
 									value="#{item.currencyEnum.type}" />
@@ -294,13 +293,13 @@
 					<span class="   fas fa-users   "
 						style="font-size: 22px; margin-right: 5px;"></span>
 
-					<h:outputText style="font-size: 22px;"
+					<h:outputText styleClass="sf-title__text"
 						value=" #{bundle.desrved_aid } " />
 
 
 				</div>
 
-				<div class="card" style="margin-top: 1%;">
+				<div class="card">
 					<div class="card-body">
 						<span
 							style="font-size: 16px; margin-top: 10px; margin-bottom: 10px;"><p:spacer
@@ -347,7 +346,7 @@
 							<p:column headerText="#{bundle.receive_money_value}"
 								sortBy="#{item.value}" width="150">
 
-								<h:outputText value="#{of:formatNumber(item.value, '#.00')}"
+								<h:outputText value="#{of:formatCurrencyForLocale(item.value, '', 'en-US')}"
 									styleClass="text-ellipsis" title="#{item.value}" />
 
 
@@ -360,7 +359,7 @@
 								sortBy="#{item.currencyEnum.type}" width="150">
 
 								<h:outputText id="Currency"
-									styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 bg-soft-success rounded ' : ' mb-0 p-2 bg-soft-danger rounded ' } "
+									styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 sf-amount sf-amount--usd rounded ' : ' mb-0 p-2 sf-amount sf-amount--lbp rounded ' } "
 									style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
 									title="#{item.currencyEnum.type}"
 									value="#{item.currencyEnum.type}" />
@@ -398,7 +397,7 @@
 					<span class="  mdi mdi-account-settings  "
 						style="font-size: 30px; margin-right: 5px;"></span>
 
-					<h:outputText style="font-size: 22px;"
+					<h:outputText styleClass="sf-title__text"
 						value=" #{bundle.rabit_aid } " />
 
 
@@ -406,7 +405,7 @@
 
 
 
-				<div class="card" style="margin-top: 1%;">
+				<div class="card">
 					<div class="card-body">
 						<span
 							style="font-size: 16px; margin-top: 10px; margin-bottom: 10px;"><p:spacer
@@ -469,7 +468,7 @@
 							<p:column headerText="#{bundle.receive_money_value}"
 								sortBy="#{item.value}" width="150">
 
-								<h:outputText value="#{of:formatNumber(item.value, '#.00')}"
+								<h:outputText value="#{of:formatCurrencyForLocale(item.value, '', 'en-US')}"
 									styleClass="text-ellipsis" title="#{item.value}" />
 
 
@@ -482,7 +481,7 @@
 								sortBy="#{item.currencyEnum.type}" width="150">
 
 								<h:outputText
-									styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 bg-soft-success rounded ' : ' mb-0 p-2 bg-soft-danger rounded ' } "
+									styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 sf-amount sf-amount--usd rounded ' : ' mb-0 p-2 sf-amount sf-amount--lbp rounded ' } "
 									style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
 									title="#{item.currencyEnum.type}"
 									value="#{item.currencyEnum.type}" />
@@ -522,7 +521,7 @@
 					<span class="    mdi mdi-office-building  "
 						style="font-size: 30px; margin-right: 5px;"></span>
 
-					<h:outputText style="font-size: 22px;"
+					<h:outputText styleClass="sf-title__text"
 						value=" #{bundle.company_aid} " />
 
 
@@ -531,7 +530,7 @@
 
 
 
-				<div class="card" style="margin-top: 1%;">
+				<div class="card">
 					<div class="card-body">
 						<span
 							style="font-size: 16px; margin-top: 10px; margin-bottom: 10px;"><p:spacer
@@ -595,7 +594,7 @@
 							<p:column headerText="#{bundle.receive_money_value}"
 								sortBy="#{item.value}" width="150">
 
-								<h:outputText value="#{of:formatNumber(item.value, '#.00')}"
+								<h:outputText value="#{of:formatCurrencyForLocale(item.value, '', 'en-US')}"
 									styleClass="text-ellipsis" title="#{item.value}" />
 
 
@@ -608,7 +607,7 @@
 
 
 								<h:outputText
-									styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 bg-soft-success rounded ' : ' mb-0 p-2 bg-soft-danger rounded ' } "
+									styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 sf-amount sf-amount--usd rounded ' : ' mb-0 p-2 sf-amount sf-amount--lbp rounded ' } "
 									style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
 									title="#{item.currencyEnum.type}"
 									value="#{item.currencyEnum.type}" />
@@ -645,14 +644,14 @@
 					<span class="      mdi mdi-shopping     "
 						style="font-size: 30px; margin-right: 5px;"></span>
 
-					<h:outputText style="font-size: 22px;"
+					<h:outputText styleClass="sf-title__text"
 						value=" #{bundle.purchase_gived} " />
 
 
 				</div>
 
 
-				<div class="card" style="margin-top: 1%;">
+				<div class="card">
 					<div class="card-body">
 
 						<p:dataTable
@@ -676,7 +675,7 @@
 							<p:column headerText="#{bundle.single_value}"
 								sortBy="#{item.value }" width="150">
 
-								<h:outputText value="#{of:formatNumber(item.value, '#.00')}"
+								<h:outputText value="#{of:formatCurrencyForLocale(item.value, '', 'en-US')}"
 									styleClass="text-ellipsis" title="#{item.value}" />
 
 
@@ -706,7 +705,7 @@
 
 								<h:outputText styleClass="text-ellipsis"
 									title="#{item.value * item.nbOFdesrvedPerson}"
-									value="#{of:formatNumber(item.value * item.nbOFdesrvedPerson , '#.00')}" />
+									value="#{of:formatCurrencyForLocale(item.value * item.nbOFdesrvedPerson, '', 'en-US')}" />
 
 
 
@@ -717,7 +716,7 @@
 
 
 								<h:outputText
-									styleClass="   mb-0 p-2 bg-soft-danger rounded  } "
+									styleClass="   mb-0 p-2 sf-amount sf-amount--lbp rounded  } "
 									style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
 									title="LBP" value="LBP" />
 
@@ -750,12 +749,12 @@
 					<span class="     mdi mdi-google-drive    "
 						style="font-size: 30px; margin-right: 5px;"></span>
 
-					<h:outputText style="font-size: 22px;"
+					<h:outputText styleClass="sf-title__text"
 						value=" #{bundle.currency_exchange} " />
 
 
 				</div>
-	<div class="card" style="margin-top: 1%;">
+	<div class="card">
 					<div class="card-body">
 				<p:dataTable
 					currentPageReportTemplate="#{bundle.row_count}: {totalRecords}"
@@ -775,7 +774,7 @@
 						sortBy="#{item.liraValue}" width="150">
 
 						<h:outputText styleClass="text-ellipsis" title="#{item.liraValue}"
-							value="#{of:formatNumber(item.liraValue , '#.00')} LBP" />
+							value="#{of:formatCurrencyForLocale(item.liraValue, '', 'en-US')} LBP" />
 
 
 
@@ -786,7 +785,7 @@
 						sortBy="#{item.dollarsValue}" width="150">
 
 						<h:outputText styleClass="text-ellipsis" title="#{item.dollarsValue}"
-							value="#{of:formatNumber(item.dollarsValue , '#.00')} USD " />
+							value="#{of:formatCurrencyForLocale(item.dollarsValue, '', 'en-US')} USD " />
 
 
 
@@ -798,7 +797,7 @@
 						width="150">
 
 						<h:outputText styleClass="text-ellipsis" title="#{item.rate}"
-							value="#{of:formatNumber(item.rate , '#.00')} LBP" />
+							value="#{of:formatCurrencyForLocale(item.rate, '', 'en-US')} LBP" />
 
 
 

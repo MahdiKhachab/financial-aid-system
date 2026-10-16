@@ -34,12 +34,11 @@
 
 
 
-			<div class="col-md-12" style="margin-top: 2%;">
+			<div class="sf-title">
 
-				<span class="  far fa-chart-bar  "
-					style="font-size: 28px; margin-right: 5px;"></span>
+				<span class="far fa-chart-bar sf-title__icon" aria-hidden="true"></span>
 
-				<h:outputText style="font-size: 22px;"
+				<h:outputText styleClass="sf-title__text"
 					value=" #{bundle.purchase_voucher_repport}" />
 
 
@@ -55,7 +54,7 @@
 
 
 
-				<div class="card" style="margin-top: 2%;">
+				<div class="card">
 					<div class="card-body">
 						<div class="row">
 
@@ -74,7 +73,7 @@
 						</div>
 
 
-						<div class="row" style="margin-top: 1%">
+						<div class="row">
 
 							<div class="col-md-6">
 
@@ -110,7 +109,7 @@
 
 						</div>
 
-						<div class="row" style="margin-top: 1.5%">
+						<div class="row">
 							<div class="col-md-12">
 								<h:commandLink value='#{bundle.search}' id="btn-save"
 									style="float:left;margin-left:10px;"
@@ -140,12 +139,11 @@
 
 
 
-			<div class="col-md-12" style="margin-top: 2%;">
+			<div class="sf-title">
 
-				<span class="     mdi mdi-table-large   "
-					style="font-size: 28px; margin-right: 5px;"></span>
+				<span class="mdi mdi-table-large sf-title__icon" aria-hidden="true"></span>
 
-				<h:outputText style="font-size: 22px;"
+				<h:outputText styleClass="sf-title__text"
 					value=" #{bundle.purchase_result_table}" />
 
 
@@ -178,7 +176,7 @@
 							</p:column>
 
 							<p:column styleClass="no-header table-actions-column" width="20">
-								<span> <h:link outcome="purchase-voucher"
+								<span> <h:link title="فتح" outcome="purchase-voucher"
 										styleClass="btn  btn-success waves-effect waves-light   btn-xs">
 										<f:param name="id" value="#{item.id}" />
 										<span class="   mdi mdi-chevron-right-circle  "
@@ -211,7 +209,7 @@
 
 
 							<p:rowExpansion>
-								<div class="card" style="margin-top: 10px;">
+								<div class="card">
 									<div class="card-body">
 										<div class="row">
 											<ul class="nav nav-pills mb-1 nav-justified" id="pills-tab"
@@ -239,13 +237,13 @@
 															var="attachment" rowKey="#{attachment.id}"
 															rowIndexVar="subIndex" editable="true" editMode="cell">
 
-															<p:column headerText="Name" id="attachmentName" width="">
+															<p:column headerText="اسم الملف" id="attachmentName" width="">
 																<h:outputText styleClass="badge badge-soft-purple"
 																	value="#{attachment.fileName}"
 																	title="#{attachment.fileName}" />
 															</p:column>
 
-															<p:column id="attachmentSize" headerText="Size"
+															<p:column id="attachmentSize" headerText="الحجم"
 																style="text-align: center">
 																<h:outputText styleClass="badge badge-primary mb-2"
 																	value="#{attachment.sizeInMegaByte}"
@@ -283,14 +281,14 @@
 																<h:outputText
 																	style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
 																	styleClass="mb-0 p-2 bg-soft-primary rounded "
-																	value="#{of:formatCurrency(itemDetails.value * itemDetails.nbOFdesrvedPerson, '')} LBP" />
+																	value="#{of:formatCurrencyForLocale(itemDetails.value * itemDetails.nbOFdesrvedPerson, '', 'en-US')} LBP" />
 															</p:column>
 															<p:summaryRow>
 																<p:column style="text-align:left">
 																</p:column>
 																<p:column style="text-align:left">
 																	<h:outputText style="color:#da4453 ; font-size:16px;"
-																		value="#{bundle.total_purcahse_value} :	#{of:formatCurrency(item.listPurchaseVoucherCoupon.stream().map(y-> (y.value * y.nbOFdesrvedPerson) ).sum(), '')}
+																		value="#{bundle.total_purcahse_value} :	#{of:formatCurrencyForLocale(item.listPurchaseVoucherCoupon.stream().map(y-> (y.value * y.nbOFdesrvedPerson) ).sum(), '', 'en-US')}
 																		   LBP" />
 																</p:column>
 															</p:summaryRow>

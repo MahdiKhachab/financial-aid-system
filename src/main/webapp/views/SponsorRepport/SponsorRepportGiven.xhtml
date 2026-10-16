@@ -15,7 +15,7 @@
 
 			<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
 			<li class="breadcrumb-item active">#{bundle.reports}</li>
-			<li class="breadcrumb-item ">><h:link outcome="sponsor_repport">#{bundle.select_sponsor} </h:link></li>
+			<li class="breadcrumb-item"><h:link outcome="sponsor_repport">#{bundle.select_sponsor} </h:link></li>
 			<li class="breadcrumb-item active">#{bundle.sponsor_repport_take}</li>
 
 			<!--end col-->
@@ -36,22 +36,20 @@
 			<o:importConstants type="enums.CurrencyEnum" var="currencyEnum" />
 
 
-			<div class="col-md-12" style="margin-top: 10px;">
+			<div class="sf-title">
 
-				<span class="  fas fa-chart-line  "
-					style="font-size: 28px; margin-right: 5px;"></span>
+				<span class="fas fa-chart-line sf-title__icon" aria-hidden="true"></span>
 
-				<h:outputText style="font-size: 22px;"
+				<h:outputText styleClass="sf-title__text"
 					value=" #{bundle.sponsor_repport}" />
 
 
 			</div>
 
-			<div class="row" style="margin-top: 2%">
+			<div class="row">
 				<div class="col-md-6">
 					<h:outputText
-						style="font-size: 18px; margin-right: 10px;  padding:2%; background-color:#0069d9 !important; "
-						styleClass="badge  badge-secondary"
+						styleClass="sf-context-chip"
 						value=" #{bundle.receive_money_sponser}: #{repportSponsorController.sponsor.fullName} " />
 
 				</div>
@@ -68,7 +66,7 @@
 
 
 
-				<div class="card" style="margin-top: 2%;">
+				<div class="card">
 					<div class="card-body">
 						<div class="row">
 
@@ -86,7 +84,7 @@
 						</div>
 
 
-						<div class="row" style="margin-top: 1%">
+						<div class="row">
 
 							<div class="col-md-4">
 
@@ -146,7 +144,7 @@
 
 						</div>
 
-						<div class="row" style="margin-top: 1.5%">
+						<div class="row">
 							<div class="col-md-12">
 								<h:commandLink value='#{bundle.search}' id="btn-save"
 									style="float:left;margin-left:10px;"
@@ -184,12 +182,12 @@
 										<div class="col-9 align-self-center">
 											<h5 style="margin-bottom: 20px;">#{bundle.total_cost_ll}</h5>
 
-											<h:outputText styleClass="mb-0 p-2 bg-soft-danger rounded"
+											<h:outputText styleClass="mb-0 p-2 sf-amount sf-amount--lbp rounded"
 												style="font-size: 16px;font-weight: bold; margin-top:5px; "
 												
 												
 												
-												value="#{of:formatCurrency(repportSponsorController.totalValueLL, '')} LBP"></h:outputText>
+												value="#{of:formatCurrencyForLocale(repportSponsorController.totalValueLL, '', 'en-US')} LBP"></h:outputText>
 
 
 
@@ -220,11 +218,11 @@
 										<div class="col-9 align-self-center">
 											<h5 style="margin-bottom: 20px;">#{bundle.total_cost_dd}</h5>
 
-											<h:outputText styleClass="mb-0 p-2 bg-soft-success rounded"
+											<h:outputText styleClass="mb-0 p-2 sf-amount sf-amount--usd rounded"
 												style="font-size: 16px;font-weight: bold; margin-top:5px; "
 												
 												
-												value="#{of:formatCurrency(repportSponsorController.totalValueDD, '')}USD"></h:outputText>
+												value="#{of:formatCurrencyForLocale(repportSponsorController.totalValueDD, '', 'en-US')}USD"></h:outputText>
 
 
 
@@ -247,7 +245,7 @@
 				</div>
 			</h:panelGroup>
 
-			<div class="card" style="margin-top: 1%;">
+			<div class="card">
 				<div class="card-body">
 
 					<p:dataTable
@@ -286,7 +284,7 @@
 							sortBy="#{item.value}" width="150">
 
 							<h:outputText id="Lira" styleClass="text-ellipsis"
-								title="#{item.value}" value="#{of:formatCurrency(item.value, '')}" />
+								title="#{item.value}" value="#{of:formatCurrencyForLocale(item.value, '', 'en-US')}" />
 
 
 
@@ -297,7 +295,7 @@
 						<p:column headerText="#{bundle.receive_money_isLira}"
 							sortBy="#{item.currencyEnum.type}" width="150">
 							<h:outputText id="Currency"
-								styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 bg-soft-success rounded ' : ' mb-0 p-2 bg-soft-danger rounded ' } "
+								styleClass="   #{item.currencyEnum eq 'DD'  ? 'mb-0 p-2 sf-amount sf-amount--usd rounded ' : ' mb-0 p-2 sf-amount sf-amount--lbp rounded ' } "
 								style="font-size: 16px;font-weight: bold; padding: 4px !important;; "
 								title="#{item.currencyEnum.type}"
 								value="#{item.currencyEnum.type}" />

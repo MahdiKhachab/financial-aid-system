@@ -20,7 +20,7 @@
 
 		<li class="breadcrumb-item"><h:link outcome="home"> #{bundle.home} </h:link></li>
 		<li class="breadcrumb-item active">#{bundle.services}</li>
-		<li class="breadcrumb-item ">><h:link outcome="provide-aid-basic">#{bundle.provide_aid} </h:link></li>
+		<li class="breadcrumb-item"><h:link outcome="provide-aid-basic">#{bundle.provide_aid} </h:link></li>
 		<li class="breadcrumb-item active">#{bundle.submit_with_conditions
 			}</li>
 	</ui:define>
@@ -43,11 +43,11 @@
 	<ui:define name="customFormContent">
 
 		<!--end col-->
-		<div class="col-md-12" style="margin-top: 2%;">
+		<div class="sf-title">
 
-			<span class=" fas fa-filter " style="font-size: 25px;"></span>
+			<span class="fas fa-filter sf-title__icon sf-title__icon--section" aria-hidden="true"></span>
 
-			<h:outputText style="font-size: 22px;"
+			<h:outputText styleClass="sf-title__text"
 				value=" #{bundle.select_rule_desrved}" />
 
 
@@ -239,7 +239,7 @@
 
 
 
-					<div class="row" style="margin-top: 1.5%">
+					<div class="row">
 						<div class="col-md-12">
 							<h:commandLink value='#{bundle.search}' id="btn-save"
 								style="float:left;"
@@ -283,7 +283,7 @@
 						var="item" widgetVar="pageItemsTableWgVar">
 						<p:ajax event="rowEdit" update=":messageScript" />
 						<p:column styleClass="no-header table-actions-column" width="80">
-							<span> <h:link outcome="person_desrved_repport"
+							<span> <h:link title="فتح" outcome="person_desrved_repport"
 									styleClass="btn  btn-success waves-effect waves-light   btn-xs">
 									<f:param name="id" value="#{item.id}" />
 									<span class="   mdi mdi-chevron-right-circle  "
