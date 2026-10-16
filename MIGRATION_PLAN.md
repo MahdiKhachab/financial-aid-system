@@ -32,7 +32,8 @@ never use the live `ShariaFunds` database for experiments, `RealEstate.war` is o
 | Bind address | `127.0.0.1` only (single-PC use) |
 | DI model | (a) JSF controllers become Spring beans; Weld only serves Faces/OmniFaces |
 
-Exact patch versions are pinned in Task 5 (spike).
+Pinned in Task 6: Spring Boot 4.1.1, JoinFaces 6.1.1 (Mojarra 4.1.12, Weld 6.0.4, PrimeFaces 15.0.17,
+OmniFaces 5.5.1), EclipseLink 5.0.2, Apache POI 5.4.0, jQuery Migrate 4.0.2.
 
 ## Key preservation rules
 
@@ -53,9 +54,9 @@ Exact patch versions are pinned in Task 5 (spike).
 | 2 | Create MIGRATION_PLAN.md / MIGRATION_STATUS.md | Done |
 | 3 | Repeatable baseline build on current stack (pin Maven plugins, JDK 8) | Done |
 | 4 | Test DB `ShariaFunds_migration` + reference snapshot (`migration/schema-baseline.sql`) | Done |
-| 5 | Spike: Boot 4.1 + JoinFaces 6.1 + PF 15 + OmniFaces 5 + EclipseLink 5 (go/no-go) | Next |
-| 6 | Platform switch in small commits (pom, jakarta, descriptors, persistence, services, scopes, PF/OF APIs); remove WildFly | Pending |
-| 7 | Full UI regression against checklist on test DB | Pending |
+| 5 | Spike: Boot 4.1 + JoinFaces 6.1 + PF 15 + OmniFaces 5 + EclipseLink 5 (go/no-go) | Skipped (user chose full switch) |
+| 6 | Platform switch in small commits (pom, jakarta, descriptors, persistence, services, scopes, PF/OF APIs); remove WildFly | Done |
+| 7 | Full UI regression against checklist on test DB | First pass done; user acceptance next |
 | 8 | Security stage (login, roles, session, logging) — separate approval | Pending |
 | 9 | Cleanup (xmlworker, test.java, swallowed exceptions, XHTML namespaces) — separate approvals | Pending |
 
@@ -66,5 +67,7 @@ Exact patch versions are pinned in Task 5 (spike).
 - SQL parameter logging writes personal data to logs.
 - DB user is the `postgres` superuser; recommend a dedicated least-privilege role.
 - PostgreSQL 10 is end-of-life (Nov 2022); kept as requested.
-- `test.java` mixes `javax.faces.bean.ManagedBean` with CDI `ViewScoped`.
-- `AbstractFacade.getSqlFromJpql` uses EclipseLink internal APIs.
+- `AbstractFacade.getSqlFromJpql` uses EclipseLink internal APIs (still compiles and works on 5.0.2).
+- PrimeFaces theme choice (aristo no longer exists; saga-blue in use).
+- Missing `js/jquery.min.js` reference in the template (pre-existing).
+- Untrack `target/` in Git; re-import the Eclipse project as Maven.

@@ -4,75 +4,97 @@ Last updated: 2026-10-16
 
 ## Git state
 
-- Branch: `migration/spring-boot` = `master` = `34a3527` ("Pre-migration baseline: commit existing local work").
-- `34a3527` contains exactly the 44 previously uncommitted modified files (62 insertions, 83 deletions); parent `b18330e` (`origin/master`).
-- Still uncommitted, intentionally left alone:
-  - 4 deleted tracked build files under `target/` (m2e-wtp and maven-archiver metadata).
-  - Untracked `.settings/org.eclipse.jdt.apt.core.prefs`.
-- Nothing pushed to `origin`.
+- Branch `migration/spring-boot`, branched from `master` at `34a3527` (pre-migration baseline: the 44 local changes).
+  `master` is untouched by the migration and is the rollback point. Nothing pushed to `origin`.
+- Left uncommitted on purpose (build output tracked in Git, see Known issues):
+  `target/` metadata files and `target/classes/META-INF/persistence.xml`; untracked `.settings/org.eclipse.jdt.apt.core.prefs`.
 
 ## Completed
 
 | Task | Result | Verification |
 |---|---|---|
-| 0 Branch | `migration/spring-boot` created | Working tree fingerprint identical before/after |
-| 1 Baseline commit | 44 files committed on `master`; branch moved to it | 44 `M` entries staged, 0 others; both branches at `34a3527` |
-| 2 Notes | MIGRATION_PLAN.md, MIGRATION_STATUS.md created | Committed `50b408a` |
-| 3 Repeatable build | `pom.xml`: pinned clean 2.5, resources 2.6, compiler 3.1, surefire 2.12.4, war 2.2, install 2.4, deploy 2.7 (the previous defaults); enforcer 3.4.1 requires JDK [1.8,1.9) and Maven ≥3.8 | See builds below |
+| 0 Branch | `migration/spring-boot` created | Working tree identical before/after |
+| 1 Baseline commit | 44 files committed on `master` (`34a3527`) | 44 `M` staged, 0 others |
+| 2 Notes | MIGRATION_PLAN.md, MIGRATION_STATUS.md | — |
+| 3 Repeatable WildFly build | Plugins pinned, enforcer JDK 8 | Two clean builds identical |
+| 4 Test DB + snapshot | `ShariaFunds_migration` on PG 10.3 + `migration/schema-baseline.sql` | Schema and row counts identical to live |
+| 5 Spike | Skipped: user chose the full switch directly (2026-10-16); validated by Task 6/7 testing instead | — |
+| 6 Platform switch | Spring Boot 4.1.1 executable JAR on embedded Tomcat 11; WildFly no longer needed | See below |
+| 7 Regression (first pass) | All pages render; CRUD, upload, download, Excel export verified in a browser | See below |
 
-| 4 Test DB + snapshot | `ShariaFunds_migration` created on PG 10.3 (UTF8, `Arabic_Saudi Arabia.1256`) from `pg_dump -Fc` of `ShariaFunds`; schema saved to `migration/schema-baseline.sql` (no data) | Schema dumps of live and copy identical; row counts identical in all 27 tables |
+## Task 6 — what changed
 
-## Database reference snapshot (2026-10-16, `ShariaFunds_migration`)
+- **Versions**: Java 21, Spring Boot 4.1.1, JoinFaces 6.1.1 (Mojarra 4.1.12, Weld 6.0.4, PrimeFaces 15.0.17,
+  PrimeFaces Extensions 15.0.17, OmniFaces 5.5.1), EclipseLink 5.0.2, PostgreSQL JDBC (Boot-managed), Apache POI 5.4.0.
+  Removed: `javaee-api`, `resources-ckeditor` (unused, no PF 15 release), WildFly-provided EclipseLink.
+- **Java**: `javax.*` → `jakarta.*` (477 imports). EJB → Spring: 23 `@Stateless` → `@Service @Transactional`
+  (abstract facade `@Transactional`), `@EJB` → `@Inject`, `@Singleton @Startup BaseApplication` → `@Component`.
+  `test.java`: `@ManagedBean` → `@Named("test") @RequestScoped` (its effective scope before).
+  PrimeFaces upload API (`model.file.UploadedFile`, `getContent()`); 28 `catch (IOException)` around OmniFaces
+  `Faces.redirect/sendFile` → `catch (UncheckedIOException)` (OmniFaces 5 no longer declares IOException).
+  Three facades use `@org.springframework.stereotype.Service` because the app has an entity named `Service`.
+- **New `boot` package**: `ShariaFundsApplication` (scans only app bean packages), `PersistenceConfig`
+  (EclipseLink unit from persistence.xml + Spring DataSource + `JpaTransactionManager`, no open-EM-in-view),
+  `WebServerConfig` (welcome file, ico mime type, multipart 10 MB for the Faces servlet, static `/resources/*` only).
+- **Config**: `application.properties` (127.0.0.1:8080, context `/ShariaFunds`, 30 min session, Faces mappings
+  `/faces/*,*.jsf,*.faces`, datetime-converter time zone, DB from `DB_URL`/`DB_USERNAME`/`DB_PASSWORD`, default DB
+  `ShariaFunds_migration`). `persistence.xml` → Jakarta 3.0, RESOURCE_LOCAL, `ddl-generation=none`, `weaving=false`.
+  `faces-config.xml` moved to `META-INF/` (Faces 4.0 header, content unchanged). `META-INF/beans.xml`
+  `bean-discovery-mode="none"`. Deleted `web.xml`, `WEB-INF/beans.xml`, `jboss-deployment-structure.xml`.
+  `resources/Bundle.properties` now packaged (it was missing from every Maven-built WAR before).
+- **XHTML** (1:1 replacements): `#{p:component('x')}` → `@root:@id(x)` (14), `javax.faces.Boolean/DateTime` →
+  `jakarta.faces.*` (13), `selectManyCheckbox layout="grid"` → `responsive`, `fileUploadListener` → `listener` (3),
+  `p:column selectionMode` → table `selectionMode` + column `selectionBox`, `xmlns:of` declared in 2 snippets,
+  3 resource `library` names with `/` split into library + name. jQuery Migrate 4.0.2 (MIT) added after PrimeFaces'
+  jQuery 4 for jQuery-3-era plugins (Bootstrap 4.3, select2, datepickers, slimscroll).
 
-- 27 tables in `public`, 228 columns, 27 PKs, 32 FKs, 27 indexes; no views, functions or triggers; no unique/check constraints.
-- One shared sequence `seq_gen_sequence` (start 50, increment 50, last_value 600) feeds **all** entity IDs
-  (EclipseLink default `SEQUENCE` with preallocation 50). Highest existing id = 503 (`service`).
-  **Target config must keep sequence name `SEQ_GEN_SEQUENCE` and allocationSize 50.**
-- Row counts: attachment 2, cfg_company 2, cfg_healthystatus 1, cfg_inssurance 1, cfg_poorpercentage 1,
-  cfg_religionreference 2, cfg_submission 3, cfg_submissiondetails 6, deadneed 0, deadperson 0, deserved 3,
-  mediator 2, needdetails 0, provideaid 0, provideaidcompany 1, provideaiddesrvedperson 0, provideaidrabet 0,
-  purchase_voucher 3, purchase_voucher_coupon 5, purchase_voucher_desrved 5, receive_money 5, service 2,
-  sponser 2, stores 1, subbmission_exchnage 1, worker 1, worker_service 1.
-- The dump file (contains personal data) was deleted after restore; only the schema is kept.
+## Builds and tests run (Task 6/7)
 
-## Environment facts
+- `mvn -B clean package` with JDK 21: **BUILD SUCCESS** → `target/ShariaFunds.jar` (78.7 MB).
+- `mvn -B test`: without DB credentials the DB test skips (0 run); with test-DB credentials **4/4 pass**
+  (`PersistenceMappingTest`: every entity readable, named queries deployed, all IDs use `SEQ_GEN_SEQUENCE`/50,
+  DDL generation off).
+- App start (`java -jar`, test DB): started in 15–25 s, listening on **127.0.0.1:8080 only**; seed query ran.
+- HTTP sweep of all 58 view files: **56 × 200**; 2 × 500 are include fragments (`report-by-name/company.xhtml`)
+  that are not standalone pages — their parent `mediator-report.xhtml` returns 200.
+- Browser checks (Chrome, test DB): home + deserved list show DB data, Arabic RTL layout intact, sidebar menus work;
+  Services page add/save (INSERT, id 601 from shared sequence) and delete (DELETE incl. `worker_service`);
+  beneficiary card edit/save (UPDATE of changed column only, `@PreUpdate` lastupdate); mediator card file upload +
+  save (attachment stored byte-exact, date saved without time-zone shift); attachment download (PDF 170 490 bytes
+  intact); purchase voucher Excel export (valid .xls, Arabic file name, post-processor ran). No server errors.
+- Static exposure: `/resources/images/...` 200; `/resources/` listing, raw `.xhtml`, `WEB-INF`, `META-INF` → 404.
+- Afterwards `ShariaFunds_migration` was recreated from live (schema + row counts identical) to remove test writes.
+  The live database was only read (pg_dump).
 
-- JDKs: 1.8.0_191, 17.0.1, 21.0.12 (default). Maven 3.8.6.
-- PostgreSQL 10.3 (port 5432, used by app; confirmed via `select version()`) and 9.6.1 (port 5433, not used by app).
-- Databases on 5432: live `ShariaFunds` (8.9 MB, never used for migration work) and test copy `ShariaFunds_migration`.
-- DB credentials are never stored in the repo; the `postgres` superuser password is weak and should be changed
-  once the app has its own least-privilege DB user (security stage).
-- WildFly 8.2.1.Final at `C:\wildfly-8.2.1.Final` (shared with RealEstate.war — do not touch).
+## Known issues / differences (not fixed, need a decision)
 
-## Builds and tests run
+- PrimeFaces theme: PF 7 default "aristo" no longer exists; PF 15 default "saga-blue" is used — PrimeFaces widgets
+  look somewhat different (app's own Bootstrap template unchanged).
+- Browser console: Bootstrap 4.3.1 prints "requires jQuery < 4" after registering all its plugins (cosmetic).
+- Pre-existing: template references `js/jquery.min.js`, which is not in the repo (`RES_NOT_FOUND`, one server
+  ERROR log line per page view). Pre-existing no-op attributes: `p:tooltip atPosition` (38 files),
+  `p:selectOneMenu allowClear` (1) — ignored by PF 7 as well.
+- Uploads limited to 10 MB per request (WildFly/Undertow default).
+- `target/` build output is tracked in Git; builds modify tracked files. Recommend `git rm --cached -r target`.
+- Eclipse project settings (`.project`, facets) still describe a WildFly dynamic web project; re-import as a
+  Maven project to work in Eclipse.
+- Spring warns once at startup about JoinFaces' optional Hibernate integration (not on classpath) — harmless.
 
-- 2026-10-16, commit `34a3527`, JDK 1.8.0_191, Maven 3.8.6, `mvn -B package` (no `clean`, no pom changes):
-  **BUILD SUCCESS** in 5.9 s → `target/ShariaFunds.war` (38.4 MB, 112 classes, 21 libs in `WEB-INF/lib`).
-  - Unpinned default plugins used: resources 2.6, compiler 3.1, surefire 2.12.4, war 2.2.
-  - Tests: none exist (surefire ran with nothing to execute).
-  - WAR contains `xmlworker-5.5.13.1.jar` (AGPL) but not the iText core jar.
-  - Build side effect `target/maven-archiver/pom.properties` was removed again to restore the prior working-tree state.
-- Not deployed or started (WildFly untouched).
-- 2026-10-16, Task 3, JDK 1.8.0_191, `mvn -B clean package`: **BUILD SUCCESS** (11.3 s), enforcer rules passed.
-  - Versus the first baseline WAR: same 402 files, all 21 libs and all web resources identical; all 112 classes differ
-    because the first baseline reused stale `target/classes` from a newer compiler (enums contained the Java 15+
-    synthetic `$values()`); the clean build is the first true JDK 8 `javac` build. No signature changes otherwise.
-  - Second clean build: byte-identical to the first except the timestamp in `META-INF/maven/.../pom.properties` → repeatable.
-  - `mvn validate` under default JDK 21 fails at the enforcer as intended ("JDK 21.0.12 is not in the allowed range [1.8,1.9)").
-- Build command: `JAVA_HOME="C:\Program Files\Java\jdk1.8.0_191"` then `mvn -B clean package`.
+## How to run
 
-## Known issue
-
-- `target/` build metadata is tracked in Git. Every build regenerates `target/maven-archiver/pom.properties`
-  (removed again after each build to keep the prior working-tree state). Recommend `git rm --cached -r target`
-  in a separate approved step.
+```
+set DB_USERNAME=postgres
+set DB_PASSWORD=...            (never commit it)
+mvn -B clean package
+java -jar target\ShariaFunds.jar   → http://127.0.0.1:8080/ShariaFunds/
+```
+`DB_URL` defaults to the test copy; pointing it at the live `ShariaFunds` database is the cut-over step.
 
 ## Blockers / waiting on user
 
-- Approval to untrack `target/` in Git.
-- Approval of Task 5 (spike).
+- Approval to untrack `target/` in Git; theme choice; cut-over plan to the live database.
 
 ## Next task
 
-Task 5 — Spike: Spring Boot 4.1 + JoinFaces 6.1 + PrimeFaces 15 + OmniFaces 5 + EclipseLink 5 against
-`ShariaFunds_migration` (go/no-go). Isolated in `spike/`, application code untouched.
+Task 7 (continued) — user acceptance on the test copy of the business flows (aid distribution, vouchers,
+currency exchange, reports), then Task 8 (security).
