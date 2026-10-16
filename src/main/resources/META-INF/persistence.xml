@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+	<!-- The DataSource is supplied by Spring (see boot.PersistenceConfig) -->
 	<persistence-unit name="ShariaFunds-persistence-unit"
-		transaction-type="JTA">
+		transaction-type="RESOURCE_LOCAL">
 		<description>Forge Persistence Unit</description>
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<jta-data-source>java:jboss/datasources/ShariaFunds</jta-data-source>
 		<class>cfg.model.CompanyCfg</class>
 		<class>cfg.model.HealthyStatusCfg</class>
 		<class>cfg.model.InssuranceCfg</class>
@@ -42,6 +42,10 @@
 			<property name="eclipselink.logging.parameters" value="true" />
 			<property name="eclipselink.target-database"
 				value="org.eclipse.persistence.platform.database.PostgreSQLPlatform" />
+			<!-- Never create, alter or drop tables -->
+			<property name="eclipselink.ddl-generation" value="none" />
+			<!-- No Java agent on embedded Tomcat; no entity relies on woven lazy to-one fetching -->
+			<property name="eclipselink.weaving" value="false" />
 
 
 		</properties>

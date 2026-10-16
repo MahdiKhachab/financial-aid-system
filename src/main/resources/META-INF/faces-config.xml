@@ -1,0 +1,393 @@
+<?xml version="1.0"?>
+<faces-config version="4.0"
+	xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_4_0.xsd">
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/views/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>company-cfg-list</from-outcome>
+			<to-view-id>/views/cfg/companyCfg-list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>healthy-status-cfg</from-outcome>
+			<to-view-id>/views/cfg/healthyStatusCfg-list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>inssurance-cfg-list</from-outcome>
+			<to-view-id>/views/cfg/inssuranceCfg-list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>poorPercentageCfg-list</from-outcome>
+			<to-view-id>/views/cfg/poorPercentageCfg-list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>submissionCfg-list</from-outcome>
+			<to-view-id>/views/cfg/submissions/submissionCfg-list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>religion-reference-cfg-list</from-outcome>
+			<to-view-id>/views/cfg/religionReferenceCfg-list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>deserved-list</from-outcome>
+			<to-view-id>/views/deserved/deserved-list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>submission-cfg-card</from-outcome>
+			<to-view-id>/views/cfg/submissions/submissionCfg-card.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>deserved-card</from-outcome>
+			<to-view-id>/views/deserved/deserved-card.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>sponsor-list</from-outcome>
+			<to-view-id>/views/sponsor/sponsor-list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>sponsor-card</from-outcome>
+			<to-view-id>/views/sponsor/sponsor-card.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>receive_money</from-outcome>
+			<to-view-id>/views/receive_money/receive_money.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>receive_money_take</from-outcome>
+			<to-view-id>/views/receive_money/receive_money_take.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>sponsor_repport_take</from-outcome>
+			<to-view-id>/views/SponsorRepport/SponsorRepportGiven.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>sponsor_repport</from-outcome>
+			<to-view-id>/views/SponsorRepport/SponsorRepport.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>mediator-list</from-outcome>
+			<to-view-id>/views/mediator/mediator-list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>mediator-card</from-outcome>
+			<to-view-id>/views/mediator/mediator-card.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>mediator-card</from-outcome>
+			<to-view-id>/views/mediator/mediator-card.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>provide-aid-basic</from-outcome>
+			<to-view-id>/views/provide_aid/provide_aid_basic.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>submit-with-conditions-aid</from-outcome>
+			<to-view-id>/views/provide_aid/submit_with_conditions_aid.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>direct-submission-aid</from-outcome>
+			<to-view-id>/views/provide_aid/direct_submission_aid.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>direct-submission-aid-give</from-outcome>
+			<to-view-id>/views/provide_aid/direct_submission_aid_give.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>submit-a-voucher-aid</from-outcome>
+			<to-view-id>/views/provide_aid/submit_a_voucher_aid.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>submit-with-repport-aid</from-outcome>
+			<to-view-id>/views/provide_aid/submit_with_repport_aid.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>mediator-report</from-outcome>
+			<to-view-id>/views/reports/mediator-reports/mediator-report.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>submit-rabit</from-outcome>
+			<to-view-id>/views/provide_aid/submit_to_rabit.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>submit-company</from-outcome>
+			<to-view-id>/views/provide_aid/submit_to_company.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>person_desrved_repport</from-outcome>
+			<to-view-id>/views/provide_aid/person_desrved_repport_give.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>rabit_list</from-outcome>
+			<to-view-id>/views/repport_rabit/list_rabit.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>rabit_list_repport</from-outcome>
+			<to-view-id>/views/repport_rabit/rabit_repport.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>company_list</from-outcome>
+			<to-view-id>/views/company_repoort/company_list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>company_list_repport</from-outcome>
+			<to-view-id>/views/company_repoort/repport_company.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>service-list</from-outcome>
+			<to-view-id>/views/cfg/service-list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>currency-exchange-select-submission</from-outcome>
+			<to-view-id>/views/currency_exchange/currency_exchange_select_submission.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>worker-list</from-outcome>
+			<to-view-id>/views/worker/worker-list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>currency-exchange-action</from-outcome>
+			<to-view-id>/views/currency_exchange/currency_exchange_action.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>worker-card</from-outcome>
+			<to-view-id>/views/worker/worker-card.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>dead-card</from-outcome>
+			<to-view-id>/views/deads/dead-persons/dead-card.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>dead-list</from-outcome>
+			<to-view-id>/views/deads/dead-persons/dead-list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>stores-list</from-outcome>
+			<to-view-id>/views/Stores/stores_list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>stores-card</from-outcome>
+			<to-view-id>/views/Stores/stores_card.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>needDeadDetails-list</from-outcome>
+			<to-view-id>/views/deadNeedDetails/needDetailsList/needDeadDetails-list.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>purchase-voucher</from-outcome>
+			<to-view-id>/views/purchase_voucher/purchase_voucher.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>stores_repport</from-outcome>
+			<to-view-id>/views/Stores/stores_repport.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+
+
+
+<navigation-rule>
+		<navigation-case>
+			<from-outcome>purchase-voucher-repport</from-outcome>
+			<to-view-id>/views/purchase_voucher/purchase_voucher_repport.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>deadNeed-report</from-outcome>
+			<to-view-id>/views/reports/deadNeeds-reports/deadNeed-report.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>remainingNeeds-report</from-outcome>
+			<to-view-id>/views/reports/deadNeeds-reports/remainingNeeds-report.xhtml </to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>external-repport</from-outcome>
+			<to-view-id>/views/general-repport/extrnal-repport.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>repport-deatils</from-outcome>
+			<to-view-id>/views/general-repport/repport-deatils.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>provide_aid</from-outcome>
+			<to-view-id>/views/provide_aid/provide_aid_basic.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<application>
+		<locale-config>
+			<default-locale>ar</default-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>resources.Bundle</base-name>
+			<var>bundle</var>
+		</resource-bundle>
+		<message-bundle>resources.Bundle</message-bundle>
+	</application>
+</faces-config>
