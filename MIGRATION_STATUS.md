@@ -80,6 +80,19 @@ Last updated: 2026-10-16
   Maven project to work in Eclipse.
 - Spring warns once at startup about JoinFaces' optional Hibernate integration (not on classpath) — harmless.
 
+## Frontend redesign (2026-10-16, commits a7d94bd, 24b44e2, 4a22541, 5620663)
+
+- Design system in `webapp/resources/css/design-system/` (tokens, shell, components) + `js/design-system/shell.js`;
+  IBM Plex Sans Arabic bundled (OFL). Loaded after the Metrica theme; theme class names and JS hooks unchanged.
+- All 51 pages moved onto shared patterns by presentation-only edits (titles, list headers, spacing, colours,
+  Western digits, accessible names, breadcrumbs). Dashboard and aid hub rebuilt; friendly 404/error page.
+- Verified: all pages HTTP 200; headless-Chrome console scan of 47 pages = 0 errors (control page detected);
+  desktop / tablet / phone layouts; UI save+delete, upload, download, Excel export; persistence test 4/4.
+- Vendored change: `js/bootstrap.bundle.min.js` jQuery version bound 4 -> 5 (PrimeFaces 15 ships jQuery 4;
+  jQuery Migrate 4.0.2 restores removed APIs).
+- Known: Java-defined menu icons mix three icon fonts (TemplateController, not changed); native date inputs show the
+  browser's date format; some long legacy forms (voucher, reports) still use dense Bootstrap grids.
+
 ## How to run
 
 ```
